@@ -1,6 +1,7 @@
 {
     "name": "butcherman/project-template",
     "type": "template",
+    "version": "1.0.0",
     "description": "Opinionated Template for new projects.",
     "keywords": [
         "framework",
