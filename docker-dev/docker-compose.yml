@@ -1,0 +1,181 @@
+################################################################################
+#                                                                              #
+#                                                                              #
+#                         Tech Bench Docker Development                        #
+#           NOTE:  Check .env file for necessary fields to modify to           #
+#                      secure this Tech Bench installation                     #
+#                                                                              #
+#                                                                              #
+################################################################################
+name: application_dev
+networks:
+    app-tier:
+        driver: bridge
+volumes:
+    dbDevData:
+    redisDevData:
+
+services:
+    #  Application Container
+    application:
+        container_name: application
+        restart: unless-stopped
+        build:
+            context: ./application
+            dockerfile: Dockerfile
+        volumes:
+            - ../src:/app
+            - ./.env:/app/.env
+        environment:
+            - SERVICE=app
+            - TB_URL=${BASE_URL}
+        networks:
+            - app-tier
+        depends_on:
+            database:
+                condition: service_healthy
+
+    #  NGINX Web Server
+    nginx:
+        container_name: nginx
+        build:
+            context: ../docker/nginx
+            dockerfile: Dockerfile
+        restart: unless-stopped
+        volumes:
+            - ../src:/app
+            - ./.env:/app/.env
+            - ./nginx/https.conf:/opt/bitnami/nginx/conf/server_blocks/https.conf
+        ports:
+            - "80:80"
+            - "443:443"
+        networks:
+            - app-tier
+        depends_on:
+            - application
+            - reverb
+
+    #  Reverb Container for Websockets
+    reverb:
+        container_name: reverb
+        restart: unless-stopped
+        build:
+            context: ./application
+            dockerfile: Dockerfile
+        volumes:
+            - ../src:/app
+            - ./.env:/app/.env
+        environment:
+            - SERVICE=reverb
+        networks:
+            - app-tier
+        depends_on:
+            - application
+        entrypoint: php artisan reverb:start --debug
+
+    #  Horizon Container to run background jobs
+    horizon:
+        container_name: horizon
+        restart: unless-stopped
+        build:
+            context: ./application
+            dockerfile: Dockerfile
+        volumes:
+            - ../src:/app
+            - ./.env:/app/.env
+        environment:
+            - SERVICE=horizon
+        networks:
+            - app-tier
+        depends_on:
+            - application
+            - nginx
+
+    #  Scheduler Container
+    scheduler:
+        container_name: scheduler
+        restart: unless-stopped
+        build:
+            context: ./application
+            dockerfile: Dockerfile
+        volumes:
+            - ../src:/app
+            - ./.env:/app/.env
+        environment:
+            - SERVICE=scheduler
+        networks:
+            - app-tier
+        depends_on:
+            - application
+            - nginx
+
+    #  MySQL Database Container
+    database:
+        container_name: database
+        build:
+            context: ../docker/database
+            dockerfile: Dockerfile
+        restart: unless-stopped
+        volumes:
+            - dbDevData:/bitnami/mysql/data
+            - ./database/testDatabase.sql:/docker-entrypoint-initdb.d/testDatabase.sql
+        networks:
+            - app-tier
+        ports:
+            - "3306:3306"
+        healthcheck:
+            test: ['CMD', '/opt/bitnami/scripts/mysql/healthcheck.sh']
+            interval: 15s
+            timeout: 5s
+            retries: 6
+
+    #  Redis Container for Cache, Job and Email Queuing
+    redis:
+        container_name: redis
+        build:
+            context: ../docker/redis
+            dockerfile: Dockerfile
+        restart: unless-stopped
+        volumes:
+            - redisDevData:/bitnami/redis/data
+        networks:
+            - app-tier
+        ports:
+            - "6379:6379"
+
+    ###########################################################################################
+    #                               Dev Specific Containers                                   #
+    ###########################################################################################
+
+    #  Mailpit for Email Traps
+    mailpit:
+        image: axllent/mailpit:latest
+        container_name: mailpit
+        restart: unless-stopped
+        networks:
+            - app-tier
+        ports:
+            - "8025:8025"
+            - "1025:1025"
+
+    #  NPM Container to run npm run dev
+    npm:
+        container_name: npm
+        restart: unless-stopped
+        build:
+            context: ./application
+            dockerfile: Dockerfile
+        user: root
+        volumes:
+            - ../src:/app
+            - ./.env:/app/.env
+        environment:
+            - SERVICE=app
+        networks:
+            - app-tier
+        ports:
+            - "5173:5173"
+        depends_on:
+            - application
+            - nginx
+        entrypoint: npm run dev

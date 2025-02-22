@@ -1,0 +1,94 @@
+{
+    "name": "butcherman/project-template",
+    "type": "template",
+    "description": "Opinionated Template for new projects.",
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
+    "license": "LGPL-2.0-or-later",
+    "require": {
+        "php": "^8.2",
+        "butcherman/version": "^1.4",
+        "glhd/gretel": "^1.8",
+        "inertiajs/inertia-laravel": "^2.0",
+        "laravel/fortify": "^1.24",
+        "laravel/framework": "^11.9",
+        "laravel/horizon": "^5.29",
+        "laravel/pennant": "^1.12",
+        "laravel/prompts": "^0.3.1",
+        "laravel/reverb": "^1.4",
+        "laravel/sanctum": "^4.0",
+        "laravel/scout": "^10.11",
+        "laravel/telescope": "^5.2",
+        "laravel/tinker": "^2.10",
+        "pion/laravel-chunk-upload": "^1.5",
+        "predis/predis": "^2.2",
+        "spatie/laravel-cookie-consent": "^3.3",
+        "tightenco/ziggy": "^2.3"
+    },
+    "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.14",
+        "barryvdh/laravel-ide-helper": "^3.2",
+        "butcherman/artisan-dev-commands": "^0.0",
+        "fakerphp/faker": "^1.23",
+        "laravel/pail": "^1.1",
+        "laravel/pint": "^1.13",
+        "laravel/sail": "^1.26",
+        "mockery/mockery": "^1.6",
+        "mxl/laravel-job": "^1.6",
+        "nunomaduro/collision": "^8.1",
+        "phpunit/phpunit": "^11.0.1",
+        "spatie/laravel-horizon-watcher": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+            "@php artisan ide-helper:generate"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi",
+            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
+            "@php artisan migrate --graceful --ansi"
+        ],
+        "dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
