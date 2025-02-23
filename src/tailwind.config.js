@@ -14,7 +14,12 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            screens: {
+                '-sm': {max: '639px'},
+                '-md': {max: '767px'},
+                '-lg': {max: '1023px'}
+            }
         },
     },
-    plugins: [],
+    plugins: [require('tailwindcss-primeui')],
 };
