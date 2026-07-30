@@ -19,8 +19,7 @@
         "laravel/tinker": "^3.0",
         "laravel/wayfinder": "^0.1.20",
         "pion/laravel-chunk-upload": "^1.6",
-        "predis/predis": "^3.5",
-        "tightenco/ziggy": "^2.6"
+        "predis/predis": "^3.5"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^4.4",

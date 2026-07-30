@@ -14,8 +14,7 @@ The Docker Back End is supported by several Docker Images
 
 Template is setup with the following dependencies by default:
 
-* Laravel 11
+* Laravel 13
 * Vue 3
-* InertiaJS 2
+* InertiaJS 3
 * Tailwinds 4
-* PrimeVue 4
