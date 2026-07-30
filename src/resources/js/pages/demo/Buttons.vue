@@ -1,9 +1,72 @@
 <script setup lang="ts">
+import AddButton from "@/core/components/buttons/AddButton.vue";
+import AlertButton from "@/core/components/buttons/AlertButton.vue";
 import AppLayout from "@/layouts/AppLayout.vue";
 import BaseButton from "@/core/components/buttons/BaseButton.vue";
 import Card from "@/core/components/Card.vue";
+import EditButton from "@/core/components/buttons/EditButton.vue";
+import SubmitButton from "@/core/components/buttons/SubmitButton.vue";
 
-const props = defineProps<{}>();
+const referenceProperties = [
+    {
+        property: "async",
+        type: "boolean",
+        default: false,
+        required: false,
+        description:
+            "Determines if the url link will be treated as a regular Inertia link, or an ASYNC Inertia link.",
+    },
+    {
+        property: "flat",
+        type: "boolean",
+        default: false,
+        required: false,
+        description: "Removes component shadowing.",
+    },
+    {
+        property: "href",
+        type: "string",
+        default: null,
+        required: false,
+        description:
+            " When set the component will act as an Inertia  hyperlink.",
+    },
+    {
+        property: "icon",
+        type: "string",
+        default: null,
+        required: false,
+        description: "Places a FontAwesome icon in front of the text.",
+    },
+    {
+        property: "pill",
+        type: "boolean",
+        default: false,
+        required: false,
+        description: "Rounds out the edges of the border to the max.",
+    },
+    {
+        property: "text",
+        type: "string",
+        default: null,
+        required: false,
+        description: "Text to be placed in the button.",
+    },
+    {
+        property: "size",
+        type: "ComponentSize",
+        default: "md",
+        required: false,
+        description: "Size of the component.",
+    },
+    {
+        property: "variant",
+        type: "VariantType",
+        default: "primary",
+        requried: false,
+        description: "Background and text colors for the comoponent.",
+    },
+];
 </script>
 
 <script lang="ts">
@@ -15,6 +78,10 @@ export default { layout: AppLayout };
             <Card title="Button Components">
                 <div class="flex flex-col gap-2">
                     <BaseButton text="Base Button" />
+                    <AddButton text="Add Button" />
+                    <AlertButton text="Alert Button" />
+                    <EditButton text="Edit Button" />
+                    <SubmitButton text="SubmitButton" />
                 </div>
             </Card>
             <Card title="Button Variants">
@@ -76,81 +143,7 @@ export default { layout: AppLayout };
                     &lt;/template&gt;<br />
                 </div>
             </Card>
-            <Card title="Component Reference">
-                <h6>Optional Props</h6>
-                <table>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <span class="font-semibold">async</span>
-                                &lt;boolean&gt;
-                            </td>
-                            <td>
-                                Determines if the url link will be treated as a
-                                regular Inertia link, or an ASYNC Inertia link.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="font-semibold">flat</span
-                                >&lt;boolean&gt;
-                            </td>
-                            <td>Removes component shadowing.</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="font-semibold">href</span
-                                >&lt;string&gt;
-                            </td>
-                            <td>
-                                When set the component will act as an Inertia
-                                hyperlink.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="font-semibold">icon</span
-                                >&lt;string&gt;
-                            </td>
-                            <td>
-                                Places a FontAwesome icon in front of the text.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="font-semibold">pill</span
-                                >&lt;boolean&gt;
-                            </td>
-                            <td>
-                                Rounds out the edges of the border to the max.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="font-semibold">text</span
-                                >&lt;string&gt;
-                            </td>
-                            <td>Text to be placed in the button.</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="font-semibold">size</span>
-                                &lt;ComponentSize&gt;
-                            </td>
-                            <td>Size of the component.</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="font-semibold">variant</span>
-                                &lt;VariantType&gt;
-                            </td>
-                            <td>
-                                Background and text colors for the comoponent.
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </Card>
+            <Card title="Component Reference"> finish me </Card>
         </div>
     </div>
 </template>
