@@ -1,12 +1,11 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Auth\TwoFactorController;
 use App\Http\Controllers\Auth\TwoFactorSetupAuthenticatorController;
 use App\Http\Controllers\Auth\TwoFactorSetupController;
 use App\Http\Controllers\Auth\TwoFactorSetupEmailController;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |-------------------------------------------------------------------------------
@@ -15,7 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware(['guest', 'throttle:50,120'])->group(function () {
-    Route::get('/', LoginController::class)->name('home');
+    Route::get('/', function () {
+        return Inertia::render('Home');
+    })->name('home');
     Route::post('two-factor-submit', TwoFactorController::class)
         ->name('two-factor.login.email');
 });
