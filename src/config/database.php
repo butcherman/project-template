@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Str;
+use Pdo\Mysql;
 
 return [
 
@@ -49,7 +50,7 @@ return [
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'application'),
             'username' => env('DB_USERNAME', 'dbUser'),
-            'password' => env('DB_PASSWORD', 'appDatabase'),
+            'password' => env('DB_PASSWORD', 'applicationDatabase'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
@@ -58,7 +59,7 @@ return [
             'strict' => true,
             'engine' => null,
             'options' => extension_loaded('pdo_mysql') ? array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+                Mysql::ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
         ],
 
@@ -78,7 +79,7 @@ return [
             'strict' => true,
             'engine' => null,
             'options' => extension_loaded('pdo_mysql') ? array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+                Mysql::ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
         ],
 
@@ -152,7 +153,7 @@ return [
 
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_') . '_database_'),
+            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
             'persistent' => env('REDIS_PERSISTENT', false),
         ],
 
@@ -160,7 +161,7 @@ return [
             'url' => env('REDIS_URL'),
             'host' => env('REDIS_HOST', 'redis'),
             'username' => env('REDIS_USERNAME'),
-            'password' => env('REDIS_PASSWORD', 'dbRootPassword'),
+            'password' => env('REDIS_PASSWORD', 'appRootPassword'),
             'port' => env('REDIS_PORT', '6379'),
             'database' => env('REDIS_DB', '0'),
         ],
@@ -169,7 +170,7 @@ return [
             'url' => env('REDIS_URL'),
             'host' => env('REDIS_HOST', 'redis'),
             'username' => env('REDIS_USERNAME'),
-            'password' => env('REDIS_PASSWORD', 'dbRootPassword'),
+            'password' => env('REDIS_PASSWORD', 'appRootPassword'),
             'port' => env('REDIS_PORT', '6379'),
             'database' => env('REDIS_CACHE_DB', '1'),
         ],
@@ -178,7 +179,7 @@ return [
             'url' => env('REDIS_URL'),
             'host' => env('REDIS_HOST', 'redis'),
             'username' => env('REDIS_USERNAME'),
-            'password' => env('REDIS_PASSWORD', 'dbRootPassword'),
+            'password' => env('REDIS_PASSWORD', 'appRootPassword'),
             'port' => env('REDIS_PORT', '6379'),
             'database' => env('REDIS_SESSION_DB', '2'),
         ],
@@ -187,7 +188,7 @@ return [
             'url' => env('REDIS_URL'),
             'host' => env('REDIS_HOST', 'redis'),
             'username' => env('REDIS_USERNAME'),
-            'password' => env('REDIS_PASSWORD', 'dbRootPassword'),
+            'password' => env('REDIS_PASSWORD', 'appRootPassword'),
             'port' => env('REDIS_PORT', '6379'),
             'database' => env('REDIS_QUEUE_DB', '3'),
         ],

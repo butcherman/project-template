@@ -1,6 +1,9 @@
 ################################################################################
 #                                                                              #
-#             Tech Bench build for dev Tech Bench Application                  #
+#    Baseline Tech Bench build does not have Tech Bench App, only              #
+#          basic install point in which to build app off of                    #
+#        all versions of Tech Bench start with this OS build                   #
+#                 scripts and app copied later                                 #
 #                                                                              #
 ################################################################################
 
@@ -49,14 +52,8 @@ RUN npm install -g npm@12.0.1
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
 
-# Overwrite the Production php.ini file with the dev one
-RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
-
-# Install xDebug to allow PHPUnit Testing
-RUN install-php-extensions xdebug
-
-# Copy the .ini file for additional debug configuration
-COPY ./php-dev.ini $PHP_INI_DIR/conf.d/php-dev.ini
+# Use the default production configuration
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
 # Build Healthcheck
 # HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
