@@ -38,7 +38,7 @@ const sizeClass = computed<string>(() => {
     return {
         sm: "px-2 py-1",
         md: "px-3 py-4",
-        lg: "px-3 py-2",
+        lg: "px-3 py-6",
     }[props.size ?? "md"];
 });
 </script>

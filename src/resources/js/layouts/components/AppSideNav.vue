@@ -27,6 +27,11 @@ const navBar: MenuItem[] = [
         icon: "font",
         route: "/typography",
     },
+    {
+        label: "Buttons",
+        icon: "stop",
+        route: "/buttons",
+    },
 ];
 </script>
 
