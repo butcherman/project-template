@@ -8,9 +8,9 @@
         name="viewport"
         content="width=device-width, initial-scale=1, shrink-to-fit=no"
     >
-    @routes()
+
     @vite('resources/js/app.ts')
-    @inertiaHead
+    <x-inertia::head />
 </head>
 
 <body>
@@ -23,7 +23,7 @@
             Please enable Javascript and reload page
         </p>
     </noscript>
-    @inertia
+    <x-inertia::app />
 </body>
 
 </html>
