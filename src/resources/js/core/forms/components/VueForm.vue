@@ -1,0 +1,161 @@
+<script setup lang="ts">
+import Overlay from "@/core/components/loaders/Overlay.vue";
+import SubmitButton from "@/core/components/buttons/SubmitButton.vue";
+import { computed, readonly, ref } from "vue";
+import { useForm } from "vee-validate";
+import { useForm as useInertiaForm } from "@inertiajs/vue3";
+
+const emit = defineEmits<{
+    submitting: [InertiaFormData];
+    success: [];
+}>();
+
+const props = defineProps<{
+    initialValues: InertiaFormData;
+    name: string;
+    submitMethod: "post" | "put" | "delete";
+    submitRoute: string;
+    validationSchema: object;
+
+    // Optional
+    doNotReset?: boolean;
+    fullPageOverlay?: boolean;
+    hideOverlay?: boolean;
+    only?: string[];
+    submitIcon?: string;
+    submitText?: string;
+}>();
+
+const isSubmitting = ref<boolean>(false);
+const submitText = computed<string>(() => props.submitText ?? "Submit");
+const isDirty = computed<boolean>(() => meta.value.dirty);
+const uncaughtErrors = ref<string[]>([]);
+
+const handleErrors = (
+    formData: InertiaFormData,
+    formErrors: InertiaFormErrors,
+): void => {
+    const formKeys = Object.keys(formData);
+    const errorList = Object.entries(formErrors);
+
+    errorList.forEach((err) => {
+        if (formKeys.includes(err[0])) {
+            setFieldError(err[0], err[1]);
+        } else {
+            // If the value is an object, inspect the error bag again
+            if (typeof err[1] === "object") {
+                handleErrors(formData, err[1]);
+            } else {
+                console.log("uncaught", err);
+                uncaughtErrors.value.push(err[1]);
+            }
+        }
+    });
+};
+
+/*
+|-------------------------------------------------------------------------------
+| Vee Validate Setup
+|-------------------------------------------------------------------------------
+*/
+const { resetForm, setFieldError, setFieldValue, handleSubmit, meta, values } =
+    useForm({
+        validationSchema: props.validationSchema,
+        initialValues: props.initialValues,
+        name: props.name,
+    });
+
+/**
+ * Return a specific field value
+ */
+const getFieldValue = (field: keyof InertiaFormData): any => {
+    return values[field];
+};
+
+/*
+|-------------------------------------------------------------------------------
+| Handle the Submission of the Form
+|-------------------------------------------------------------------------------
+*/
+const onSubmit = handleSubmit((form: InertiaFormData): void => {
+    uncaughtErrors.value = [];
+    isSubmitting.value = true;
+    emit("submitting", form);
+
+    // Use InertiaJS to Submit the form
+    const formData = useInertiaForm<InertiaFormData>(form);
+    formData.submit(props.submitMethod, props.submitRoute, {
+        preserveScroll: true,
+        only: props.only ?? [],
+        onFinish: () => (isSubmitting.value = false),
+        onSuccess: onSuccess,
+        onError: () => handleErrors(form, formData.errors),
+    });
+});
+
+/*
+|-------------------------------------------------------------------------------
+| Handle successful completion of the form
+|-------------------------------------------------------------------------------
+*/
+const onSuccess = () => {
+    if (!props.doNotReset) {
+        resetForm();
+    }
+    emit("success");
+};
+
+/*
+|-------------------------------------------------------------------------------
+| Expose the necessary methods
+|-------------------------------------------------------------------------------
+*/
+defineExpose({
+    getFieldValue,
+    setFieldError,
+    setFieldValue,
+    resetForm,
+    isDirty,
+    isSubmitting,
+    values: readonly(values),
+});
+</script>
+
+<template>
+    <Overlay
+        :loading="isSubmitting"
+        :full-page="fullPageOverlay"
+        class="h-full"
+    >
+        <form
+            class="h-full flex flex-col gap-2"
+            :name="name"
+            novalidate
+            @submit.prevent="onSubmit"
+        >
+            <div v-if="uncaughtErrors.length">
+                <div
+                    v-for="err in uncaughtErrors"
+                    :key="err"
+                    class="bg-red-200 rounded-lg p-1 text-center my-2 text-red-800"
+                >
+                    {{ err }}
+                </div>
+            </div>
+            <div class="grow flex flex-col gap-2">
+                <slot />
+            </div>
+            <div>
+                <SubmitButton
+                    class="w-full"
+                    :text="submitText"
+                    :icon="submitIcon"
+                >
+                    <span v-if="isSubmitting">
+                        <fa-icon icon="spinner" class="fa-spin-pulse" />
+                    </span>
+                </SubmitButton>
+            </div>
+        </form>
+    </Overlay>
+</template>
