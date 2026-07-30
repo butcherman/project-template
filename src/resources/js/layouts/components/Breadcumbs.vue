@@ -7,9 +7,9 @@ const breadcrumbs = computed(() => page.props.breadcrumbs);
 </script>
 
 <template>
-    <div class="bg-blue-300 rounded-lg opacity-85 p-4">
+    <div v-if="breadcrumbs" class="bg-blue-300 rounded-lg opacity-85 p-4">
         <ul class="flex gap-2">
-            <li v-for="link in breadcrumbs" :key="link.url">
+            <!-- <li v-for="link in breadcrumbs" :key="link.url">
                 <div v-if="link.is_current_page">
                     {{ link.title }}
                 </div>
@@ -17,7 +17,7 @@ const breadcrumbs = computed(() => page.props.breadcrumbs);
                     <Link :href="link.url"> {{ link.title }}</Link>
                     <fa-icon icon="angle-right" class="text-muted" />
                 </div>
-            </li>
+            </li> -->
         </ul>
     </div>
 </template>

@@ -6,7 +6,7 @@ const page = usePage();
 const authorizedUser = computed<User | undefined>(
     () => page.props.current_user ?? undefined,
 );
-const navBar = computed<menuItem[]>(() => page.props.navbar);
+const navBar = computed<MenuItem[]>(() => page.props.navbar);
 
 export const useUserAuth = () => {
     return {

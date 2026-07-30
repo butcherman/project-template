@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import MenuList from "@/core/components/MenuList.vue";
 import { computed } from "vue";
-import { useUserAuth } from "@/core/state/userAuth";
 
 const emit = defineEmits(["update:modelValue"]);
 
@@ -9,7 +8,18 @@ const props = defineProps<{
     modelValue: boolean;
 }>();
 
-const { navBar } = useUserAuth();
+const navBar: MenuItem[] = [
+    {
+        label: "Home",
+        icon: "home",
+        route: "/",
+    },
+    {
+        label: "Layout and Base Function",
+        icon: "table-columns",
+        route: "/authenticated-layout",
+    },
+];
 
 /**
  * Status of the Nav Menu - opened or closed

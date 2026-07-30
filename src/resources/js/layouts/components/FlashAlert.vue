@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import gsap from "gsap";
-import { useAlertStyles } from "../composables/alertStyles";
 import { useFlashState } from "../../core/state/flashState";
 import { onMounted, onUnmounted, ref } from "vue";
 import { router } from "@inertiajs/vue3";
+import { useVariantHelper } from "@/core/composables/variantHelper";
 
-const { getStatusType, getStatusIcon } = useAlertStyles();
 const { flashAlerts, pushFlashAlert } = useFlashState();
+const { getVariantClass, getVariantIcon } = useVariantHelper();
 
 /*
 |-------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ onMounted(() => {
 
         let msg = event.detail.flash;
         if (msg.banner) {
-            pushFlashAlert(msg.banner);
+            // pushFlashAlert(msg.banner);
         }
     });
 });
@@ -60,15 +60,15 @@ onUnmounted(() => flashListener.value());
                 <div
                     v-for="flash in flashAlerts"
                     class="flash-alert flex justify-between w-11/12 md:w-1/2 px-3 py-2 my-2 rounded-xl text-xl pointer-events-auto opacity-90"
-                    :class="getStatusType(flash.level)"
+                    :class="getVariantClass(flash.level)"
                     :key="flash.id"
                 >
                     <div class="flex items-center">
-                        <fa-icon :icon="getStatusIcon(flash.level)" />
+                        <fa-icon :icon="getVariantIcon(flash.level)" />
                     </div>
                     <div class="text-center my-1">{{ flash.message }}</div>
                     <div class="flex items-center">
-                        <fa-icon :icon="getStatusIcon(flash.level)" />
+                        <fa-icon :icon="getVariantIcon(flash.level)" />
                     </div>
                 </div>
             </TransitionGroup>

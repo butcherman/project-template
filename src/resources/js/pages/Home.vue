@@ -2,6 +2,8 @@
 import AuthLayout from "@/layouts/AuthLayout.vue";
 import Card from "@/core/components/Card.vue";
 import BaseButton from "@/core/components/buttons/BaseButton.vue";
+import { projectStructure } from "@/wayfinder/routes";
+import { appLayout } from "@/wayfinder/routes";
 
 const props = defineProps<{}>();
 </script>
@@ -29,7 +31,12 @@ export default { layout: AuthLayout };
                 </p>
             </div>
             <div class="flex justify-center gap-2">
-                <BaseButton text="Project Structure" />
+                <BaseButton
+                    text="Project Structure"
+                    :href="projectStructure.url()"
+                />
+                <BaseButton text="Layout" :href="appLayout.url()" />
+                <BaseButton text="Typography" />
                 <BaseButton text="Core Components" />
                 <BaseButton text="Data Gathering Components" />
                 <BaseButton text="Forms and Form Based Components" />

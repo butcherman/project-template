@@ -22,7 +22,7 @@ export const useFlashState = () => {
     /**
      * Manually remove message
      */
-    const removeFlashMsg = (id: string) => {
+    const removeFlashMsg = (id: string): void => {
         flashAlerts.value = flashAlerts.value.filter(
             (alert) => alert.id !== id,
         );
@@ -31,7 +31,7 @@ export const useFlashState = () => {
     /**
      * Auto delete message after 15 seconds
      */
-    const setFlashTimeout = (id: string) => {
+    const setFlashTimeout = (id: string): void => {
         setTimeout(() => {
             removeFlashMsg(id);
         }, 5000);
