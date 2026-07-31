@@ -5,6 +5,7 @@ import { useColumnBuilder } from "@/core/features/dataTable/composables/columnBu
 
 interface testingData {
     text: string;
+    icon: string;
     bool: boolean;
     size: number;
     date: string;
@@ -15,6 +16,7 @@ const colHelper = useColumnBuilder<testingData>();
 
 const dataColumns = [
     colHelper.text("text", "Text Col"),
+    colHelper.icon("icon", "FA Icon"),
     colHelper.boolean("bool", "Bool"),
     colHelper.text("size", "Formatted", {
         formatter: (value: number) => prettyBytes(value),
@@ -30,6 +32,7 @@ const testData = [
         size: 1024,
         date: "Jan 12, 2024",
         phone: 8085458856,
+        icon: "star",
     },
     {
         text: "test 2",
@@ -37,6 +40,7 @@ const testData = [
         size: 2048,
         date: "12-30-29",
         phone: "(877)555-1212,",
+        icon: "poo",
     },
 ];
 </script>

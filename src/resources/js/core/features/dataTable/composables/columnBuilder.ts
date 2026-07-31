@@ -1,5 +1,6 @@
 import { booleanColumn } from "../columns/booleanColumn";
 import { dateColumn } from "../columns/dateColumn";
+import { iconColumn } from "../columns/iconColumn";
 import { phoneNumberColumn } from "../columns/phoneNumberColumn";
 import { textColumn } from "../columns/textColumn";
 import type { DeepKeys, RowData } from "@tanstack/table-core";
@@ -29,5 +30,11 @@ export function useColumnBuilder<TRow extends RowData>() {
             label: string,
             options = {},
         ) => phoneNumberColumn<TRow, TField>(field, label, options),
+
+        icon: <TField extends DeepKeys<TRow>>(
+            field: TField,
+            label: string,
+            options = {},
+        ) => iconColumn<TRow, TField>(field, label, options),
     };
 }
