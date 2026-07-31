@@ -14,13 +14,5 @@
                 textColumn(dataField, columnLabel, {options})
             </code>
         </p>
-        <p>
-            dataField property represents the name of the object property
-            holding the value for that column.
-        </p>
-        <p>
-            columnLable property is how the column should be labeled in the
-            Table Header Row.
-        </p>
     </div>
 </template>

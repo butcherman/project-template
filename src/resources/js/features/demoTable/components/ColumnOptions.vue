@@ -34,6 +34,12 @@
                         Callback to load custom component into cell.
                     </td>
                 </tr>
+                <tr>
+                    <td class="p-2 border-e border-e-slate-300">formatter</td>
+                    <td class="p-2">
+                        Callback function to reformat the value.
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
