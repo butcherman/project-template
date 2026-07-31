@@ -13,7 +13,7 @@ export interface DataTableColumn<TRow extends RowData, TValue = unknown> {
     width?: number;
     align?: "start" | "center" | "end";
 
-    formatter?: (value: unknown, row: TRow) => unknown;
+    formatter?: (value: TValue, row?: TRow) => unknown;
     cell?: (info: CellContext<TRow, TValue>) => VNodeChild;
 }
 
