@@ -8,6 +8,7 @@ interface testingData {
     bool: boolean;
     size: number;
     date: string;
+    phone: number | string;
 }
 
 const colHelper = useColumnBuilder<testingData>();
@@ -19,6 +20,7 @@ const dataColumns = [
         formatter: (value: number) => prettyBytes(value),
     }),
     colHelper.date("date", "Date"),
+    colHelper.phoneNumber("phone", "Phone Number"),
 ];
 
 const testData = [
@@ -27,12 +29,14 @@ const testData = [
         bool: false,
         size: 1024,
         date: "Jan 12, 2024",
+        phone: 8085458856,
     },
     {
         text: "test 2",
         bool: true,
         size: 2048,
         date: "12-30-29",
+        phone: "(877)555-1212,",
     },
 ];
 </script>
