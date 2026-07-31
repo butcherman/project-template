@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import MenuList from "@/core/components/MenuList.vue";
 import { computed } from "vue";
+import { useDemoNavbar } from "@/features/composables/demoNavbar";
 
 const emit = defineEmits(["update:open"]);
 
@@ -21,23 +22,7 @@ const isOpen = computed({
  */
 const hiddenClass = computed<string>(() => (isOpen.value ? "w-0" : "w-64"));
 
-const navBar: MenuItem[] = [
-    {
-        label: "Typography",
-        icon: "font",
-        route: "/typography",
-    },
-    {
-        label: "Badges",
-        icon: "certificate",
-        route: "/badges",
-    },
-    {
-        label: "Buttons",
-        icon: "stop",
-        route: "/buttons",
-    },
-];
+const navBar = useDemoNavbar;
 </script>
 
 <template>
