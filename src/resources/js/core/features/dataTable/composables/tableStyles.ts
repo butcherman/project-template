@@ -1,5 +1,5 @@
 import { computed } from "vue";
-import { DataTableProps } from "../types";
+import { DataTableProps } from "../types/types";
 import { RowData } from "@tanstack/vue-table";
 
 export const useTableStyles = <TRow extends RowData>(

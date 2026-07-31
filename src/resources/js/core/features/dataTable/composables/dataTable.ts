@@ -11,7 +11,7 @@ import {
     getFacetedUniqueValues,
     RowData,
 } from "@tanstack/vue-table";
-import type { DataTableProps } from "../types";
+import type { DataTableProps } from "../types/types";
 
 export const useDataTable = <TRow extends RowData>(
     props: DataTableProps<TRow>,

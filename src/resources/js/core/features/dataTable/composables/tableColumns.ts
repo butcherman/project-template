@@ -1,7 +1,7 @@
 import DataTableHeaderCell from "../components/DataTableHeaderCell.vue";
 import { h } from "vue";
 import type { ColumnDef, RowData } from "@tanstack/vue-table";
-import type { DataTableColumn } from "../types.js";
+import type { DataTableColumn } from "../types/types.js";
 
 export function useTableColumns<TRow extends RowData>(
     columns: DataTableColumn<TRow, unknown>[],

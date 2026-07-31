@@ -1,5 +1,5 @@
 import BooleanBadge from "@/core/components/badges/BooleanBadge.vue";
-import { DataTableColumn } from "../types";
+import { DataTableColumn } from "../types/types";
 import { h } from "vue";
 import type { DeepKeys, RowData } from "@tanstack/table-core";
 

@@ -3,7 +3,7 @@ import DataTableBody from "./components/DataTableBody.vue";
 import DataTableFooter from "./components/DataTableFooter.vue";
 import DataTableHeader from "./components/DataTableHeader.vue";
 import { useDataTable } from "./composables/dataTable.js";
-import type { DataTableColumn } from "./types.js";
+import type { DataTableColumn } from "./types/types.js";
 import type { RowData } from "@tanstack/vue-table";
 
 defineSlots<{

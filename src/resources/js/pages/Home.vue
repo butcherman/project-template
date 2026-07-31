@@ -24,7 +24,7 @@ export default { layout: GenericLayout };
                 templates.
             </p>
             <div class="flex justify-center gap-3 mt-4">
-                <BaseButton text="Typography" href="/typography" />
+                <BaseButton text="Demo" href="/typography" />
             </div>
         </Card>
     </div>

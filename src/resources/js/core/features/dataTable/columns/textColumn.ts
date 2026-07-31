@@ -1,5 +1,5 @@
 import type { DeepKeys, RowData } from "@tanstack/table-core";
-import { DataTableColumn } from "../types";
+import { DataTableColumn } from "../types/types";
 
 export function textColumn<TRow extends RowData>(
     field: DeepKeys<TRow>,
