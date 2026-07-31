@@ -1,23 +1,24 @@
 <script setup lang="ts">
 import DataTable from "@/core/features/dataTable/DataTable.vue";
-import PrettyBytes from "pretty-bytes";
-import { textColumn } from "@/core/features/dataTable/columns/textColumn";
-import { booleanColumn } from "@/core/features/dataTable/columns/booleanColumn";
+import prettyBytes from "pretty-bytes";
+import { useColumnBuilder } from "@/core/features/dataTable/composables/columnBuilder";
 
 interface testingData {
     text: string;
     bool: boolean;
     size: number;
+    date: string;
 }
 
+const colHelper = useColumnBuilder<testingData>();
+
 const dataColumns = [
-    textColumn<testingData>("text", "Text Column", {
-        icon: "user",
+    colHelper.text("text", "Text Col"),
+    colHelper.boolean("bool", "Bool"),
+    colHelper.text("size", "Formatted", {
+        formatter: (value: number) => prettyBytes(value),
     }),
-    booleanColumn<testingData>("bool", "Boolean"),
-    textColumn<testingData, number>("size", "Formatted", {
-        formatter: (value) => PrettyBytes(value),
-    }),
+    colHelper.date("date", "Date"),
 ];
 
 const testData = [
@@ -25,6 +26,13 @@ const testData = [
         text: "test 1",
         bool: false,
         size: 1024,
+        date: "Jan 12, 2024",
+    },
+    {
+        text: "test 2",
+        bool: true,
+        size: 2048,
+        date: "12-30-29",
     },
 ];
 </script>

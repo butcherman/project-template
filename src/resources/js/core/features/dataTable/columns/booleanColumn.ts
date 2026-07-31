@@ -1,6 +1,6 @@
-import BooleanBadge from "@/core/components/badges/BooleanBadge.vue";
-import { DataTableColumn } from "../types/types";
+import BoolValue from "../components/BoolValue.vue";
 import { h } from "vue";
+import { DataTableColumn } from "../types/types";
 import type { DeepKeys, RowData } from "@tanstack/table-core";
 
 export function booleanColumn<TRow extends RowData>(
@@ -10,21 +10,15 @@ export function booleanColumn<TRow extends RowData>(
 ): DataTableColumn<TRow, boolean> {
     return {
         field,
-
         label,
-
         icon: undefined,
-
         filterable: true,
-
         filterSelect: true,
-
         sort: true,
-
         align: "center",
 
         cell: (info) =>
-            h(BooleanBadge, {
+            h(BoolValue, {
                 value: info.getValue(),
             }),
 
