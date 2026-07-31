@@ -2,5 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::inertia('/typography', 'demo/Typography');
-Route::inertia('/buttons', 'demo/Buttons');
+Route::inertia('/typography', 'demo/TypographyDemo');
+Route::inertia('/badges', 'demo/BadgesDemo');
+Route::inertia('/buttons', 'demo/ButtonsDemo');

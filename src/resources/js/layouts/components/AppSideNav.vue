@@ -28,6 +28,11 @@ const navBar: MenuItem[] = [
         route: "/typography",
     },
     {
+        label: "Badges",
+        icon: "certificate",
+        route: "/badges",
+    },
+    {
         label: "Buttons",
         icon: "stop",
         route: "/buttons",
