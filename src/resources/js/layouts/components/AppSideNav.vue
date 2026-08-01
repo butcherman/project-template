@@ -30,6 +30,11 @@ const navBar = useDemoNavbar;
         class="fixed top-14 right-0 lg:left-0 h-full z-30 lg:w-64 overflow-hidden rounded-s-lg lg:rounded-none border-s border-s-slate-200 lg:border-0 transition-[width] transition-900 bg-white"
         :class="hiddenClass"
     >
-        <MenuList :menu-list="navBar" class="mt-4 ms-4 me-2" />
+        <div class="mt-4 ms-4 me-2">
+            <h5>Basic Components</h5>
+            <MenuList :menu-list="navBar.basicComponents" />
+            <h5>Data Components</h5>
+            <MenuList :menu-list="navBar.dataComponents" />
+        </div>
     </nav>
 </template>
