@@ -31,7 +31,7 @@ export interface DataTableProps<TRow extends RowData> {
     striped?: boolean;
 
     rowClassFn?: (row: TRow) => string | false;
-    rowLinkFn?: (event: MouseEvent, row: TRow) => void;
+    rowClickFn?: (event: MouseEvent, row: TRow) => unknown;
 }
 
 export interface ResourceListProps<TRow> {
@@ -50,7 +50,7 @@ export interface ResourceListProps<TRow> {
     paginate?: boolean;
 
     rowClassFn?: (row: TRow) => IndexedData<TRow> | false;
-    rowLinkFn?: (event: MouseEvent, row: TRow) => void;
+    rowClickFn?: (event: MouseEvent, row: TRow) => unknown;
 }
 
 declare module "@tanstack/table-core" {
@@ -74,6 +74,6 @@ declare module "@tanstack/table-core" {
         allowRowClick?: boolean;
 
         rowClassFn?: (row: TData) => string | false;
-        rowLinkFn?: (event: MouseEvent, row: TData) => void;
+        rowClickFn?: (event: MouseEvent, row: TData) => unknown;
     }
 }

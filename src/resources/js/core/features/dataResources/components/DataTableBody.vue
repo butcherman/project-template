@@ -44,11 +44,7 @@ const showComponent = computed(() => {
             <slot :name="name" v-bind="data" />
         </template>
     </DataTableBodyEmpty>
-    <DataTableBodyData
-        v-if="showComponent === 'body'"
-        :table="table"
-        @row-click="$emit('row-click', $event)"
-    >
+    <DataTableBodyData v-if="showComponent === 'body'" :table="table">
         <template v-for="name of Object.keys($slots)" v-slot:[name]="data">
             <slot :name="name" v-bind="data" />
         </template>

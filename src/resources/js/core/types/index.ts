@@ -32,3 +32,8 @@ interface IndexedData<TData> {
     isLast: boolean;
     data: TData;
 }
+
+interface LinkHelper {
+    href: string;
+    external?: boolean;
+}

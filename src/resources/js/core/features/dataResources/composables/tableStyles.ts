@@ -6,7 +6,7 @@ export const useTableStyles = <TRow extends RowData>(
     props: DataTableProps<TRow> | ResourceListProps<TRow>,
 ) => {
     const pointerClass = computed<string>(() =>
-        props.allowRowClick || props.rowLinkFn ? "pointer" : "",
+        props.allowRowClick || props.rowClickFn ? "pointer" : "",
     );
 
     const borderClass = computed<string>(() =>

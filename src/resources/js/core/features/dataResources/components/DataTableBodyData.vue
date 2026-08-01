@@ -15,8 +15,8 @@ const onRowClick = (event: MouseEvent, row: TRow) => {
         emit("row-click", row);
     }
 
-    if (props.table.options.meta?.rowLinkFn) {
-        props.table.options.meta?.rowLinkFn(event, row);
+    if (props.table.options.meta?.rowClickFn) {
+        props.table.options.meta?.rowClickFn(event, row);
     }
 };
 </script>
