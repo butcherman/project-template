@@ -87,7 +87,9 @@ export default { layout: AppLayout };
 <template>
     <div class="flex flex-col gap-2">
         <Card title="Description">
-            <p class="text-center">Customizable button component.</p>
+            <p class="text-center">
+                Collection of customizable button components.
+            </p>
         </Card>
         <div class="flex justify-center gap-2">
             <Card title="Button Components">

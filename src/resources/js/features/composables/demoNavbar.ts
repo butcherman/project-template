@@ -25,6 +25,21 @@ export const useDemoNavbar: { [key: string]: MenuItem[] } = {
             icon: "fa-down-left-and-up-right-to-center",
             route: "/collapse",
         },
+        {
+            label: "Deferred Loader",
+            icon: "clock-rotate-left",
+            route: "/deferred-loader",
+        },
+        {
+            label: "Loaders",
+            icon: "spinner",
+            route: "/loaders",
+        },
+        {
+            label: "Overlay",
+            icon: "circle-notch",
+            route: "/overlay",
+        },
     ],
     dataComponents: [
         {

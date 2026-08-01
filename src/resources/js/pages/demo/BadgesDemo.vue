@@ -80,7 +80,8 @@ export default { layout: AppLayout };
     <div class="flex flex-col gap-2">
         <Card title="Description">
             <p class="text-center">
-                Small badge to display inline with existing text.
+                Collection of small badge components to display inline with
+                existing text.
             </p>
         </Card>
         <div class="flex justify-center gap-2">

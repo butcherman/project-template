@@ -12,6 +12,9 @@ Route::inertia('/badges', 'demo/BadgesDemo');
 Route::inertia('/buttons', 'demo/ButtonsDemo');
 Route::inertia('/card', 'demo/CardDemo');
 Route::inertia('/collapse', 'demo/CollapseDemo');
+Route::inertia('/deferred-loader', 'demo/DeferredLoaderDemo');
+Route::inertia('/loaders', 'demo/LoaderDemo');
+Route::inertia('/overlay', 'demo/OverlayDemo');
 
 /*
 |---------------------------------------------------------------------------
