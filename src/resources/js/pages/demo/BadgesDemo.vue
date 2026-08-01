@@ -4,7 +4,7 @@ import AppLayout from "@/layouts/AppLayout.vue";
 import BaseBadge from "@/core/components/badges/BaseBadge.vue";
 import BooleanBadge from "@/core/components/badges/BooleanBadge.vue";
 import Card from "@/core/components/Card.vue";
-import DataTable from "@/core/features/dataTable/DataTable.vue";
+import DataTable from "@/core/features/dataResources/DataTable.vue";
 import DeleteBadge from "@/core/components/badges/DeleteBadge.vue";
 import EditBadge from "@/core/components/badges/EditBadge.vue";
 import { useReferenceHelper } from "@/features/composables/referenceHelper";

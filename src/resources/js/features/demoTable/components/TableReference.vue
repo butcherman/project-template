@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import DataTable from "@/core/features/dataTable/DataTable.vue";
+import DataTable from "@/core/features/dataResources/DataTable.vue";
 import { useReferenceHelper } from "@/features/composables/referenceHelper";
 
 const { getPropColumns, getSlotColumns } = useReferenceHelper();

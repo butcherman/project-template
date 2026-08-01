@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import DataTable from "@/core/features/dataTable/DataTable.vue";
+import DataTable from "@/core/features/dataResources/DataTable.vue";
 import prettyBytes from "pretty-bytes";
 import { useColumnBuilder } from "@/core/features/dataResources/composables/columnBuilder";
 

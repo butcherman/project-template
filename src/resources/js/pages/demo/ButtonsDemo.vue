@@ -4,7 +4,7 @@ import AlertButton from "@/core/components/buttons/AlertButton.vue";
 import AppLayout from "@/layouts/AppLayout.vue";
 import BaseButton from "@/core/components/buttons/BaseButton.vue";
 import Card from "@/core/components/Card.vue";
-import DataTable from "@/core/features/dataTable/DataTable.vue";
+import DataTable from "@/core/features/dataResources/DataTable.vue";
 import EditButton from "@/core/components/buttons/EditButton.vue";
 import SubmitButton from "@/core/components/buttons/SubmitButton.vue";
 import { useReferenceHelper } from "@/features/composables/referenceHelper";

@@ -3,11 +3,11 @@ import AppLayout from "@/layouts/AppLayout.vue";
 import Card from "@/core/components/Card.vue";
 import Collapse from "@/core/components/Collapse.vue";
 import DataTable from "@/core/features/dataResources/DataTable.vue";
+import ExpandBadge from "@/core/components/badges/ExpandBadge.vue";
 import ResourceList from "@/core/features/dataResources/ResourceList.vue";
 import { useReferenceHelper } from "@/features/composables/referenceHelper";
 import { useSampleData } from "@/features/composables/sampleData";
 import { ref } from "vue";
-import ExpandBadge from "@/core/components/badges/ExpandBadge.vue";
 
 const { getPropColumns, getSlotColumns } = useReferenceHelper();
 const { sampleList } = useSampleData();

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import AppLayout from "@/layouts/AppLayout.vue";
 import Card from "@/core/components/Card.vue";
-import TableStacked from "@/core/features/dataTable/TableStacked.vue";
-import DataTable from "@/core/features/dataTable/DataTable.vue";
+import TableStacked from "@/core/features/dataResources/TableStacked.vue";
+import DataTable from "@/core/features/dataResources/DataTable.vue";
 import { useReferenceHelper } from "@/features/composables/referenceHelper";
 
 const { getPropColumns } = useReferenceHelper();
