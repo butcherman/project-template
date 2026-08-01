@@ -1,6 +1,6 @@
 import BoolValue from "../components/BoolValue.vue";
 import { h } from "vue";
-import { DataTableColumn } from "../types/types";
+import { DataTableColumn } from "../types/types.js";
 import type { DeepKeys, RowData } from "@tanstack/table-core";
 
 export function booleanColumn<TRow extends RowData>(

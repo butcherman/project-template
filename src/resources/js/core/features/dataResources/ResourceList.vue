@@ -1,7 +1,8 @@
 <script setup lang="ts" generic="TRow">
 import { computed, ref } from "vue";
 import { useDataHelper } from "@/core/composables/dataHelper";
-// import Paginate from "../pagination/Paginate.vue";
+import { useTableStyles } from "./composables/tableStyles.js";
+import Paginate from "../pagination/Paginate.vue";
 
 const emit = defineEmits<{
     rowClicked: [TRow];
@@ -14,29 +15,46 @@ const props = defineProps<{
     allowRowClick?: boolean;
     center?: boolean;
     compact?: boolean;
+    gridLines?: boolean;
     hoverRow?: boolean;
     labelField?: keyof TRow;
-    // striped?: boolean;
+    striped?: boolean;
     noBorder?: boolean;
-    noGridLines?: boolean;
     noResultsText?: string;
-    // paginate?: boolean;
+    paginate?: boolean;
 
     rowClassFn?: (row: TRow) => IndexedData<TRow> | false;
     rowLinkFn?: (event: MouseEvent, row: TRow) => void;
 }>();
 
-const { indexData } = useDataHelper();
+const { indexData, getIndexedChunk } = useDataHelper();
+const { pointerClass, paddingClass, stripedClass } = useTableStyles(props);
 
-// const currentPage = ref(1);
-// const perPage = ref(10);
+/*
+|-------------------------------------------------------------------------------
+| Pagination management
+|-------------------------------------------------------------------------------
+*/
+const currentPage = ref(1);
+const perPage = ref(10);
 
+/**
+ * Handle Pagination Navigation
+ */
+const onGoToPage = (page: number) => {
+    currentPage.value = page;
+};
+
+/*
+|-------------------------------------------------------------------------------
+| Data management
+|-------------------------------------------------------------------------------
+*/
 const emptyText = computed(() => props.noResultsText ?? "No Data");
 const dataChunk = computed(() => {
-    // if (props.paginate) {
-    //     console.log("paginate data");
-    //     return;
-    // }
+    if (props.paginate) {
+        return getIndexedChunk(props.list, currentPage.value, perPage.value);
+    }
 
     return indexData(props.list);
 });
@@ -51,8 +69,9 @@ const getRowLabel = (row: TRow): TRow[keyof TRow] | TRow => {
 /**
  * Handle a row being clicked
  */
-const onRowClick = (row: IndexedData<TRow>) => {
-    if (props.allowRowClick) {
+const onRowClick = (event: MouseEvent, row: IndexedData<TRow>) => {
+    if (props.allowRowClick || props.rowLinkFn) {
+        props.rowLinkFn?.(event, row.data);
         emit("rowClicked", row.data);
     }
 };
@@ -79,15 +98,16 @@ const onRowClick = (row: IndexedData<TRow>) => {
                 class="px-1 border-b-slate-300 border-collapse"
                 :class="[
                     {
-                        'border-b': !noGridLines && !data.isLast,
-                        'p-3': !compact,
+                        'border-b': gridLines && !data.isLast,
                         'text-center': center,
                         'hover:bg-slate-200/50': hoverRow,
-                        pointer: rowLinkFn,
                     },
+                    paddingClass,
+                    pointerClass,
+                    stripedClass,
                     rowClassFn?.(data.data),
                 ]"
-                @click="rowLinkFn?.($event, data.data)"
+                @click="onRowClick($event, data)"
             >
                 <div class="flex">
                     <div class="grow">
@@ -101,13 +121,14 @@ const onRowClick = (row: IndexedData<TRow>) => {
                 </div>
             </li>
         </ul>
-        <!-- <div>
+        <div>
             <Paginate
                 v-model:per-page="perPage"
                 :current-page="currentPage"
                 :per-page-array="[10, 25, 50]"
                 :total-records="list.length"
+                @go-to-page="onGoToPage"
             />
-        </div> -->
+        </div>
     </div>
 </template>

@@ -1,4 +1,4 @@
-import { useColumnBuilder } from "@/core/features/dataTable/composables/columnBuilder";
+import { useColumnBuilder } from "@/core/features/dataResources/composables/columnBuilder";
 
 interface propColumns {
     property: string;

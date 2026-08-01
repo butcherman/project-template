@@ -15,7 +15,22 @@ export const useDataHelper = () => {
         });
     };
 
+    /**
+     * Return a specific chunk of data for pagination
+     */
+    const getIndexedChunk = <TData>(
+        originalData: TData[],
+        currentPage: number,
+        perPage: number,
+    ): IndexedData<TData>[] => {
+        let startIndex = (currentPage - 1) * perPage;
+        let endIndex = startIndex + perPage;
+
+        return indexData(originalData.slice(startIndex, endIndex));
+    };
+
     return {
         indexData,
+        getIndexedChunk,
     };
 };

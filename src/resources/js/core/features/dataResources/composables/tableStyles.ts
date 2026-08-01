@@ -1,12 +1,11 @@
 import { computed } from "vue";
-import { DataTableProps } from "../types/types";
+import { DataTableProps, ResourceListProps } from "../types/types";
 import { RowData } from "@tanstack/vue-table";
 
 export const useTableStyles = <TRow extends RowData>(
-    props: DataTableProps<TRow>,
+    props: DataTableProps<TRow> | ResourceListProps<TRow>,
 ) => {
     const pointerClass = computed<string>(() =>
-        // props.allowRowClick || props.rowClickLink ? "pointer" : "",
         props.allowRowClick || props.rowLinkFn ? "pointer" : "",
     );
 

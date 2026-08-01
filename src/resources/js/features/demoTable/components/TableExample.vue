@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import DataTable from "@/core/features/dataTable/DataTable.vue";
 import prettyBytes from "pretty-bytes";
-import { useColumnBuilder } from "@/core/features/dataTable/composables/columnBuilder";
+import { useColumnBuilder } from "@/core/features/dataResources/composables/columnBuilder";
 
 interface testingData {
     text: string;

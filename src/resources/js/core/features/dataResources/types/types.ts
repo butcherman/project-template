@@ -34,6 +34,25 @@ export interface DataTableProps<TRow extends RowData> {
     rowLinkFn?: (event: MouseEvent, row: TRow) => void;
 }
 
+export interface ResourceListProps<TRow> {
+    list: TRow[];
+
+    // Optional
+    allowRowClick?: boolean;
+    center?: boolean;
+    compact?: boolean;
+    gridLines?: boolean;
+    hoverRow?: boolean;
+    labelField?: keyof TRow;
+    striped?: boolean;
+    noBorder?: boolean;
+    noResultsText?: string;
+    paginate?: boolean;
+
+    rowClassFn?: (row: TRow) => IndexedData<TRow> | false;
+    rowLinkFn?: (event: MouseEvent, row: TRow) => void;
+}
+
 declare module "@tanstack/table-core" {
     interface ColumnMeta<TData extends RowData, TValue> {
         align?: "start" | "center" | "end";
