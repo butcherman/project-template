@@ -19,5 +19,6 @@ Route::inertia('/collapse', 'demo/CollapseDemo');
 |---------------------------------------------------------------------------
 */
 Route::inertia('/data-table', 'demo/DataTableDemo');
+Route::inertia('/menu-list', 'demo/MenuListDemo');
 Route::inertia('/resource-list', 'demo/ResourceListDemo');
 Route::inertia('/table-stacked', 'demo/TableStackedDemo');

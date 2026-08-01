@@ -33,6 +33,11 @@ export const useDemoNavbar: { [key: string]: MenuItem[] } = {
             route: "/data-table",
         },
         {
+            label: "Menu List",
+            icon: "bars",
+            route: "/menu-list",
+        },
+        {
             label: "Resource List",
             icon: "list",
             route: "/resource-list",
