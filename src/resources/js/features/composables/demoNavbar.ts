@@ -15,6 +15,16 @@ export const useDemoNavbar: { [key: string]: MenuItem[] } = {
             icon: "stop",
             route: "/buttons",
         },
+        {
+            label: "Card",
+            icon: "address-card",
+            route: "/card",
+        },
+        {
+            label: "Collapse",
+            icon: "fa-down-left-and-up-right-to-center",
+            route: "/collapse",
+        },
     ],
     dataComponents: [
         {
