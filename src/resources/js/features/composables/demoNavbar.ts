@@ -20,6 +20,11 @@ export const useDemoNavbar: MenuItem[] = [
         route: "/data-table",
     },
     {
+        label: "Resource List",
+        icon: "list",
+        route: "/resource-list",
+    },
+    {
         label: "Table Stacked",
         icon: "table-list",
         route: "/table-stacked",

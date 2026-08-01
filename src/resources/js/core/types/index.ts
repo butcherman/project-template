@@ -25,3 +25,10 @@ interface MenuItem {
               method: SubmitMethod;
           };
 }
+
+interface IndexedData<TData> {
+    id: string;
+    isFirst: boolean;
+    isLast: boolean;
+    data: TData;
+}
