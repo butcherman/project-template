@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import AppLayout from "@/layouts/AppLayout.vue";
 import Card from "@/core/components/Card.vue";
-import TableColumns from "@/features/demoTable/components/TableColumns.vue";
 import ColumnOptions from "@/features/demoTable/components/ColumnOptions.vue";
+import SampleColumns from "@/features/demoTable/components/SampleColumns.vue";
+import SampleData from "@/features/demoTable/components/SampleData.vue";
+import TableColumns from "@/features/demoTable/components/TableColumns.vue";
 import TableExample from "@/features/demoTable/components/TableExample.vue";
 
 const props = defineProps<{}>();
@@ -27,10 +29,10 @@ export default { layout: AppLayout };
         </div>
         <div class="flex justify-center gap-2">
             <Card title="Sample Columns">
-                <!-- <TableColumns /> -->
+                <SampleColumns />
             </Card>
             <Card title="Sample Data">
-                <!-- <ColumnOptions /> -->
+                <SampleData />
             </Card>
         </div>
         <div class="flex flex-col gap-2">

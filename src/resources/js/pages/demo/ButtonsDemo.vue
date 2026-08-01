@@ -132,11 +132,12 @@ export default { layout: AppLayout };
                 <div class="flex justify-center mb-2">
                     <BaseButton text="Any Button Text" variant="primary" />
                 </div>
-                <div class="p-3 bg-slate-300 rounded-lg overflow-scroll">
+                <div class="p-3 bg-slate-300 rounded-lg overflow-auto">
                     &lt;script setup&gt; <br />
                     import BaseButton from
                     "@/core/components/buttons/BaseButton.vue" <br />
-                    &lt;/script setup&gt;<br />
+                    &lt;/script&gt;<br />
+                    <br />
                     &lt;template&gt;<br />
                     &emsp;&lt;BaseButton text="Any Button Text"
                     variant="primary" /&gt;<br />

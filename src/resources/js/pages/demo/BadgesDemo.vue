@@ -93,11 +93,12 @@ export default { layout: AppLayout };
                 <div class="flex justify-center mb-2">
                     <BaseBadge text="Badge Text" variant="primary" />
                 </div>
-                <div class="p-3 bg-slate-300 rounded-lg overflow-scroll">
+                <div class="p-3 bg-slate-300 rounded-lg overflow-auto">
                     &lt;script setup&gt; <br />
                     import BaseBadge from
                     "@/core/components/badges/BaseBadge.vue" <br />
-                    &lt;/script setup&gt;<br />
+                    &lt;/script&gt;<br />
+                    <br />
                     &lt;template&gt;<br />
                     &emsp;&lt;BaseBadge text="Badge Text" variant="primary"
                     /&gt;<br />
