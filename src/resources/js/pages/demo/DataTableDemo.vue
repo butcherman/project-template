@@ -7,12 +7,6 @@ import SampleData from "@/features/demoTable/components/SampleData.vue";
 import TableColumns from "@/features/demoTable/components/TableColumns.vue";
 import TableExample from "@/features/demoTable/components/TableExample.vue";
 import TableReference from "@/features/demoTable/components/TableReference.vue";
-
-const props = defineProps<{}>();
-
-const referenceProperties = [
-    //
-];
 </script>
 
 <script lang="ts">
@@ -20,6 +14,12 @@ export default { layout: AppLayout };
 </script>
 <template>
     <div class="flex flex-col gap-2">
+        <Card title="Description">
+            <p class="text-center">
+                Fully functional and customizable table. Can sort and filter
+                data as well as paginate.
+            </p>
+        </Card>
         <div class="flex justify-center gap-2">
             <Card title="Data Table Columns">
                 <TableColumns />

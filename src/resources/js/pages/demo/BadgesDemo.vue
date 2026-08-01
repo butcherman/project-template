@@ -9,8 +9,6 @@ import DeleteBadge from "@/core/components/badges/DeleteBadge.vue";
 import EditBadge from "@/core/components/badges/EditBadge.vue";
 import { useReferenceHelper } from "@/features/composables/referenceHelper";
 
-const props = defineProps<{}>();
-
 const { getPropColumns, getSlotColumns } = useReferenceHelper();
 
 const referenceProperties = [
@@ -80,6 +78,11 @@ export default { layout: AppLayout };
 </script>
 <template>
     <div class="flex flex-col gap-2">
+        <Card title="Description">
+            <p class="text-center">
+                Small badge to display inline with existing text.
+            </p>
+        </Card>
         <div class="flex justify-center gap-2">
             <Card title="Badge Components">
                 <div class="flex flex-col gap-2">
@@ -156,7 +159,7 @@ export default { layout: AppLayout };
                 </div>
                 <div class="p-3 bg-slate-300 rounded-lg overflow-auto">
                     &lt;script setup&gt; <br />
-                    import BaseBadge from
+                    &emsp;import BaseBadge from
                     "@/core/components/badges/BaseBadge.vue" <br />
                     &lt;/script&gt;<br />
                     <br />

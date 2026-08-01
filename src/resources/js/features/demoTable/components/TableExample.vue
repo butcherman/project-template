@@ -50,7 +50,8 @@ const testData = [
         <DataTable :columns="dataColumns" :data="testData" />
         <div class="p-3 bg-slate-300 rounded-lg overflow-auto">
             &lt;script setup&gt; <br />
-            import DataTable from "@/core/features/dataTable/DataTable.vue";
+            &emsp;import DataTable from
+            "@/core/features/dataTable/DataTable.vue";
             <br />
             &lt;/script&gt;<br />
             <br />

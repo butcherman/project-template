@@ -1,6 +1,7 @@
-<script setup lang="ts" generic="T">
+<script setup lang="ts" generic="TData">
 defineProps<{
-    items: T;
+    data: TData;
+
     // Optional
     bordered?: boolean;
     only?: string[];
@@ -23,7 +24,7 @@ const toTitleCase = (str: string): string => {
 <template>
     <table class="table-fixed border-collapse" :class="{ border: bordered }">
         <tbody>
-            <template v-for="(value, index) in items" :key="index">
+            <template v-for="(value, index) in data" :key="index">
                 <tr
                     v-if="
                         only?.includes(index.toString()) ||

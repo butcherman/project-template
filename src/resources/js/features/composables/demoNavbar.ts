@@ -19,4 +19,9 @@ export const useDemoNavbar: MenuItem[] = [
         icon: "table",
         route: "/data-table",
     },
+    {
+        label: "Table Stacked",
+        icon: "table-list",
+        route: "/table-stacked",
+    },
 ];
