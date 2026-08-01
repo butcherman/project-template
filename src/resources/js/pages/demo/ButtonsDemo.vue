@@ -4,14 +4,18 @@ import AlertButton from "@/core/components/buttons/AlertButton.vue";
 import AppLayout from "@/layouts/AppLayout.vue";
 import BaseButton from "@/core/components/buttons/BaseButton.vue";
 import Card from "@/core/components/Card.vue";
+import DataTable from "@/core/features/dataTable/DataTable.vue";
 import EditButton from "@/core/components/buttons/EditButton.vue";
 import SubmitButton from "@/core/components/buttons/SubmitButton.vue";
+import { useReferenceHelper } from "@/features/composables/referenceHelper";
+
+const { getPropColumns, getSlotColumns } = useReferenceHelper();
 
 const referenceProperties = [
     {
         property: "async",
         type: "boolean",
-        default: false,
+        default: "false",
         required: false,
         description:
             "Determines if the url link will be treated as a regular Inertia link, or an ASYNC Inertia link.",
@@ -19,14 +23,14 @@ const referenceProperties = [
     {
         property: "flat",
         type: "boolean",
-        default: false,
+        default: "false",
         required: false,
         description: "Removes component shadowing.",
     },
     {
         property: "href",
         type: "string",
-        default: null,
+        default: "null",
         required: false,
         description:
             " When set the component will act as an Inertia  hyperlink.",
@@ -34,21 +38,21 @@ const referenceProperties = [
     {
         property: "icon",
         type: "string",
-        default: null,
+        default: "null",
         required: false,
         description: "Places a FontAwesome icon in front of the text.",
     },
     {
         property: "pill",
         type: "boolean",
-        default: false,
+        default: "false",
         required: false,
         description: "Rounds out the edges of the border to the max.",
     },
     {
         property: "text",
         type: "string",
-        default: null,
+        default: "null",
         required: false,
         description: "Text to be placed in the button.",
     },
@@ -63,8 +67,16 @@ const referenceProperties = [
         property: "variant",
         type: "VariantType",
         default: "primary",
-        requried: false,
+        required: false,
         description: "Background and text colors for the comoponent.",
+    },
+];
+
+const slotProperties = [
+    {
+        name: "default",
+        params: "none",
+        description: "Default slot for content inside button",
     },
 ];
 </script>
@@ -144,7 +156,15 @@ export default { layout: AppLayout };
                     &lt;/template&gt;<br />
                 </div>
             </Card>
-            <Card title="Component Reference"> finish me </Card>
+            <Card title="Component Reference">
+                <h4>Props</h4>
+                <DataTable
+                    :columns="getPropColumns()"
+                    :data="referenceProperties"
+                />
+                <h4>Slots</h4>
+                <DataTable :columns="getSlotColumns()" :data="slotProperties" />
+            </Card>
         </div>
     </div>
 </template>

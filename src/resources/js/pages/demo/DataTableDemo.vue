@@ -6,6 +6,7 @@ import SampleColumns from "@/features/demoTable/components/SampleColumns.vue";
 import SampleData from "@/features/demoTable/components/SampleData.vue";
 import TableColumns from "@/features/demoTable/components/TableColumns.vue";
 import TableExample from "@/features/demoTable/components/TableExample.vue";
+import TableReference from "@/features/demoTable/components/TableReference.vue";
 
 const props = defineProps<{}>();
 
@@ -39,7 +40,9 @@ export default { layout: AppLayout };
             <Card title="ComponentExample">
                 <TableExample />
             </Card>
-            <Card title="Component Reference">reference</Card>
+            <Card title="Component Reference">
+                <TableReference />
+            </Card>
         </div>
     </div>
 </template>

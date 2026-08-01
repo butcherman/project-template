@@ -4,13 +4,74 @@ import AppLayout from "@/layouts/AppLayout.vue";
 import BaseBadge from "@/core/components/badges/BaseBadge.vue";
 import BooleanBadge from "@/core/components/badges/BooleanBadge.vue";
 import Card from "@/core/components/Card.vue";
+import DataTable from "@/core/features/dataTable/DataTable.vue";
 import DeleteBadge from "@/core/components/badges/DeleteBadge.vue";
 import EditBadge from "@/core/components/badges/EditBadge.vue";
+import { useReferenceHelper } from "@/features/composables/referenceHelper";
 
 const props = defineProps<{}>();
 
+const { getPropColumns, getSlotColumns } = useReferenceHelper();
+
 const referenceProperties = [
-    //
+    {
+        property: "circle",
+        type: "boolean",
+        default: "false",
+        required: false,
+        description: "Makes the badge borders as round as possible.",
+    },
+    {
+        property: "href",
+        type: "string",
+        default: "null",
+        required: false,
+        description:
+            " When set the component will act as an Inertia  hyperlink.",
+    },
+    {
+        property: "icon",
+        type: "string",
+        default: "null",
+        required: false,
+        description: "Places a FontAwesome icon in front of the text.",
+    },
+    {
+        property: "pointer",
+        type: "boolean",
+        default: "false",
+        required: false,
+        description: "Changes the cursor over the badge to a pointer.",
+    },
+    {
+        property: "text",
+        type: "string",
+        default: "null",
+        required: false,
+        description: "Text to be placed in the button.",
+    },
+    {
+        property: "size",
+        type: "ComponentSize",
+        default: "md",
+        required: false,
+        description: "Size of the component.",
+    },
+    {
+        property: "variant",
+        type: "VariantType",
+        default: "primary",
+        required: false,
+        description: "Background and text colors for the comoponent.",
+    },
+];
+
+const slotProperties = [
+    {
+        name: "default",
+        params: "none",
+        description: "Default slot for content inside badge",
+    },
 ];
 </script>
 
@@ -105,7 +166,15 @@ export default { layout: AppLayout };
                     &lt;/template&gt;<br />
                 </div>
             </Card>
-            <Card title="Component Reference">reference</Card>
+            <Card title="Component Reference">
+                <h4>Props</h4>
+                <DataTable
+                    :columns="getPropColumns()"
+                    :data="referenceProperties"
+                />
+                <h4>Slots</h4>
+                <DataTable :columns="getSlotColumns()" :data="slotProperties" />
+            </Card>
         </div>
     </div>
 </template>
