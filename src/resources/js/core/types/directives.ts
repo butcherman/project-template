@@ -1,5 +1,3 @@
-type Placement = "top" | "bottom" | "left" | "right";
-
 interface TooltipOptions {
     text: string;
     placement?: Placement;

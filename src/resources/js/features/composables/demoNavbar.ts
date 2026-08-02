@@ -31,6 +31,11 @@ export const useDemoNavbar: { [key: string]: MenuItem[] } = {
             route: "/deferred-loader",
         },
         {
+            label: "Drawer",
+            icon: "picture-in-picture",
+            route: "/drawer",
+        },
+        {
             label: "Loaders",
             icon: "spinner",
             route: "/loaders",

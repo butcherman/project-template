@@ -37,3 +37,5 @@ interface LinkHelper {
     href: string;
     external?: boolean;
 }
+
+type Placement = "top" | "bottom" | "left" | "right";
