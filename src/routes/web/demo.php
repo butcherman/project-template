@@ -15,6 +15,7 @@ Route::inertia('/collapse', 'demo/CollapseDemo');
 Route::inertia('/deferred-loader', 'demo/DeferredLoaderDemo');
 Route::inertia('/drawer', 'demo/DrawerDemo');
 Route::inertia('/loaders', 'demo/LoaderDemo');
+Route::inertia('/modal', 'demo/ModalDemo');
 Route::inertia('/overlay', 'demo/OverlayDemo');
 
 /*

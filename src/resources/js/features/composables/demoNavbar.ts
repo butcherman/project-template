@@ -41,6 +41,11 @@ export const useDemoNavbar: { [key: string]: MenuItem[] } = {
             route: "/loaders",
         },
         {
+            label: "Modal",
+            icon: "picture-in-picture",
+            route: "/modal",
+        },
+        {
             label: "Overlay",
             icon: "circle-notch",
             route: "/overlay",
