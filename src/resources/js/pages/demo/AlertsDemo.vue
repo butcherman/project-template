@@ -98,16 +98,29 @@ export default { layout: AppLayout };
                 />
             </template>
             <Collapse :show="showFlash">
-                <p class="text-center">
+                <p class="text-center mb-3">
                     Flash Alerts are part of the Layout and are pushed via
                     Laravel Flash, or manually via pushFlashAlert function in
                     the Flash State.
                 </p>
-                <div class="text-center">
+                <div class="text-center mb-3">
                     <BaseButton
                         text="Click to show flash alert"
                         @click="demoFlash"
                     />
+                </div>
+                <div class="p-3 bg-slate-300 rounded-lg overflow-auto">
+                    &lt;script setup&gt; <br />
+                    &emsp;import &lbrace; useFlashState &rbrace; from
+                    "@/core/state/flashState"; <br />
+                    <br />
+                    &emsp;const &lbrace; pushFlashAlert &rbrace; =
+                    useFlashState();<br />
+                    &emsp;const pushMsg = (msg, variant) => &lbrace;<br />
+                    &emsp;&emsp;message: msg;<br />
+                    &emsp;&emsp;variant: variant;<br />
+                    &emsp;&rbrace;<br />
+                    &lt;/script&gt;<br />
                 </div>
             </Collapse>
         </Card>
