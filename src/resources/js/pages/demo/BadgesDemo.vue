@@ -8,6 +8,7 @@ import DataTable from "@/core/features/dataResources/DataTable.vue";
 import DeleteBadge from "@/core/components/badges/DeleteBadge.vue";
 import EditBadge from "@/core/components/badges/EditBadge.vue";
 import { useReferenceHelper } from "@/features/composables/referenceHelper";
+import CopyBadge from "@/core/components/badges/CopyBadge.vue";
 
 const { getPropColumns, getSlotColumns } = useReferenceHelper();
 
@@ -97,6 +98,7 @@ export default { layout: AppLayout };
                     </div>
                     <div><DeleteBadge /> - Delete Badge</div>
                     <div><EditBadge /> - Edit Badge</div>
+                    <div><CopyBadge /> - Copy Badge</div>
                 </div>
             </Card>
             <Card title="Badge Variants">
