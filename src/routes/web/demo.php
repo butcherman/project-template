@@ -17,6 +17,7 @@ Route::inertia('/drawer', 'demo/DrawerDemo');
 Route::inertia('/loaders', 'demo/LoaderDemo');
 Route::inertia('/modal', 'demo/ModalDemo');
 Route::inertia('/overlay', 'demo/OverlayDemo');
+Route::inertia('popup-alerts', 'demo/PopupAlertDemo');
 
 /*
 |---------------------------------------------------------------------------

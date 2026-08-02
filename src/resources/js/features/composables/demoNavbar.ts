@@ -50,6 +50,11 @@ export const useDemoNavbar: { [key: string]: MenuItem[] } = {
             icon: "circle-notch",
             route: "/overlay",
         },
+        {
+            label: "Popup Alerts",
+            icon: "exclamation",
+            route: "/popup-alerts",
+        },
     ],
     dataComponents: [
         {
