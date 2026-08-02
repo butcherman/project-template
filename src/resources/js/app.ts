@@ -1,6 +1,7 @@
 import { createInertiaApp, Link } from "@inertiajs/vue3";
 import { vOnClickOutside } from "@vueuse/components";
 import { tooltip } from "./core/directives/tooltipDirective";
+import { copy } from "./core/directives/copyDirective";
 
 /*
 |-------------------------------------------------------------------------------
@@ -27,6 +28,7 @@ createInertiaApp({
         app.component("fa-icon", FontAwesomeIcon)
             .component("Link", Link)
             .directive("on-click-outside", vOnClickOutside)
-            .directive("tooltip", tooltip);
+            .directive("tooltip", tooltip)
+            .directive("copy", copy);
     },
 });
