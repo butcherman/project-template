@@ -45,3 +45,10 @@ interface FlashAlert {
     message: string;
     variant: VariantType;
 }
+
+interface ToastAlert {
+    id?: string;
+    title: string;
+    message: string;
+    href?: string;
+}

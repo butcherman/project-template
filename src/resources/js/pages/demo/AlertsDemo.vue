@@ -6,12 +6,13 @@ import Card from "@/core/components/Card.vue";
 import Collapse from "@/core/components/Collapse.vue";
 import ExpandBadge from "@/core/components/badges/ExpandBadge.vue";
 import { ref } from "vue";
-import { useFlashState } from "@/core/state/flashState";
+import { useAlertState } from "@/core/state/alertState";
 
 const showBanner = ref(false);
 const showFlash = ref(false);
+const showToast = ref(true);
 
-const { pushFlashAlert } = useFlashState();
+const { pushFlashAlert, pushToastAlert } = useAlertState();
 
 const demoVariants: VariantType[] = [
     "primary",
@@ -31,6 +32,14 @@ const demoFlash = () => {
     pushFlashAlert({
         message: `I am a ${variant} alert`,
         variant,
+    });
+};
+
+const demoToast = () => {
+    pushToastAlert({
+        title: "Toast Alert Title",
+        message: "This is the toast Message",
+        href: "/",
     });
 };
 </script>
@@ -101,24 +110,62 @@ export default { layout: AppLayout };
                 <p class="text-center mb-3">
                     Flash Alerts are part of the Layout and are pushed via
                     Laravel Flash, or manually via pushFlashAlert function in
-                    the Flash State.
+                    the Alert State.
                 </p>
                 <div class="text-center mb-3">
                     <BaseButton
-                        text="Click to show flash alert"
+                        text="Click to show Flash Alert"
                         @click="demoFlash"
                     />
                 </div>
                 <div class="p-3 bg-slate-300 rounded-lg overflow-auto">
                     &lt;script setup&gt; <br />
-                    &emsp;import &lbrace; useFlashState &rbrace; from
-                    "@/core/state/flashState"; <br />
+                    &emsp;import &lbrace; useAlertState &rbrace; from
+                    "@/core/state/alertState"; <br />
                     <br />
                     &emsp;const &lbrace; pushFlashAlert &rbrace; =
-                    useFlashState();<br />
+                    userAlertState();<br />
                     &emsp;const pushMsg = (msg, variant) => &lbrace;<br />
-                    &emsp;&emsp;message: msg;<br />
-                    &emsp;&emsp;variant: variant;<br />
+                    &emsp;&emsp;&emsp;pushToastAlert(&lbrace;<br />
+                    &emsp;&emsp;&emsp;&emsp;message: msg;<br />
+                    &emsp;&emsp;&emsp;&emsp;variant: variant;<br />
+                    &emsp;&emsp;&emsp;&rbrace;);<br />
+                    &emsp;&rbrace;<br />
+                    &lt;/script&gt;<br />
+                </div>
+            </Collapse>
+        </Card>
+
+        <Card title="Toast Alert">
+            <template #append-title>
+                <ExpandBadge
+                    :expanded="showToast"
+                    @click="showToast = !showToast"
+                />
+            </template>
+            <Collapse :show="showToast">
+                <p class="text-center mb-3">
+                    Toast Alerts are part of the Layout and are pushed manually
+                    via pushToastAlert function in the Alert State.
+                </p>
+                <div class="text-center mb-3">
+                    <BaseButton
+                        text="Click to show Toast Alert"
+                        @click="demoToast"
+                    />
+                </div>
+                <div class="p-3 bg-slate-300 rounded-lg overflow-auto">
+                    &lt;script setup&gt; <br />
+                    &emsp;import &lbrace; useAlertState &rbrace; from
+                    "@/core/state/alertState"; <br />
+                    <br />
+                    &emsp;const &lbrace; pushToastAlert &rbrace; =
+                    useAlertState();<br />
+                    &emsp;const pushMsg = (msg, variant) => &lbrace;<br />
+                    &emsp;&emsp;&emsp;pushToastAlert(&lbrace;<br />
+                    &emsp;&emsp;&emsp;&emsp;message: msg;<br />
+                    &emsp;&emsp;&emsp;&emsp;variant: variant;<br />
+                    &emsp;&emsp;&emsp;&rbrace;);<br />
                     &emsp;&rbrace;<br />
                     &lt;/script&gt;<br />
                 </div>

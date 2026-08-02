@@ -3,9 +3,9 @@ import BannerAlert from "@/core/components/alerts/BannerAlert.vue";
 import gsap from "gsap";
 import { onMounted, onUnmounted, ref } from "vue";
 import { router } from "@inertiajs/vue3";
-import { useFlashState } from "@/core/state/flashState";
+import { useAlertState } from "@/core/state/alertState";
 
-const { flashAlerts, pushFlashAlert } = useFlashState();
+const { flashAlerts, pushFlashAlert } = useAlertState();
 
 /*
 |-------------------------------------------------------------------------------
