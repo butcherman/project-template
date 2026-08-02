@@ -39,7 +39,6 @@ const totalColumns = computed<number>(() => {
 |-------------------------------------------------------------------------------
 */
 const onGoToPage = (page: number): void => {
-    console.log("go to page", page);
     props.table.setPageIndex(page - 1);
 };
 </script>
