@@ -53,6 +53,11 @@ export const useDemoNavbar: { [key: string]: MenuItem[] } = {
             route: "/menu-list",
         },
         {
+            label: "Pagination",
+            icon: "angles-right",
+            route: "/paginate",
+        },
+        {
             label: "Resource List",
             icon: "list",
             route: "/resource-list",
