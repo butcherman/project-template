@@ -29,3 +29,11 @@ Route::inertia('/menu-list', 'demo/MenuListDemo');
 Route::inertia('/paginate', 'demo/PaginateDemo');
 Route::inertia('/resource-list', 'demo/ResourceListDemo');
 Route::inertia('/table-stacked', 'demo/TableStackedDemo');
+
+/*
+|---------------------------------------------------------------------------
+| Directives
+|---------------------------------------------------------------------------
+*/
+Route::inertia('/copy-directive', 'demo/CopyDirectiveDemo');
+Route::inertia('/tooltip-directive', 'demo/TooltipDirectiveDemo');

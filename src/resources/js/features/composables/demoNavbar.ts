@@ -83,4 +83,16 @@ export const useDemoNavbar: { [key: string]: MenuItem[] } = {
             route: "/table-stacked",
         },
     ],
+    directives: [
+        {
+            label: "Copy Directive",
+            icon: "copy",
+            route: "/copy-directive",
+        },
+        {
+            label: "Tooltip Directive",
+            icon: "egg",
+            route: "/tooltip-directive",
+        },
+    ],
 };

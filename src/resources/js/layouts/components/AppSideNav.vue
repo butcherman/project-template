@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import Collapse from "@/core/components/Collapse.vue";
+import ExpandBadge from "@/core/components/badges/ExpandBadge.vue";
 import MenuList from "@/core/components/MenuList.vue";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useDemoNavbar } from "@/features/composables/demoNavbar";
 
 const emit = defineEmits(["update:open"]);
@@ -23,6 +25,10 @@ const isOpen = computed({
 const hiddenClass = computed<string>(() => (isOpen.value ? "w-0" : "w-64"));
 
 const navBar = useDemoNavbar;
+
+const basic = ref(false);
+const components = ref(false);
+const directives = ref(false);
 </script>
 
 <template>
@@ -31,10 +37,27 @@ const navBar = useDemoNavbar;
         :class="hiddenClass"
     >
         <div class="mt-4 ms-4 me-2">
-            <h5>Basic Components</h5>
-            <MenuList :menu-list="navBar.basicComponents" />
-            <h5>Data Components</h5>
-            <MenuList :menu-list="navBar.dataComponents" />
+            <h5 class="pointer" @click="basic = !basic">
+                <ExpandBadge :expanded="basic" />
+                Basic Components
+            </h5>
+            <Collapse :show="basic">
+                <MenuList :menu-list="navBar.basicComponents" />
+            </Collapse>
+            <h5 class="pointer" @click="components = !components">
+                <ExpandBadge :expanded="components" />
+                Data Components
+            </h5>
+            <Collapse :show="components">
+                <MenuList :menu-list="navBar.dataComponents" />
+            </Collapse>
+            <h5 class="pointer" @click="directives = !directives">
+                <ExpandBadge :expanded="directives" />
+                Directives
+            </h5>
+            <Collapse :show="directives">
+                <MenuList :menu-list="navBar.directives" />
+            </Collapse>
         </div>
     </nav>
 </template>
