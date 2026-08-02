@@ -6,6 +6,11 @@ export const useDemoNavbar: { [key: string]: MenuItem[] } = {
             route: "/typography",
         },
         {
+            label: "Alerts",
+            icon: "triangle-exclamation",
+            route: "/alerts",
+        },
+        {
             label: "Badges",
             icon: "certificate",
             route: "/badges",

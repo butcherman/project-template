@@ -2,6 +2,7 @@
 import AppFooter from "./components/AppFooter.vue";
 import AppHeader from "./components/AppHeader.vue";
 import AppSideNav from "./components/AppSideNav.vue";
+import FlashAlert from "./components/FlashAlert.vue";
 import { Head } from "@inertiajs/vue3";
 import { ref } from "vue";
 
@@ -17,6 +18,7 @@ const toggleNav = () => (sideNavHidden.value = !sideNavHidden.value);
 <template>
     <div class="h-screen flex flex-col">
         <Head title="Typography" />
+        <FlashAlert />
         <AppHeader @toggle-navbar="toggleNav" />
         <AppSideNav v-model:open="sideNavHidden" />
         <section class="mt-14 lg:ms-64 grow bg-gray-200 flex flex-col">

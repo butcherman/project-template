@@ -39,3 +39,9 @@ interface LinkHelper {
 }
 
 type Placement = "top" | "bottom" | "left" | "right";
+
+interface FlashAlert {
+    id?: string;
+    message: string;
+    variant: VariantType;
+}
