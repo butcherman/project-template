@@ -38,11 +38,8 @@ const table = useDataTable(props);
     <div class="overflow-x-auto w-full">
         <table class="table-auto w-full">
             <DataTableHeader :table="table">
-                <template
-                    v-for="name of Object.keys($slots)"
-                    v-slot:[name]="data"
-                >
-                    <slot :name="name" v-bind="data" />
+                <template v-for="(_, slot) of $slots" #[slot]="scope">
+                    <slot :name="slot" v-bind="scope" />
                 </template>
             </DataTableHeader>
             <DataTableBody
@@ -50,22 +47,16 @@ const table = useDataTable(props);
                 :no-results-text="noResultsText"
                 @row-click="$emit('row-click', $event)"
             >
-                <template
-                    v-for="name of Object.keys($slots)"
-                    v-slot:[name]="data"
-                >
-                    <slot :name="name" v-bind="data" />
+                <template v-for="(_, slot) of $slots" #[slot]="scope">
+                    <slot :name="slot" v-bind="scope" />
                 </template>
             </DataTableBody>
             <DataTableFooter
                 :table="table"
                 :has-action-slot="props.actionsSlot"
             >
-                <template
-                    v-for="name of Object.keys($slots)"
-                    v-slot:[name]="data"
-                >
-                    <slot :name="name" v-bind="data" />
+                <template v-for="(_, slot) of $slots" #[slot]="scope">
+                    <slot :name="slot" v-bind="scope" />
                 </template>
             </DataTableFooter>
         </table>

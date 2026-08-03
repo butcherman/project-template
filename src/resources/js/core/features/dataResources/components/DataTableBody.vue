@@ -40,13 +40,13 @@ const showComponent = computed(() => {
         :table="table"
         :no-results-text="noResultsText"
     >
-        <template v-for="name of Object.keys($slots)" v-slot:[name]="data">
-            <slot :name="name" v-bind="data" />
+        <template v-for="(_, slot) of $slots" #[slot]="scope">
+            <slot :name="slot" v-bind="scope" />
         </template>
     </DataTableBodyEmpty>
     <DataTableBodyData v-if="showComponent === 'body'" :table="table">
-        <template v-for="name of Object.keys($slots)" v-slot:[name]="data">
-            <slot :name="name" v-bind="data" />
+        <template v-for="(_, slot) of $slots" #[slot]="scope">
+            <slot :name="slot" v-bind="scope" />
         </template>
     </DataTableBodyData>
 </template>
