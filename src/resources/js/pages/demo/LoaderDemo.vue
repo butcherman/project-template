@@ -1,15 +1,12 @@
 <script setup lang="ts">
 import AppLayout from "@/layouts/AppLayout.vue";
-import Card from "@/core/components/Card.vue";
-import DataTable from "@/core/features/dataResources/DataTable.vue";
 import AtomLoader from "@/core/components/loaders/AtomLoader.vue";
+import Card from "@/core/components/Card.vue";
+import ComponentReference from "@/features/components/ComponentReference.vue";
 import EllipsisLoader from "@/core/components/loaders/EllipsisLoader.vue";
 import HollowDotsLoader from "@/core/components/loaders/HollowDotsLoader.vue";
 import SkeletonLoader from "@/core/components/loaders/SkeletonLoader.vue";
 import TrinityRingsLoader from "@/core/components/loaders/TrinityRingsLoader.vue";
-import { useReferenceHelper } from "@/features/composables/referenceHelper";
-
-const { getPropColumns } = useReferenceHelper();
 
 const referenceProperties = [
     {
@@ -72,13 +69,7 @@ export default { layout: AppLayout };
                     &lt;/template&gt;<br />
                 </div>
             </Card>
-            <Card title="Component Reference">
-                <h4>Props</h4>
-                <DataTable
-                    :columns="getPropColumns()"
-                    :data="referenceProperties"
-                />
-            </Card>
+            <ComponentReference :reference-properties="referenceProperties" />
         </div>
     </div>
 </template>

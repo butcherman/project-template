@@ -3,13 +3,10 @@ import AppLayout from "@/layouts/AppLayout.vue";
 import BaseButton from "@/core/components/buttons/BaseButton.vue";
 import Card from "@/core/components/Card.vue";
 import Collapse from "@/core/components/Collapse.vue";
-import DataTable from "@/core/features/dataResources/DataTable.vue";
+import ComponentReference from "@/features/components/ComponentReference.vue";
 import Modal from "@/core/components/Modal.vue";
 import ExpandBadge from "@/core/components/badges/ExpandBadge.vue";
 import { ref } from "vue";
-import { useReferenceHelper } from "@/features/composables/referenceHelper";
-
-const { getPropColumns, getSlotColumns } = useReferenceHelper();
 
 const showExample = ref(false);
 const exampleModal = ref(false);
@@ -177,16 +174,10 @@ export default { layout: AppLayout };
                 </div>
             </Collapse>
         </Card>
-        <Card title="Component Reference">
-            <h4>Props</h4>
-            <DataTable
-                :columns="getPropColumns()"
-                :data="referenceProperties"
-            />
-            <h4>Slots</h4>
-            <DataTable :columns="getSlotColumns()" :data="slotProperties" />
-            <h4>Emits</h4>
-            <DataTable :columns="getSlotColumns()" :data="emitProperties" />
-        </Card>
+        <ComponentReference
+            :reference-properties="referenceProperties"
+            :slot-properties="slotProperties"
+            :emit-properties="emitProperties"
+        />
     </div>
 </template>

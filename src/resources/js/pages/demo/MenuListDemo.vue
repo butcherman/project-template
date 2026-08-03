@@ -2,13 +2,10 @@
 import AppLayout from "@/layouts/AppLayout.vue";
 import Card from "@/core/components/Card.vue";
 import Collapse from "@/core/components/Collapse.vue";
-import DataTable from "@/core/features/dataResources/DataTable.vue";
+import ComponentReference from "@/features/components/ComponentReference.vue";
 import ExpandBadge from "@/core/components/badges/ExpandBadge.vue";
 import MenuList from "@/core/components/MenuList.vue";
 import { ref } from "vue";
-import { useReferenceHelper } from "@/features/composables/referenceHelper";
-
-const { getPropColumns } = useReferenceHelper();
 
 const showExample = ref(false);
 
@@ -98,12 +95,6 @@ export default { layout: AppLayout };
                 </Collapse>
             </Card>
         </div>
-        <Card title="Component Reference">
-            <h4>Props</h4>
-            <DataTable
-                :columns="getPropColumns()"
-                :data="referenceProperties"
-            />
-        </Card>
+        <ComponentReference :reference-properties="referenceProperties" />
     </div>
 </template>

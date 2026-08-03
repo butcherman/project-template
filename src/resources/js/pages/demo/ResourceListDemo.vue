@@ -2,14 +2,12 @@
 import AppLayout from "@/layouts/AppLayout.vue";
 import Card from "@/core/components/Card.vue";
 import Collapse from "@/core/components/Collapse.vue";
-import DataTable from "@/core/features/dataResources/DataTable.vue";
+import ComponentReference from "@/features/components/ComponentReference.vue";
 import ExpandBadge from "@/core/components/badges/ExpandBadge.vue";
 import ResourceList from "@/core/features/dataResources/ResourceList.vue";
-import { useReferenceHelper } from "@/features/composables/referenceHelper";
 import { useSampleData } from "@/features/composables/sampleData";
 import { ref } from "vue";
 
-const { getPropColumns, getSlotColumns } = useReferenceHelper();
 const { sampleList } = useSampleData();
 
 const referenceProperties = [
@@ -237,16 +235,10 @@ export default { layout: AppLayout };
                 </Collapse>
             </Card>
         </div>
-        <Card title="Component Reference">
-            <h4>Props</h4>
-            <DataTable
-                :columns="getPropColumns()"
-                :data="referenceProperties"
-            />
-            <h4>Slots</h4>
-            <DataTable :columns="getSlotColumns()" :data="slotProperties" />
-            <h4>Events</h4>
-            <DataTable :columns="getSlotColumns()" :data="emitProperties" />
-        </Card>
+        <ComponentReference
+            :reference-properties="referenceProperties"
+            :slot-properties="slotProperties"
+            :emit-properties="emitProperties"
+        />
     </div>
 </template>

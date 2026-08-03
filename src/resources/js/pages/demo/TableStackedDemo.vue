@@ -1,11 +1,8 @@
 <script setup lang="ts">
 import AppLayout from "@/layouts/AppLayout.vue";
 import Card from "@/core/components/Card.vue";
+import ComponentReference from "@/features/components/ComponentReference.vue";
 import TableStacked from "@/core/features/dataResources/TableStacked.vue";
-import DataTable from "@/core/features/dataResources/DataTable.vue";
-import { useReferenceHelper } from "@/features/composables/referenceHelper";
-
-const { getPropColumns } = useReferenceHelper();
 
 const sampleData = {
     first_name: "Billy",
@@ -85,12 +82,6 @@ export default { layout: AppLayout };
                 </div>
             </Card>
         </div>
-        <Card title="Component Reference">
-            <h4>Props</h4>
-            <DataTable
-                :columns="getPropColumns()"
-                :data="referenceProperties"
-            />
-        </Card>
+        <ComponentReference :reference-properties="referenceProperties" />
     </div>
 </template>

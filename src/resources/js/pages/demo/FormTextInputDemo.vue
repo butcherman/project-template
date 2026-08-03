@@ -3,12 +3,9 @@ import AppLayout from "@/layouts/AppLayout.vue";
 import BaseTextInput from "@/core/forms/components/baseInputs/BaseTextInput.vue";
 import Card from "@/core/components/Card.vue";
 import Collapse from "@/core/components/Collapse.vue";
-import DataTable from "@/core/features/dataResources/DataTable.vue";
+import ComponentReference from "@/features/components/ComponentReference.vue";
 import ExpandBadge from "@/core/components/badges/ExpandBadge.vue";
 import { reactive } from "vue";
-import { useReferenceHelper } from "@/features/composables/referenceHelper";
-
-const { getPropColumns, getSlotColumns } = useReferenceHelper();
 
 const referenceProperties = [
     {
@@ -134,7 +131,7 @@ export default { layout: AppLayout };
                     <BaseTextInput
                         v-model:value="formValues.basicText"
                         name="text_input"
-                        label="Text Input"
+                        label="Outlined Input"
                         placeholder="Test Input"
                         error-message="This is an error message"
                         help-message="This is a help message"
@@ -143,7 +140,7 @@ export default { layout: AppLayout };
                     <BaseTextInput
                         v-model:value="formValues.basicText"
                         name="text_input"
-                        label="Text Input"
+                        label="Filled Input"
                         placeholder="Test Input"
                         error-message="This is an error message"
                         help-message="This is a help message"
@@ -152,7 +149,7 @@ export default { layout: AppLayout };
                     <BaseTextInput
                         v-model:value="formValues.basicText"
                         name="text_input"
-                        label="Text Input"
+                        label="Standard Input"
                         placeholder="Test Input"
                         error-message="This is an error message"
                         help-message="This is a help message"
@@ -228,16 +225,10 @@ export default { layout: AppLayout };
                 </div>
             </Collapse>
         </Card>
-        <Card title="Component Reference">
-            <h4>Props</h4>
-            <DataTable
-                :columns="getPropColumns()"
-                :data="referenceProperties"
-            />
-            <h4>Slots</h4>
-            <DataTable :columns="getSlotColumns()" :data="slotProperties" />
-            <h4>Emits</h4>
-            <DataTable :columns="getSlotColumns()" :data="emitProperties" />
-        </Card>
+        <ComponentReference
+            :reference-properties="referenceProperties"
+            :slot-properties="slotProperties"
+            :emit-properties="emitProperties"
+        />
     </div>
 </template>

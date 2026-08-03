@@ -4,13 +4,10 @@ import AppLayout from "@/layouts/AppLayout.vue";
 import BaseBadge from "@/core/components/badges/BaseBadge.vue";
 import BooleanBadge from "@/core/components/badges/BooleanBadge.vue";
 import Card from "@/core/components/Card.vue";
-import DataTable from "@/core/features/dataResources/DataTable.vue";
+import ComponentReference from "@/features/components/ComponentReference.vue";
+import CopyBadge from "@/core/components/badges/CopyBadge.vue";
 import DeleteBadge from "@/core/components/badges/DeleteBadge.vue";
 import EditBadge from "@/core/components/badges/EditBadge.vue";
-import { useReferenceHelper } from "@/features/composables/referenceHelper";
-import CopyBadge from "@/core/components/badges/CopyBadge.vue";
-
-const { getPropColumns, getSlotColumns } = useReferenceHelper();
 
 const referenceProperties = [
     {
@@ -172,15 +169,10 @@ export default { layout: AppLayout };
                     &lt;/template&gt;<br />
                 </div>
             </Card>
-            <Card title="Component Reference">
-                <h4>Props</h4>
-                <DataTable
-                    :columns="getPropColumns()"
-                    :data="referenceProperties"
-                />
-                <h4>Slots</h4>
-                <DataTable :columns="getSlotColumns()" :data="slotProperties" />
-            </Card>
+            <ComponentReference
+                :reference-properties="referenceProperties"
+                :slot-properties="slotProperties"
+            />
         </div>
     </div>
 </template>

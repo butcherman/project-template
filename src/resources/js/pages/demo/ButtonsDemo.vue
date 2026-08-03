@@ -4,12 +4,9 @@ import AlertButton from "@/core/components/buttons/AlertButton.vue";
 import AppLayout from "@/layouts/AppLayout.vue";
 import BaseButton from "@/core/components/buttons/BaseButton.vue";
 import Card from "@/core/components/Card.vue";
-import DataTable from "@/core/features/dataResources/DataTable.vue";
+import ComponentReference from "@/features/components/ComponentReference.vue";
 import EditButton from "@/core/components/buttons/EditButton.vue";
 import SubmitButton from "@/core/components/buttons/SubmitButton.vue";
-import { useReferenceHelper } from "@/features/composables/referenceHelper";
-
-const { getPropColumns, getSlotColumns } = useReferenceHelper();
 
 const referenceProperties = [
     {
@@ -161,15 +158,10 @@ export default { layout: AppLayout };
                     &lt;/template&gt;<br />
                 </div>
             </Card>
-            <Card title="Component Reference">
-                <h4>Props</h4>
-                <DataTable
-                    :columns="getPropColumns()"
-                    :data="referenceProperties"
-                />
-                <h4>Slots</h4>
-                <DataTable :columns="getSlotColumns()" :data="slotProperties" />
-            </Card>
+            <ComponentReference
+                :reference-properties="referenceProperties"
+                :slot-properties="slotProperties"
+            />
         </div>
     </div>
 </template>
