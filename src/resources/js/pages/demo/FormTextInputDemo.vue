@@ -2,9 +2,8 @@
 import AppLayout from "@/layouts/AppLayout.vue";
 import BaseTextInput from "@/core/forms/components/baseInputs/BaseTextInput.vue";
 import Card from "@/core/components/Card.vue";
-import Collapse from "@/core/components/Collapse.vue";
 import ComponentReference from "@/features/components/ComponentReference.vue";
-import ExpandBadge from "@/core/components/badges/ExpandBadge.vue";
+import ExampleComponent from "@/features/components/ExampleComponent.vue";
 import { reactive } from "vue";
 
 const referenceProperties = [
@@ -104,11 +103,6 @@ const formValues = reactive({
     basicText: "",
     slotsText: "",
 });
-
-const showExamples = reactive({
-    basic: false,
-    slots: false,
-});
 </script>
 
 <script lang="ts">
@@ -119,112 +113,96 @@ export default { layout: AppLayout };
         <Card title="Description">
             <p class="text-center">Basic Text Input</p>
         </Card>
-        <Card title="Basic Example">
-            <template #append-title>
-                <ExpandBadge
-                    :expanded="showExamples.basic"
-                    @click="showExamples.basic = !showExamples.basic"
+        <ExampleComponent title="Basic Example">
+            <template #component>
+                <BaseTextInput
+                    v-model:value="formValues.basicText"
+                    name="text_input"
+                    label="Outlined Input"
+                    placeholder="Test Input"
+                    error-message="This is an error message"
+                    help-message="This is a help message"
+                    variant="outlined"
+                />
+                <BaseTextInput
+                    v-model:value="formValues.basicText"
+                    name="text_input"
+                    label="Filled Input"
+                    placeholder="Test Input"
+                    error-message="This is an error message"
+                    help-message="This is a help message"
+                    variant="filled"
+                />
+                <BaseTextInput
+                    v-model:value="formValues.basicText"
+                    name="text_input"
+                    label="Standard Input"
+                    placeholder="Test Input"
+                    error-message="This is an error message"
+                    help-message="This is a help message"
+                    variant="standard"
                 />
             </template>
-            <Collapse :show="showExamples.basic">
-                <div class="mb-2 flex gap-2">
-                    <BaseTextInput
-                        v-model:value="formValues.basicText"
-                        name="text_input"
-                        label="Outlined Input"
-                        placeholder="Test Input"
-                        error-message="This is an error message"
-                        help-message="This is a help message"
-                        variant="outlined"
-                    />
-                    <BaseTextInput
-                        v-model:value="formValues.basicText"
-                        name="text_input"
-                        label="Filled Input"
-                        placeholder="Test Input"
-                        error-message="This is an error message"
-                        help-message="This is a help message"
-                        variant="filled"
-                    />
-                    <BaseTextInput
-                        v-model:value="formValues.basicText"
-                        name="text_input"
-                        label="Standard Input"
-                        placeholder="Test Input"
-                        error-message="This is an error message"
-                        help-message="This is a help message"
-                        variant="standard"
-                    />
-                </div>
-                <div class="p-3 bg-slate-300 rounded-lg overflow-auto">
-                    &lt;script setup&gt; <br />
-                    &emsp;import BaseTextInput from
-                    "@/core/forms/components/baseInputs/BaseTextInput.vue";
-                    <br />
-                    &lt;/script&gt;<br />
-                    <br />
-                    &lt;template&gt;<br />
-                    &emsp;&lt;BaseTextInput<br />
-                    &emsp;&emsp;v-model:value="textValue"<br />
-                    &emsp;&emsp;name="text_input"<br />
-                    &emsp;&emsp;label="Text Input"<br />
-                    &emsp;&emsp;placeholder="Test Input"<br />
-                    &emsp;&emsp;error-message="This is an error message"<br />
-                    &emsp;&emsp;help-message="This is a help message"<br />
-                    &emsp;&emsp;variant="outlined"<br />
-                    &emsp;/BaseTextInput&gt;<br />
-                    &lt;/template&gt;<br />
-                </div>
-            </Collapse>
-        </Card>
-        <Card title="Slots Example">
-            <template #append-title>
-                <ExpandBadge
-                    :expanded="showExamples.slots"
-                    @click="showExamples.slots = !showExamples.slots"
-                />
+            <template #code>
+                &lt;script setup&gt; <br />
+                &emsp;import BaseTextInput from
+                "@/core/forms/components/baseInputs/BaseTextInput.vue";
+                <br />
+                &lt;/script&gt;<br />
+                <br />
+                &lt;template&gt;<br />
+                &emsp;&lt;BaseTextInput<br />
+                &emsp;&emsp;v-model:value="textValue"<br />
+                &emsp;&emsp;name="text_input"<br />
+                &emsp;&emsp;label="Text Input"<br />
+                &emsp;&emsp;placeholder="Test Input"<br />
+                &emsp;&emsp;error-message="This is an error message"<br />
+                &emsp;&emsp;help-message="This is a help message"<br />
+                &emsp;&emsp;variant="outlined"<br />
+                &emsp;/BaseTextInput&gt;<br />
+                &lt;/template&gt;<br />
             </template>
-            <Collapse :show="showExamples.slots">
-                <div class="mb-2">
-                    <BaseTextInput
-                        v-model:value="formValues.slotsText"
-                        name="text_input"
-                        label="Text Input"
-                        placeholder="Test Input"
-                    >
-                        <template #prepend-input>https://</template>
-                        <template #append-input>
-                            <fa-icon icon="book-open-reader" />
-                        </template>
-                    </BaseTextInput>
-                </div>
-                <div class="p-3 bg-slate-300 rounded-lg overflow-auto">
-                    &lt;script setup&gt; <br />
-                    &emsp;import BaseTextInput from
-                    "@/core/forms/components/baseInputs/BaseTextInput.vue";
-                    <br />
-                    &lt;/script&gt;<br />
-                    <br />
-                    &lt;template&gt;<br />
-                    &emsp;&lt;BaseTextInput<br />
-                    &emsp;&emsp;v-model:value="textValue"<br />
-                    &emsp;&emsp;name="text_input"<br />
-                    &emsp;&emsp;label="Text Input"<br />
-                    &emsp;&emsp;placeholder="Test Input"<br />
-                    &emsp;&emsp;error-message="This is an error message"<br />
-                    &emsp;&emsp;help-message="This is a help message"<br />
-                    &emsp;&gt; <br />
-                    &emsp;&emsp;&lt;template
-                    #prepend-input&gt;https://&lt;template&gt;<br />
-                    &emsp;&emsp;&lt;template #append-input&gt;<br />
-                    &emsp;&emsp;&emsp;&lt;fa-icon icon="book-open-reader"
-                    /&gt;<br />
-                    &emsp;&emsp;&lt;/template&gt;<br />
-                    &emsp;&lt;/BaseTextInput&gt;<br />
-                    &lt;/template&gt;<br />
-                </div>
-            </Collapse>
-        </Card>
+        </ExampleComponent>
+
+        <ExampleComponent title="Slots Example">
+            <template #component>
+                <BaseTextInput
+                    v-model:value="formValues.slotsText"
+                    name="text_input"
+                    label="Text Input"
+                    placeholder="Test Input"
+                >
+                    <template #prepend-input>https://</template>
+                    <template #append-input>
+                        <fa-icon icon="book-open-reader" />
+                    </template>
+                </BaseTextInput>
+            </template>
+            <template #code>
+                &lt;script setup&gt; <br />
+                &emsp;import BaseTextInput from
+                "@/core/forms/components/baseInputs/BaseTextInput.vue";
+                <br />
+                &lt;/script&gt;<br />
+                <br />
+                &lt;template&gt;<br />
+                &emsp;&lt;BaseTextInput<br />
+                &emsp;&emsp;v-model:value="textValue"<br />
+                &emsp;&emsp;name="text_input"<br />
+                &emsp;&emsp;label="Text Input"<br />
+                &emsp;&emsp;placeholder="Test Input"<br />
+                &emsp;&emsp;error-message="This is an error message"<br />
+                &emsp;&emsp;help-message="This is a help message"<br />
+                &emsp;&gt; <br />
+                &emsp;&emsp;&lt;template
+                #prepend-input&gt;https://&lt;template&gt;<br />
+                &emsp;&emsp;&lt;template #append-input&gt;<br />
+                &emsp;&emsp;&emsp;&lt;fa-icon icon="book-open-reader" /&gt;<br />
+                &emsp;&emsp;&lt;/template&gt;<br />
+                &emsp;&lt;/BaseTextInput&gt;<br />
+                &lt;/template&gt;<br />
+            </template>
+        </ExampleComponent>
         <ComponentReference
             :reference-properties="referenceProperties"
             :slot-properties="slotProperties"
