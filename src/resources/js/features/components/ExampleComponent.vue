@@ -6,16 +6,18 @@ import Collapse from "@/core/components/Collapse.vue";
 import ExpandBadge from "@/core/components/badges/ExpandBadge.vue";
 
 const props = defineProps<{
+    show?: boolean;
     title?: string;
 }>();
 
-const showExample = ref(false);
+const showExample = ref(props.show ?? false);
 </script>
 
 <template>
     <Card :title="title ?? 'Component Example'">
         <template #append-title>
             <ExpandBadge
+                v-if="!show"
                 :expanded="showExample"
                 @click="showExample = !showExample"
             />

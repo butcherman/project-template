@@ -107,6 +107,11 @@ export const useDemoNavbar: { [key: string]: MenuItem[] } = {
             route: "/form-component",
         },
         {
+            label: "Switch Input",
+            icon: "toggle-on",
+            route: "/form-switch-input",
+        },
+        {
             label: "Text Input",
             icon: "font",
             route: "/form-text-input",

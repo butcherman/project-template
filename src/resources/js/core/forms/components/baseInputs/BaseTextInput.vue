@@ -17,13 +17,13 @@ const props = defineProps<{
     name: string;
     value: unknown;
 
-    label?: string;
+    autocomplete?: string;
     errorMessage?: string;
     helpMessage?: string;
-    variant?: InputVariant;
-    placeholder?: string;
     helpVisible?: boolean;
-    autocomplete?: string;
+    label?: string;
+    placeholder?: string;
+    variant?: InputVariant;
 }>();
 
 const { hasFocus, onFocus, onBlur, inputVariantStyle } = useInputHelper(
