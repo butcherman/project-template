@@ -29,6 +29,7 @@ const navBar = useDemoNavbar;
 const basic = ref(false);
 const components = ref(false);
 const directives = ref(false);
+const forms = ref(false);
 </script>
 
 <template>
@@ -57,6 +58,13 @@ const directives = ref(false);
             </h5>
             <Collapse :show="directives">
                 <MenuList :menu-list="navBar.directives" />
+            </Collapse>
+            <h5 class="pointer" @click="forms = !forms">
+                <ExpandBadge :expanded="forms" />
+                Form Components
+            </h5>
+            <Collapse :show="forms">
+                <MenuList :menu-list="navBar.forms" />
             </Collapse>
         </div>
     </nav>

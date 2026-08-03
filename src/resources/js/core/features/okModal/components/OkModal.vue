@@ -24,7 +24,6 @@ const onOkClicked = () => {
 
 const forceOption = () => {
     if (props.forceOk) {
-        console.log("tried to close");
         return;
     }
 

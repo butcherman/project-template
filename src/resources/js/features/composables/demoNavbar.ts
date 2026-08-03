@@ -100,4 +100,11 @@ export const useDemoNavbar: { [key: string]: MenuItem[] } = {
             route: "/tooltip-directive",
         },
     ],
+    forms: [
+        {
+            label: "Form Component",
+            icon: "clipboard-question",
+            route: "/form-component",
+        },
+    ],
 };

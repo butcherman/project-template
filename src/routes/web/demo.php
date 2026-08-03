@@ -38,3 +38,14 @@ Route::inertia('/table-stacked', 'demo/TableStackedDemo');
 */
 Route::inertia('/copy-directive', 'demo/CopyDirectiveDemo');
 Route::inertia('/tooltip-directive', 'demo/TooltipDirectiveDemo');
+
+/*
+|---------------------------------------------------------------------------
+| Form Components
+|---------------------------------------------------------------------------
+*/
+Route::inertia('/form-component', 'demo/FormComponentDemo');
+
+Route::post('/submit-form', function () {
+    return back()->with('success', 'success');
+});
