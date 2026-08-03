@@ -106,5 +106,10 @@ export const useDemoNavbar: { [key: string]: MenuItem[] } = {
             icon: "clipboard-question",
             route: "/form-component",
         },
+        {
+            label: "Text Input",
+            icon: "font",
+            route: "/form-text-input",
+        },
     ],
 };

@@ -45,6 +45,7 @@ Route::inertia('/tooltip-directive', 'demo/TooltipDirectiveDemo');
 |---------------------------------------------------------------------------
 */
 Route::inertia('/form-component', 'demo/FormComponentDemo');
+Route::inertia('/form-text-input', 'demo/FormTextInputDemo');
 
 Route::post('/submit-form', function () {
     return back()->with('success', 'success');

@@ -1,34 +1,69 @@
 <script setup lang="ts">
-import { useId } from "vue";
-import InputWrapper from "../wrappers/InputWrapper.vue";
-const emit = defineEmits<{}>();
+import TextInputWrapper from "../wrappers/TextInputWrapper.vue";
+import { computed, useId } from "vue";
+import { useInputHelper } from "../../composables/inputHelper.js";
 
-const props = defineProps<{
-    // value: unknown;
-    name: string;
-    label?: string;
-
-    errorMessage?: string;
-    helpMessage?: string;
-    helpVisible?: boolean;
+defineSlots<{
+    [key: string]: any;
 }>();
 
+const emit = defineEmits<{
+    "update:value": unknown;
+    focus: [];
+    blur: [];
+}>();
+
+const props = defineProps<{
+    name: string;
+    value: unknown;
+
+    label?: string;
+    errorMessage?: string;
+    helpMessage?: string;
+    variant?: InputVariant;
+    placeholder?: string;
+    helpVisible?: boolean;
+    autocomplete?: string;
+}>();
+
+const { hasFocus, onFocus, onBlur, inputVariantStyle } = useInputHelper(
+    props,
+    emit,
+);
+
 const inputId = useId();
+const inputValue = computed({
+    get: () => props.value,
+    set: (value) => emit("update:value", value),
+});
 </script>
 
 <template>
-    <InputWrapper v-bind="props" :has-focus="false">
+    <TextInputWrapper v-bind="props" :has-focus="hasFocus">
         <template v-for="(_, slot) of $slots" #[slot]="scope">
             <slot :name="slot" v-bind="scope" />
         </template>
         <input
+            v-model="inputValue"
             class="block peer form-input-base"
             type="text"
+            :autocomplete="name"
+            :class="[
+                inputVariantStyle,
+                { invalid: errorMessage?.length, 'has-focus': hasFocus },
+            ]"
             :id="inputId"
+            :placeholder="placeholder ?? ''"
             :name="name"
+            @focus="onFocus"
+            @blur="onBlur"
         />
-        <label :for="inputId" class="form-label-base">
+        <label
+            :for="inputId"
+            class="form-label-base"
+            :class="{ 'bg-white!': variant === 'outlined' }"
+        >
             {{ label }}
         </label>
-    </InputWrapper>
+    </TextInputWrapper>
 </template>

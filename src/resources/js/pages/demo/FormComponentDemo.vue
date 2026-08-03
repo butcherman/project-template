@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import AppLayout from "@/layouts/AppLayout.vue";
+import BaseTextInput from "@/core/forms/components/baseInputs/BaseTextInput.vue";
 import Card from "@/core/components/Card.vue";
 import VueForm from "@/core/forms/components/VueForm.vue";
+import { ref } from "vue";
 
-const props = defineProps<{}>();
+const formValues = ref({
+    textInput: undefined,
+});
 </script>
 
 <script lang="ts">
@@ -24,15 +28,21 @@ export default { layout: AppLayout };
             </p>
         </Card>
         <Card title="Basic Form Example">
-            <VueForm
-                name="basic-demo-form"
-                submit-method="post"
-                submit-route="/submit-form"
-                :initial-values="{}"
-                :validation-schema="{}"
-            >
-                <div>basic form</div>
-            </VueForm>
+            <div>
+                <VueForm
+                    name="basic-demo-form"
+                    submit-method="post"
+                    submit-route="/submit-form"
+                    :initial-values="{}"
+                    :validation-schema="{}"
+                >
+                    <BaseTextInput
+                        v-model:value="formValues.textInput"
+                        name="text_input"
+                        label="Text Input"
+                    />
+                </VueForm>
+            </div>
         </Card>
     </div>
 </template>
