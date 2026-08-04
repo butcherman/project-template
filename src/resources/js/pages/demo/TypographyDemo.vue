@@ -9,7 +9,7 @@ const props = defineProps<{}>();
 export default { layout: AppLayout };
 </script>
 <template>
-    <div class="flex justify-center gap-2">
+    <div class="flex flex-wrap lg:flex-nowrap justify-center gap-2">
         <Card title="Headers">
             <h1>H1 Header</h1>
             <h2>H2 Header</h2>

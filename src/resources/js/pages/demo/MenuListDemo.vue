@@ -1,13 +1,9 @@
 <script setup lang="ts">
 import AppLayout from "@/layouts/AppLayout.vue";
 import Card from "@/core/components/Card.vue";
-import Collapse from "@/core/components/Collapse.vue";
 import ComponentReference from "@/features/components/ComponentReference.vue";
-import ExpandBadge from "@/core/components/badges/ExpandBadge.vue";
+import ExampleComponent from "@/features/components/ExampleComponent.vue";
 import MenuList from "@/core/components/MenuList.vue";
-import { ref } from "vue";
-
-const showExample = ref(false);
 
 const exampleMenu = [
     {
@@ -46,8 +42,8 @@ export default { layout: AppLayout };
         <Card title="Description">
             <p class="text-center">List of navigation links.</p>
         </Card>
-        <div class="flex gap-2">
-            <Card title="Example Data" size="sm">
+        <div class="flex flex-col lg:flex-row gap-2">
+            <Card title="Example Data">
                 <div class="mt-3 p-3 bg-slate-300 rounded-lg overflow-auto">
                     const exampleMenu = [<br />
                     &emsp;{<br />
@@ -68,32 +64,26 @@ export default { layout: AppLayout };
                     ];
                 </div>
             </Card>
-            <Card title="Component Example">
-                <template #append-title>
-                    <ExpandBadge
-                        :expanded="showExample"
-                        @click="showExample = !showExample"
-                    />
-                </template>
-                <Collapse :show="showExample">
+            <ExampleComponent show>
+                <template #component>
                     <div class="flex justify-center">
                         <MenuList
                             :menu-list="exampleMenu"
                             class="border border-slate-300 rounded-lg"
                         />
                     </div>
-                    <div class="mt-3 p-3 bg-slate-300 rounded-lg overflow-auto">
-                        &lt;script setup&gt; <br />
-                        &emsp;import Collapse from
-                        "@/core/components/MenuList.vue"<br />
-                        &lt;/script&gt;<br />
-                        <br />
-                        &lt;template&gt;<br />
-                        &emsp;&lt;MenuList :menu-list="exampleMenu" /&gt;<br />
-                        &lt;/template&gt;<br />
-                    </div>
-                </Collapse>
-            </Card>
+                </template>
+                <template #code>
+                    &lt;script setup&gt; <br />
+                    &emsp;import Collapse from
+                    "@/core/components/MenuList.vue"<br />
+                    &lt;/script&gt;<br />
+                    <br />
+                    &lt;template&gt;<br />
+                    &emsp;&lt;MenuList :menu-list="exampleMenu" /&gt;<br />
+                    &lt;/template&gt;<br />
+                </template>
+            </ExampleComponent>
         </div>
         <ComponentReference :reference-properties="referenceProperties" />
     </div>

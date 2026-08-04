@@ -1,13 +1,10 @@
 <script setup lang="ts">
 import AppLayout from "@/layouts/AppLayout.vue";
 import Card from "@/core/components/Card.vue";
-import Collapse from "@/core/components/Collapse.vue";
 import ComponentReference from "@/features/components/ComponentReference.vue";
-import ExpandBadge from "@/core/components/badges/ExpandBadge.vue";
+import ExampleComponent from "@/features/components/ExampleComponent.vue";
 import Paginate from "@/core/features/pagination/Paginate.vue";
 import { ref } from "vue";
-
-const showExample = ref(false);
 
 const perPageExample = ref(10);
 const currentPageExample = ref(1);
@@ -75,54 +72,46 @@ export default { layout: AppLayout };
                 data sets
             </p>
         </Card>
-        <div class="flex gap-2">
-            <Card title="Component Example">
-                <template #append-title>
-                    <ExpandBadge
-                        :expanded="showExample"
-                        @click="showExample = !showExample"
+        <ExampleComponent>
+            <template #component>
+                <div
+                    class="flex justify-center p-3 border border-slate-300 rounded-lg"
+                >
+                    <Paginate
+                        v-model:per-page="perPageExample"
+                        :current-page="currentPageExample"
+                        :per-page-array="perPageArray"
+                        :total-records="totalRecords"
+                        @next-page="currentPageExample++"
+                        @prev-page="currentPageExample--"
+                        @go-to-page="currentPageExample = $event"
                     />
-                </template>
-                <Collapse :show="showExample">
-                    <div
-                        class="flex justify-center p-3 border border-slate-300 rounded-lg"
-                    >
-                        <Paginate
-                            v-model:per-page="perPageExample"
-                            :current-page="currentPageExample"
-                            :per-page-array="perPageArray"
-                            :total-records="totalRecords"
-                            @next-page="currentPageExample++"
-                            @prev-page="currentPageExample--"
-                            @go-to-page="currentPageExample = $event"
-                        />
-                    </div>
-                    <div class="mt-3 p-3 bg-slate-300 rounded-lg overflow-auto">
-                        &lt;script setup&gt; <br />
-                        &emsp;import Paginate from
-                        "@/core/features/pagination/Paginate.vue"<br />
-                        <br />
-                        &emsp;const perPage = ref(10);<br />
-                        &emsp;const currentPage = ref(1);<br />
-                        &emsp;const perPageArray = ref([10, 20, 30]);<br />
-                        &emsp;const totalRecords = 150; <br />
-                        &lt;/script&gt;<br />
-                        <br />
-                        &lt;template&gt;<br />
-                        &emsp;&lt;Paginate<br />
-                        &emsp;&emsp;v-model:per-page="perPage"<br />
-                        &emsp;&emsp;:current-page="currentPage"<br />
-                        &emsp;&emsp;:per-page-array="perPageArray"<br />
-                        &emsp;&emsp;:total-records="totalRecords"<br />
-                        &emsp;&emsp;@next-page="currentPage++"<br />
-                        &emsp;&emsp;@prev-page="currentPage--"<br />
-                        &emsp;&emsp;@go-to-page="currentPage = $event"<br />
-                        &emsp;/&gt;<br />
-                        &lt;/template&gt;<br />
-                    </div>
-                </Collapse>
-            </Card>
-        </div>
+                </div>
+            </template>
+            <template #code>
+                &lt;script setup&gt; <br />
+                &emsp;import Paginate from
+                "@/core/features/pagination/Paginate.vue"<br />
+                <br />
+                &emsp;const perPage = ref(10);<br />
+                &emsp;const currentPage = ref(1);<br />
+                &emsp;const perPageArray = ref([10, 20, 30]);<br />
+                &emsp;const totalRecords = 150; <br />
+                &lt;/script&gt;<br />
+                <br />
+                &lt;template&gt;<br />
+                &emsp;&lt;Paginate<br />
+                &emsp;&emsp;v-model:per-page="perPage"<br />
+                &emsp;&emsp;:current-page="currentPage"<br />
+                &emsp;&emsp;:per-page-array="perPageArray"<br />
+                &emsp;&emsp;:total-records="totalRecords"<br />
+                &emsp;&emsp;@next-page="currentPage++"<br />
+                &emsp;&emsp;@prev-page="currentPage--"<br />
+                &emsp;&emsp;@go-to-page="currentPage = $event"<br />
+                &emsp;/&gt;<br />
+                &lt;/template&gt;<br />
+            </template>
+        </ExampleComponent>
         <ComponentReference
             :reference-properties="referenceProperties"
             :emit-properties="emitProperties"

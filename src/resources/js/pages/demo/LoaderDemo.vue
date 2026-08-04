@@ -4,6 +4,7 @@ import AtomLoader from "@/core/components/loaders/AtomLoader.vue";
 import Card from "@/core/components/Card.vue";
 import ComponentReference from "@/features/components/ComponentReference.vue";
 import EllipsisLoader from "@/core/components/loaders/EllipsisLoader.vue";
+import ExampleComponent from "@/features/components/ExampleComponent.vue";
 import HollowDotsLoader from "@/core/components/loaders/HollowDotsLoader.vue";
 import SkeletonLoader from "@/core/components/loaders/SkeletonLoader.vue";
 import TrinityRingsLoader from "@/core/components/loaders/TrinityRingsLoader.vue";
@@ -54,11 +55,13 @@ export default { layout: AppLayout };
             </Card>
         </div>
         <div class="flex flex-col gap-2">
-            <Card title="Component Example">
-                <div class="flex justify-center mb-2">
-                    <AtomLoader text="Atom Demo" />
-                </div>
-                <div class="p-3 bg-slate-300 rounded-lg overflow-auto">
+            <ExampleComponent show>
+                <template #component>
+                    <div class="flex justify-center mb-2">
+                        <AtomLoader text="Atom Demo" />
+                    </div>
+                </template>
+                <template #code>
                     &lt;script setup&gt; <br />
                     &emsp;import AtomLoader from
                     "@/core/components/loaders/AtomLoader.vue" <br />
@@ -67,8 +70,8 @@ export default { layout: AppLayout };
                     &lt;template&gt;<br />
                     &emsp;&lt;AtomLoader text="Atom Demo" /&gt;<br />
                     &lt;/template&gt;<br />
-                </div>
-            </Card>
+                </template>
+            </ExampleComponent>
             <ComponentReference :reference-properties="referenceProperties" />
         </div>
     </div>

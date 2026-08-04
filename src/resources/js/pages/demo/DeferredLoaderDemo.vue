@@ -1,13 +1,9 @@
 <script setup lang="ts">
 import AppLayout from "@/layouts/AppLayout.vue";
 import Card from "@/core/components/Card.vue";
-import Collapse from "@/core/components/Collapse.vue";
 import ComponentReference from "@/features/components/ComponentReference.vue";
 import DeferredLoader from "@/core/components/loaders/DeferredLoader.vue";
-import ExpandBadge from "@/core/components/badges/ExpandBadge.vue";
-import { ref } from "vue";
-
-const showExample = ref(false);
+import ExampleComponent from "@/features/components/ExampleComponent.vue";
 
 const referenceProperties = [
     {
@@ -58,39 +54,31 @@ export default { layout: AppLayout };
             </p>
         </Card>
         <div class="flex gap-2">
-            <Card title="Component Example">
-                <template #append-title>
-                    <ExpandBadge
-                        :expanded="showExample"
-                        @click="showExample = !showExample"
-                    />
+            <ExampleComponent>
+                <template #component>
+                    <div>
+                        <DeferredLoader
+                            data="deferred-props"
+                            loading-text="Loading..."
+                        >
+                            <div>Null Content</div>
+                        </DeferredLoader>
+                    </div>
                 </template>
-                <Collapse :show="showExample">
-                    <div class="flex flex-col gap-2 items-center">
-                        <div>
-                            <DeferredLoader
-                                data="deferred-props"
-                                loading-text="Loading..."
-                            >
-                                <div>Null Content</div>
-                            </DeferredLoader>
-                        </div>
-                    </div>
-                    <div class="mt-3 p-3 bg-slate-300 rounded-lg overflow-auto">
-                        &lt;script setup&gt; <br />
-                        &emsp;import DeferredLoader from
-                        "@/core/components/loaders/DeferredLoader.vue"<br />
-                        &lt;/script&gt;<br />
-                        <br />
-                        &lt;template&gt;<br />
-                        &emsp;&lt;DeferredLoader data="deferred-props"
-                        loading-text="Loading..."&gt;<br />
-                        &emsp;&emsp;&lt;Loaded Data /&gt;<br />
-                        &emsp;&lt;Overlay /&gt;<br />
-                        &lt;/template&gt;<br />
-                    </div>
-                </Collapse>
-            </Card>
+                <template #code>
+                    &lt;script setup&gt; <br />
+                    &emsp;import DeferredLoader from
+                    "@/core/components/loaders/DeferredLoader.vue"<br />
+                    &lt;/script&gt;<br />
+                    <br />
+                    &lt;template&gt;<br />
+                    &emsp;&lt;DeferredLoader data="deferred-props"
+                    loading-text="Loading..."&gt;<br />
+                    &emsp;&emsp;&lt;Loaded Data /&gt;<br />
+                    &emsp;&lt;Overlay /&gt;<br />
+                    &lt;/template&gt;<br />
+                </template>
+            </ExampleComponent>
         </div>
         <ComponentReference
             :reference-properties="referenceProperties"

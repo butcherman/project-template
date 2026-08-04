@@ -7,6 +7,7 @@ import ComponentReference from "@/features/components/ComponentReference.vue";
 import Modal from "@/core/components/Modal.vue";
 import ExpandBadge from "@/core/components/badges/ExpandBadge.vue";
 import { ref } from "vue";
+import ExampleComponent from "@/features/components/ExampleComponent.vue";
 
 const showExample = ref(false);
 const exampleModal = ref(false);
@@ -126,14 +127,8 @@ export default { layout: AppLayout };
                 with the rest of the page.
             </p>
         </Card>
-        <Card title="Component Example">
-            <template #append-title>
-                <ExpandBadge
-                    :expanded="showExample"
-                    @click="showExample = !showExample"
-                />
-            </template>
-            <Collapse :show="showExample">
+        <ExampleComponent>
+            <template #component>
                 <div class="flex justify-center">
                     <BaseButton
                         text="Show Modal"
@@ -148,32 +143,32 @@ export default { layout: AppLayout };
                         maxime do ducimus dolore commodo cumque et laborum est
                     </Modal>
                 </div>
-                <div class="mt-3 p-3 bg-slate-300 rounded-lg overflow-auto">
-                    &lt;script setup&gt; <br />
-                    &emsp;import Modal from "@/core/components/Modal.vue"
-                    <br />
-                    <br />
-                    &emsp;const showModal = ref(false);<br />
-                    &lt;/script&gt;<br />
-                    <br />
-                    &lt;template&gt;<br />
-                    &emsp;&lt;Modal v-model:show="showModal" title="Example
-                    Modal"&gt;<br />
-                    &emsp;&emsp;&lt;div&gt;
-                    <div class="ms-12">
-                        lorem ipsum dolor sit amet consectetur adipiscing elit
-                        omnis et et accusamus pariatur vero qui aliquip dolor
-                        velit et distinctio cumque libero facere ea quas
-                        mollitia non deserunt sint blanditiis est quidem dolores
-                        optio nostrud tempor officia elit atque aliqua corrupti
-                        maxime do ducimus dolore commodo cumque et
-                    </div>
-                    &emsp;&emsp;&lt;/div&gt; <br />
-                    &emsp;&lt;/Modal&gt;<br />
-                    &lt;/template&gt;<br />
+            </template>
+            <template #code>
+                &lt;script setup&gt; <br />
+                &emsp;import Modal from "@/core/components/Modal.vue"
+                <br />
+                <br />
+                &emsp;const showModal = ref(false);<br />
+                &lt;/script&gt;<br />
+                <br />
+                &lt;template&gt;<br />
+                &emsp;&lt;Modal v-model:show="showModal" title="Example
+                Modal"&gt;<br />
+                &emsp;&emsp;&lt;div&gt;
+                <div class="ms-12">
+                    lorem ipsum dolor sit amet consectetur adipiscing elit omnis
+                    et et accusamus pariatur vero qui aliquip dolor velit et
+                    distinctio cumque libero facere ea quas mollitia non
+                    deserunt sint blanditiis est quidem dolores optio nostrud
+                    tempor officia elit atque aliqua corrupti maxime do ducimus
+                    dolore commodo cumque et
                 </div>
-            </Collapse>
-        </Card>
+                &emsp;&emsp;&lt;/div&gt; <br />
+                &emsp;&lt;/Modal&gt;<br />
+                &lt;/template&gt;<br />
+            </template>
+        </ExampleComponent>
         <ComponentReference
             :reference-properties="referenceProperties"
             :slot-properties="slotProperties"

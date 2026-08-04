@@ -6,6 +6,7 @@ import BaseButton from "@/core/components/buttons/BaseButton.vue";
 import Card from "@/core/components/Card.vue";
 import ComponentReference from "@/features/components/ComponentReference.vue";
 import EditButton from "@/core/components/buttons/EditButton.vue";
+import ExampleComponent from "@/features/components/ExampleComponent.vue";
 import SubmitButton from "@/core/components/buttons/SubmitButton.vue";
 
 const referenceProperties = [
@@ -141,23 +142,25 @@ export default { layout: AppLayout };
                 </div>
             </Card>
         </div>
-        <div class="flex flex-col gap-2">
-            <Card title="Component Example">
+        <ExampleComponent>
+            <template #component>
                 <div class="flex justify-center mb-2">
                     <BaseButton text="Any Button Text" variant="primary" />
                 </div>
-                <div class="p-3 bg-slate-300 rounded-lg overflow-auto">
-                    &lt;script setup&gt; <br />
-                    &emsp;import BaseButton from
-                    "@/core/components/buttons/BaseButton.vue" <br />
-                    &lt;/script&gt;<br />
-                    <br />
-                    &lt;template&gt;<br />
-                    &emsp;&lt;BaseButton text="Any Button Text"
-                    variant="primary" /&gt;<br />
-                    &lt;/template&gt;<br />
-                </div>
-            </Card>
+            </template>
+            <template #code>
+                &lt;script setup&gt; <br />
+                &emsp;import BaseButton from
+                "@/core/components/buttons/BaseButton.vue" <br />
+                &lt;/script&gt;<br />
+                <br />
+                &lt;template&gt;<br />
+                &emsp;&lt;BaseButton text="Any Button Text" variant="primary"
+                /&gt;<br />
+                &lt;/template&gt;<br />
+            </template>
+        </ExampleComponent>
+        <div class="flex flex-col gap-2">
             <ComponentReference
                 :reference-properties="referenceProperties"
                 :slot-properties="slotProperties"

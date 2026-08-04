@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { ref } from "vue";
-
 import Card from "@/core/components/Card.vue";
 import Collapse from "@/core/components/Collapse.vue";
 import ExpandBadge from "@/core/components/badges/ExpandBadge.vue";
+import { ref } from "vue";
 
 const props = defineProps<{
     show?: boolean;
@@ -23,12 +22,14 @@ const showExample = ref(props.show ?? false);
             />
         </template>
         <Collapse :show="showExample">
-            <div class="flex justify-center gap-2">
-                <slot name="component" />
-            </div>
-            <div class="mt-3 p-3 bg-slate-300 rounded-lg overflow-auto">
-                <slot name="code" />
-            </div>
+            <slot>
+                <div class="flex flex-col justify-center gap-2">
+                    <slot name="component" />
+                </div>
+                <div class="mt-3 p-3 bg-slate-300 rounded-lg overflow-auto">
+                    <slot name="code" />
+                </div>
+            </slot>
         </Collapse>
     </Card>
 </template>

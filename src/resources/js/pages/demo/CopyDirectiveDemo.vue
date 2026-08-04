@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AppLayout from "@/layouts/AppLayout.vue";
 import Card from "@/core/components/Card.vue";
+import ExampleComponent from "@/features/components/ExampleComponent.vue";
 import { ref } from "vue";
 
 const copyText = ref("Click the Copy Badge to copy this text to the clipboard");
@@ -14,11 +15,13 @@ export default { layout: AppLayout };
         <Card title="Description">
             <p>Directive for copying text data to the clipboard.</p>
         </Card>
-        <Card title="Directive Example">
-            <div class="flex justify-center">
-                <p v-copy="copyText">{{ copyText }}</p>
-            </div>
-            <div class="p-3 bg-slate-300 rounded-lg overflow-auto">
+        <ExampleComponent title="Directive Example" show>
+            <template #component>
+                <div class="flex justify-center">
+                    <p v-copy="copyText">{{ copyText }}</p>
+                </div>
+            </template>
+            <template #code>
                 &lt;script setup&gt; <br />
                 &emsp;const copyText = ref("Click the Copy Badge to copy this
                 text to the clipboard"); <br />
@@ -28,7 +31,7 @@ export default { layout: AppLayout };
                 &emsp;&lt;p v-copy="copyText"&gt;&lbrace;&lbrace; copyText
                 &rbrace;&rbrace;&lt;/p&gt;<br />
                 &lt;/template&gt;<br />
-            </div>
-        </Card>
+            </template>
+        </ExampleComponent>
     </div>
 </template>

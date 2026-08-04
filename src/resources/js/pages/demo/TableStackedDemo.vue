@@ -2,6 +2,7 @@
 import AppLayout from "@/layouts/AppLayout.vue";
 import Card from "@/core/components/Card.vue";
 import ComponentReference from "@/features/components/ComponentReference.vue";
+import ExampleComponent from "@/features/components/ExampleComponent.vue";
 import TableStacked from "@/core/features/dataResources/TableStacked.vue";
 
 const sampleData = {
@@ -66,7 +67,7 @@ export default { layout: AppLayout };
                     };
                 </div>
             </Card>
-            <Card title="Component Example">
+            <ExampleComponent show>
                 <div class="flex justify-center mb-2">
                     <TableStacked :data="sampleData" />
                 </div>
@@ -80,7 +81,7 @@ export default { layout: AppLayout };
                     &emsp;&lt;TableStacked :data="sampleData" /&gt;<br />
                     &lt;/template&gt;<br />
                 </div>
-            </Card>
+            </ExampleComponent>
         </div>
         <ComponentReference :reference-properties="referenceProperties" />
     </div>

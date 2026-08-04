@@ -8,6 +8,7 @@ import ComponentReference from "@/features/components/ComponentReference.vue";
 import CopyBadge from "@/core/components/badges/CopyBadge.vue";
 import DeleteBadge from "@/core/components/badges/DeleteBadge.vue";
 import EditBadge from "@/core/components/badges/EditBadge.vue";
+import ExampleComponent from "@/features/components/ExampleComponent.vue";
 
 const referenceProperties = [
     {
@@ -85,17 +86,55 @@ export default { layout: AppLayout };
         <div class="flex justify-center gap-2">
             <Card title="Badge Components">
                 <div class="flex flex-col gap-2">
-                    <div><BaseBadge text="Base" /> - Base Badge</div>
-                    <div><AddBadge /> - Add Badge</div>
-                    <div>
-                        <BooleanBadge :value="true" /> - Boolean Badge True
+                    <div class="flex flex-wrap">
+                        <BaseBadge text="Base" />
+                        <div>
+                            <span class="hidden md:inline">&nbsp;- </span>
+                            Base Badge
+                        </div>
                     </div>
-                    <div>
-                        <BooleanBadge :value="false" /> - Boolean Badge False
+                    <div class="flex flex-wrap">
+                        <AddBadge />
+                        <div>
+                            <span class="hidden md:inline">&nbsp;- </span>
+                            Add Badge
+                        </div>
                     </div>
-                    <div><DeleteBadge /> - Delete Badge</div>
-                    <div><EditBadge /> - Edit Badge</div>
-                    <div><CopyBadge /> - Copy Badge</div>
+                    <div class="flex flex-wrap">
+                        <BooleanBadge :value="true" />
+                        <div>
+                            <span class="hidden md:inline"> - </span>
+                            Boolean Badge True
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap">
+                        <BooleanBadge :value="false" />
+                        <div>
+                            <span class="hidden md:inline">&nbsp;- </span>
+                            Boolean Badge False
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap">
+                        <DeleteBadge />
+                        <div>
+                            <span class="hidden md:inline">&nbsp;- </span>
+                            Delete Badge
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap">
+                        <EditBadge />
+                        <div>
+                            <span class="hidden md:inline">&nbsp;- </span>
+                            Edit Badge
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap">
+                        <CopyBadge />
+                        <div>
+                            <span class="hidden md:inline">&nbsp;- </span>
+                            Copy Badge
+                        </div>
+                    </div>
                 </div>
             </Card>
             <Card title="Badge Variants">
@@ -130,7 +169,7 @@ export default { layout: AppLayout };
                 </div>
             </Card>
             <Card title="Badge Sizes">
-                <div class="flex flex-col gap-1">
+                <div class="flex flex-col gap-1 items-center">
                     <div>
                         <BaseBadge text="Large" size="lg" />
                     </div>
@@ -152,27 +191,26 @@ export default { layout: AppLayout };
                 </div>
             </Card>
         </div>
-        <div class="flex flex-col gap-2">
-            <Card title="ComponentExample">
-                <div class="flex justify-center mb-2">
+        <ExampleComponent>
+            <template #component>
+                <div class="text-center">
                     <BaseBadge text="Badge Text" variant="primary" />
                 </div>
-                <div class="p-3 bg-slate-300 rounded-lg overflow-auto">
-                    &lt;script setup&gt; <br />
-                    &emsp;import BaseBadge from
-                    "@/core/components/badges/BaseBadge.vue" <br />
-                    &lt;/script&gt;<br />
-                    <br />
-                    &lt;template&gt;<br />
-                    &emsp;&lt;BaseBadge text="Badge Text" variant="primary"
-                    /&gt;<br />
-                    &lt;/template&gt;<br />
-                </div>
-            </Card>
-            <ComponentReference
-                :reference-properties="referenceProperties"
-                :slot-properties="slotProperties"
-            />
-        </div>
+            </template>
+            <template #code>
+                &lt;script setup&gt; <br />
+                &emsp;import BaseBadge from
+                "@/core/components/badges/BaseBadge.vue" <br />
+                &lt;/script&gt;<br />
+                <br />
+                &lt;template&gt;<br />
+                &emsp;&lt;BaseBadge text="Badge Text" variant="primary" /&gt;<br />
+                &lt;/template&gt;<br />
+            </template>
+        </ExampleComponent>
+        <ComponentReference
+            :reference-properties="referenceProperties"
+            :slot-properties="slotProperties"
+        />
     </div>
 </template>

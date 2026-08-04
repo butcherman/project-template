@@ -2,15 +2,29 @@
 import AppLayout from "@/layouts/AppLayout.vue";
 import BaseButton from "@/core/components/buttons/BaseButton.vue";
 import Card from "@/core/components/Card.vue";
-import Collapse from "@/core/components/Collapse.vue";
 import ComponentReference from "@/features/components/ComponentReference.vue";
-import ExpandBadge from "@/core/components/badges/ExpandBadge.vue";
+import ExampleComponent from "@/features/components/ExampleComponent.vue";
 import MenuList from "@/core/components/MenuList.vue";
 import Overlay from "@/core/components/Overlay.vue";
 import { ref } from "vue";
 
-const showExample = ref(false);
 const showLoader = ref(true);
+const showFullPageLoader = ref(false);
+
+const timer = ref(5);
+
+const onShowFullPage = () => {
+    showFullPageLoader.value = true;
+    let countdown = setInterval(() => {
+        timer.value--;
+
+        if (timer.value <= 0) {
+            clearInterval(countdown);
+            timer.value = 5;
+            showFullPageLoader.value = false;
+        }
+    }, 1000);
+};
 
 const exampleMenu = [
     {
@@ -77,53 +91,75 @@ export default { layout: AppLayout };
         <Card title="Description">
             <p class="text-center">Loading overlay that covers content</p>
         </Card>
-        <div class="flex gap-2">
-            <Card title="Component Example">
-                <template #append-title>
-                    <ExpandBadge
-                        :expanded="showExample"
-                        @click="showExample = !showExample"
+        <ExampleComponent title="Basic Example">
+            <template #component>
+                <div class="text-center">
+                    <BaseButton
+                        text="Toggle Loader"
+                        @click="showLoader = !showLoader"
                     />
-                </template>
-                <Collapse :show="showExample">
-                    <div class="flex flex-col gap-2 items-center">
-                        <div>
-                            <BaseButton
-                                text="Toggle Loader"
-                                @click="showLoader = !showLoader"
-                            />
-                        </div>
-                        <div>
-                            <Overlay
-                                :loading="showLoader"
-                                loading-text="Loading..."
-                            >
-                                <MenuList
-                                    :menu-list="exampleMenu"
-                                    class="border border-slate-300 rounded-lg"
-                                />
-                            </Overlay>
-                        </div>
-                    </div>
-                    <div class="mt-3 p-3 bg-slate-300 rounded-lg overflow-auto">
-                        &lt;script setup&gt; <br />
-                        &emsp;import Overlay from
-                        "@/core/components/Overlay.vue"<br />
-                        <br />
-                        const showLoader = ref(true);<br />
-                        &lt;/script&gt;<br />
-                        <br />
-                        &lt;template&gt;<br />
-                        &emsp;&lt;Overlay :loading="showLoader"
-                        loading-text="Loading..."&gt;<br />
-                        &emsp;&emsp;&lt;MenuList :menu-list="exampleMenu"
-                        /&gt;<br />
-                        &emsp;&lt;Overlay /&gt;<br />
-                        &lt;/template&gt;<br />
-                    </div>
-                </Collapse>
-            </Card>
-        </div>
+                </div>
+                <div>
+                    <Overlay :loading="showLoader" loading-text="Loading...">
+                        <MenuList
+                            :menu-list="exampleMenu"
+                            class="border border-slate-300 rounded-lg"
+                        />
+                    </Overlay>
+                </div>
+            </template>
+            <template #code>
+                &lt;script setup&gt; <br />
+                &emsp;import Overlay from "@/core/components/Overlay.vue"<br />
+                <br />
+                const showLoader = ref(true);<br />
+                &lt;/script&gt;<br />
+                <br />
+                &lt;template&gt;<br />
+                &emsp;&lt;Overlay :loading="showLoader"
+                loading-text="Loading..."&gt;<br />
+                &emsp;&emsp;&lt;MenuList :menu-list="exampleMenu" /&gt;<br />
+                &emsp;&lt;Overlay /&gt;<br />
+                &lt;/template&gt;<br />
+            </template>
+        </ExampleComponent>
+        <ExampleComponent title="Full Page Overlay">
+            <template #component>
+                <div class="text-center">
+                    <BaseButton text="Toggle Loader" @click="onShowFullPage" />
+                </div>
+                <div>
+                    <Overlay
+                        :loading="showFullPageLoader"
+                        :loading-text="`${timer} seconds left`"
+                        full-page
+                    >
+                        <MenuList
+                            :menu-list="exampleMenu"
+                            class="border border-slate-300 rounded-lg"
+                        />
+                    </Overlay>
+                </div>
+            </template>
+            <template #code>
+                &lt;script setup&gt; <br />
+                &emsp;import Overlay from "@/core/components/Overlay.vue"<br />
+                <br />
+                const showLoader = ref(true);<br />
+                &lt;/script&gt;<br />
+                <br />
+                &lt;template&gt;<br />
+                &emsp;&lt;Overlay <br />
+                &emsp;&emsp;:loading="showLoader"<br />
+                &emsp;&emsp;:loading-text="`${timer} seconds left`"<br />
+                &emsp;&emsp;full-page<br />
+                &emsp;&gt;<br />
+
+                &emsp;&emsp;&lt;MenuList :menu-list="exampleMenu" /&gt;<br />
+                &emsp;&lt;Overlay /&gt;<br />
+                &lt;/template&gt;<br />
+            </template>
+        </ExampleComponent>
         <ComponentReference
             :reference-properties="referenceProperties"
             :slot-properties="slotProperties"

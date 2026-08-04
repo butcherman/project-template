@@ -123,6 +123,7 @@ const onRowClick = (event: MouseEvent, row: IndexedData<TRow>) => {
         </ul>
         <div>
             <Paginate
+                v-if="paginate"
                 v-model:per-page="perPage"
                 :current-page="currentPage"
                 :per-page-array="[10, 25, 50]"

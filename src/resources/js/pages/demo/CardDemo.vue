@@ -2,12 +2,8 @@
 import AddButton from "@/core/components/buttons/AddButton.vue";
 import AppLayout from "@/layouts/AppLayout.vue";
 import Card from "@/core/components/Card.vue";
-import Collapse from "@/core/components/Collapse.vue";
 import ComponentReference from "@/features/components/ComponentReference.vue";
-import ExpandBadge from "@/core/components/badges/ExpandBadge.vue";
-import { ref } from "vue";
-
-const showExample = ref(false);
+import ExampleComponent from "@/features/components/ExampleComponent.vue";
 
 const referenceProperties = [
     {
@@ -61,14 +57,8 @@ export default { layout: AppLayout };
                 Standard box with white background for grouping sections.
             </p>
         </Card>
-        <Card title="Component Example">
-            <template #append-title>
-                <ExpandBadge
-                    :expanded="showExample"
-                    @click="showExample = !showExample"
-                />
-            </template>
-            <Collapse :show="showExample">
+        <ExampleComponent>
+            <template #component>
                 <div class="flex justify-center">
                     <Card title="I am a card" size="md">
                         <template #append-title>
@@ -85,37 +75,37 @@ export default { layout: AppLayout };
                         </template>
                     </Card>
                 </div>
-                <div class="mt-3 p-3 bg-slate-300 rounded-lg overflow-auto">
-                    &lt;script setup&gt; <br />
-                    &emsp;import Card from "@/core/components/Card.vue" <br />
-                    &lt;/script&gt;<br />
-                    <br />
-                    &lt;template&gt;<br />
-                    &emsp;&lt;Card title="I am a card"&gt;<br />
-                    &emsp;&emsp;&lt;template #append-title&gt; <br />
-                    &emsp;&emsp;&emsp;&lt;AddButton size="sm" text="Add
-                    Something" pill /&gt;
-                    <br />
-                    &emsp;&emsp;&lt;/template&gt;<br />
-                    &emsp;&emsp;&lt;div&gt;
-                    <div class="ms-12">
-                        lorem ipsum dolor sit amet consectetur adipiscing elit
-                        omnis et et accusamus pariatur vero qui aliquip dolor
-                        velit et distinctio cumque libero facere ea quas
-                        mollitia non deserunt sint blanditiis est quidem dolores
-                        optio nostrud tempor officia elit atque aliqua corrupti
-                        maxime do ducimus dolore commodo cumque et
-                    </div>
-                    &emsp;&emsp;&lt;/div&gt; <br />
-                    &emsp;&emsp;&lt;template #footer&gt;<br />
-                    &emsp;&emsp;&emsp;&lt;p class="text-center"&gt;Custom Footer
-                    Content&lt;/p&gt;<br />
-                    &emsp;&emsp;&lt;/template&gt;<br />
-                    &emsp;&lt;/Card&gt;<br />
-                    &lt;/template&gt;<br />
+            </template>
+            <template #code>
+                &lt;script setup&gt; <br />
+                &emsp;import Card from "@/core/components/Card.vue" <br />
+                &lt;/script&gt;<br />
+                <br />
+                &lt;template&gt;<br />
+                &emsp;&lt;Card title="I am a card"&gt;<br />
+                &emsp;&emsp;&lt;template #append-title&gt; <br />
+                &emsp;&emsp;&emsp;&lt;AddButton size="sm" text="Add Something"
+                pill /&gt;
+                <br />
+                &emsp;&emsp;&lt;/template&gt;<br />
+                &emsp;&emsp;&lt;div&gt;
+                <div class="ms-12">
+                    lorem ipsum dolor sit amet consectetur adipiscing elit omnis
+                    et et accusamus pariatur vero qui aliquip dolor velit et
+                    distinctio cumque libero facere ea quas mollitia non
+                    deserunt sint blanditiis est quidem dolores optio nostrud
+                    tempor officia elit atque aliqua corrupti maxime do ducimus
+                    dolore commodo cumque et
                 </div>
-            </Collapse>
-        </Card>
+                &emsp;&emsp;&lt;/div&gt; <br />
+                &emsp;&emsp;&lt;template #footer&gt;<br />
+                &emsp;&emsp;&emsp;&lt;p class="text-center"&gt;Custom Footer
+                Content&lt;/p&gt;<br />
+                &emsp;&emsp;&lt;/template&gt;<br />
+                &emsp;&lt;/Card&gt;<br />
+                &lt;/template&gt;<br />
+            </template>
+        </ExampleComponent>
         <ComponentReference
             :reference-properties="referenceProperties"
             :slot-properties="slotProperties"

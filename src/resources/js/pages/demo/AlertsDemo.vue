@@ -3,14 +3,8 @@ import AppLayout from "@/layouts/AppLayout.vue";
 import BannerAlert from "@/core/components/alerts/BannerAlert.vue";
 import BaseButton from "@/core/components/buttons/BaseButton.vue";
 import Card from "@/core/components/Card.vue";
-import Collapse from "@/core/components/Collapse.vue";
-import ExpandBadge from "@/core/components/badges/ExpandBadge.vue";
-import { ref } from "vue";
+import ExampleComponent from "@/features/components/ExampleComponent.vue";
 import { useAlertState } from "@/core/state/alertState";
-
-const showBanner = ref(false);
-const showFlash = ref(false);
-const showToast = ref(true);
 
 const { pushFlashAlert, pushToastAlert } = useAlertState();
 
@@ -54,15 +48,9 @@ export default { layout: AppLayout };
                 Collection of components for notifications.
             </p>
         </Card>
-        <Card title="Banner Alert">
-            <template #append-title>
-                <ExpandBadge
-                    :expanded="showBanner"
-                    @click="showBanner = !showBanner"
-                />
-            </template>
-            <Collapse :show="showBanner">
-                <div class="flex flex-col gap-2 mb-3">
+        <ExampleComponent title="Banner Alert">
+            <template #component>
+                <div class="flex flex-col w-full gap-2">
                     <BannerAlert
                         text="This is a Primary alert"
                         variant="primary"
@@ -86,27 +74,21 @@ export default { layout: AppLayout };
                         variant="warning"
                     />
                 </div>
-                <div class="p-3 bg-slate-300 rounded-lg overflow-auto">
-                    &lt;script setup&gt; <br />
-                    &emsp;import BannerAlert from
-                    "@/core/components/alerts/BannerAlert.vue" <br />
-                    &lt;/script&gt;<br />
-                    <br />
-                    &lt;template&gt;<br />
-                    &emsp;&lt;BannerAlert text="This is a Danger Alert"
-                    variant="danger" /&gt;<br />
-                    &lt;/template&gt;<br />
-                </div>
-            </Collapse>
-        </Card>
-        <Card title="Flash Alert">
-            <template #append-title>
-                <ExpandBadge
-                    :expanded="showFlash"
-                    @click="showFlash = !showFlash"
-                />
             </template>
-            <Collapse :show="showFlash">
+            <template #code>
+                &lt;script setup&gt; <br />
+                &emsp;import BannerAlert from
+                "@/core/components/alerts/BannerAlert.vue" <br />
+                &lt;/script&gt;<br />
+                <br />
+                &lt;template&gt;<br />
+                &emsp;&lt;BannerAlert text="This is a Danger Alert"
+                variant="danger" /&gt;<br />
+                &lt;/template&gt;<br />
+            </template>
+        </ExampleComponent>
+        <ExampleComponent title="Flash Alert">
+            <template #component>
                 <p class="text-center mb-3">
                     Flash Alerts are part of the Layout and are pushed via
                     Laravel Flash, or manually via pushFlashAlert function in
@@ -118,32 +100,25 @@ export default { layout: AppLayout };
                         @click="demoFlash"
                     />
                 </div>
-                <div class="p-3 bg-slate-300 rounded-lg overflow-auto">
-                    &lt;script setup&gt; <br />
-                    &emsp;import &lbrace; useAlertState &rbrace; from
-                    "@/core/state/alertState"; <br />
-                    <br />
-                    &emsp;const &lbrace; pushFlashAlert &rbrace; =
-                    userAlertState();<br />
-                    &emsp;const pushMsg = (msg, variant) => &lbrace;<br />
-                    &emsp;&emsp;&emsp;pushToastAlert(&lbrace;<br />
-                    &emsp;&emsp;&emsp;&emsp;message: msg;<br />
-                    &emsp;&emsp;&emsp;&emsp;variant: variant;<br />
-                    &emsp;&emsp;&emsp;&rbrace;);<br />
-                    &emsp;&rbrace;<br />
-                    &lt;/script&gt;<br />
-                </div>
-            </Collapse>
-        </Card>
-
-        <Card title="Toast Alert">
-            <template #append-title>
-                <ExpandBadge
-                    :expanded="showToast"
-                    @click="showToast = !showToast"
-                />
             </template>
-            <Collapse :show="showToast">
+            <template #code>
+                &lt;script setup&gt; <br />
+                &emsp;import &lbrace; useAlertState &rbrace; from
+                "@/core/state/alertState"; <br />
+                <br />
+                &emsp;const &lbrace; pushFlashAlert &rbrace; =
+                userAlertState();<br />
+                &emsp;const pushMsg = (msg, variant) => &lbrace;<br />
+                &emsp;&emsp;&emsp;pushToastAlert(&lbrace;<br />
+                &emsp;&emsp;&emsp;&emsp;message: msg;<br />
+                &emsp;&emsp;&emsp;&emsp;variant: variant;<br />
+                &emsp;&emsp;&emsp;&rbrace;);<br />
+                &emsp;&rbrace;<br />
+                &lt;/script&gt;<br />
+            </template>
+        </ExampleComponent>
+        <ExampleComponent title="Toast Alert">
+            <template #component>
                 <p class="text-center mb-3">
                     Toast Alerts are part of the Layout and are pushed manually
                     via pushToastAlert function in the Alert State.
@@ -154,22 +129,22 @@ export default { layout: AppLayout };
                         @click="demoToast"
                     />
                 </div>
-                <div class="p-3 bg-slate-300 rounded-lg overflow-auto">
-                    &lt;script setup&gt; <br />
-                    &emsp;import &lbrace; useAlertState &rbrace; from
-                    "@/core/state/alertState"; <br />
-                    <br />
-                    &emsp;const &lbrace; pushToastAlert &rbrace; =
-                    useAlertState();<br />
-                    &emsp;const pushMsg = (msg, variant) => &lbrace;<br />
-                    &emsp;&emsp;&emsp;pushToastAlert(&lbrace;<br />
-                    &emsp;&emsp;&emsp;&emsp;message: msg;<br />
-                    &emsp;&emsp;&emsp;&emsp;variant: variant;<br />
-                    &emsp;&emsp;&emsp;&rbrace;);<br />
-                    &emsp;&rbrace;<br />
-                    &lt;/script&gt;<br />
-                </div>
-            </Collapse>
-        </Card>
+            </template>
+            <template #code>
+                &lt;script setup&gt; <br />
+                &emsp;import &lbrace; useAlertState &rbrace; from
+                "@/core/state/alertState"; <br />
+                <br />
+                &emsp;const &lbrace; pushToastAlert &rbrace; =
+                useAlertState();<br />
+                &emsp;const pushMsg = (msg, variant) => &lbrace;<br />
+                &emsp;&emsp;&emsp;pushToastAlert(&lbrace;<br />
+                &emsp;&emsp;&emsp;&emsp;message: msg;<br />
+                &emsp;&emsp;&emsp;&emsp;variant: variant;<br />
+                &emsp;&emsp;&emsp;&rbrace;);<br />
+                &emsp;&rbrace;<br />
+                &lt;/script&gt;<br />
+            </template>
+        </ExampleComponent>
     </div>
 </template>

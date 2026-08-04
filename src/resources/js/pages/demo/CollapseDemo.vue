@@ -5,8 +5,8 @@ import Collapse from "@/core/components/Collapse.vue";
 import ComponentReference from "@/features/components/ComponentReference.vue";
 import ExpandBadge from "@/core/components/badges/ExpandBadge.vue";
 import { ref } from "vue";
+import ExampleComponent from "@/features/components/ExampleComponent.vue";
 
-const showExample = ref(false);
 const exampleCollapse = ref(true);
 
 const referenceProperties = [
@@ -39,57 +39,49 @@ export default { layout: AppLayout };
                 transition.
             </p>
         </Card>
-        <Card title="Component Example">
-            <template #append-title>
-                <ExpandBadge
-                    :expanded="showExample"
-                    @click="showExample = !showExample"
-                />
-            </template>
-            <Collapse :show="showExample">
-                <div class="flex justify-center">
-                    <Card title="Example" size="md">
-                        <template #append-title>
-                            <ExpandBadge
-                                :expanded="exampleCollapse"
-                                @click="exampleCollapse = !exampleCollapse"
-                            />
-                        </template>
-                        <Collapse :show="exampleCollapse">
-                            Use the badge in the header to expand and collapse
-                            this component.
-                        </Collapse>
-                    </Card>
-                </div>
-                <div class="mt-3 p-3 bg-slate-300 rounded-lg overflow-auto">
-                    &lt;script setup&gt; <br />
-                    &emsp;import Collapse from
-                    "@/core/components/Collapse.vue"<br />
-                    <br />
-                    &emsp;const exampleCollapse = ref(true);<br />
-                    &lt;/script&gt;<br />
-                    <br />
-                    &lt;template&gt;<br />
-                    &emsp;&lt;Card title="Example"&gt;<br />
-                    &emsp;&emsp;&lt;template #append-title&gt; <br />
-                    &emsp;&emsp;&emsp;&lt;ExpandBadge<br />
-                    &emsp;&emsp;&emsp;&emsp;:expanded="exampleCollapse"<br />
-                    &emsp;&emsp;&emsp;&emsp;@click="exampleCollapse =
-                    !exampleCollapse"<br />
-                    &emsp;&emsp;&emsp;/&gt;
-                    <br />
-                    &emsp;&emsp;&lt;/template&gt;<br />
-                    &emsp;&emsp;&lt;Collapse :show="exampleCollapse"&gt;
-                    <div class="ms-12">
+        <ExampleComponent>
+            <template #component>
+                <Card title="Example" size="md">
+                    <template #append-title>
+                        <ExpandBadge
+                            :expanded="exampleCollapse"
+                            @click="exampleCollapse = !exampleCollapse"
+                        />
+                    </template>
+                    <Collapse :show="exampleCollapse">
                         Use the badge in the header to expand and collapse this
                         component.
-                    </div>
-                    &emsp;&emsp;&lt;/Collapse&gt; <br />
-                    &emsp;&lt;/Card&gt;<br />
-                    &lt;/template&gt;<br />
+                    </Collapse>
+                </Card>
+            </template>
+            <template #code>
+                &lt;script setup&gt; <br />
+                &emsp;import Collapse from "@/core/components/Collapse.vue"<br />
+                <br />
+                &emsp;const exampleCollapse = ref(true);<br />
+                &lt;/script&gt;<br />
+                <br />
+                &lt;template&gt;<br />
+                &emsp;&lt;Card title="Example"&gt;<br />
+                &emsp;&emsp;&lt;template #append-title&gt; <br />
+                &emsp;&emsp;&emsp;&lt;ExpandBadge<br />
+                &emsp;&emsp;&emsp;&emsp;:expanded="exampleCollapse"<br />
+                &emsp;&emsp;&emsp;&emsp;@click="exampleCollapse =
+                !exampleCollapse"<br />
+                &emsp;&emsp;&emsp;/&gt;
+                <br />
+                &emsp;&emsp;&lt;/template&gt;<br />
+                &emsp;&emsp;&lt;Collapse :show="exampleCollapse"&gt;
+                <div class="ms-12">
+                    Use the badge in the header to expand and collapse this
+                    component.
                 </div>
-            </Collapse>
-        </Card>
+                &emsp;&emsp;&lt;/Collapse&gt; <br />
+                &emsp;&lt;/Card&gt;<br />
+                &lt;/template&gt;<br />
+            </template>
+        </ExampleComponent>
+
         <ComponentReference
             :reference-properties="referenceProperties"
             :slot-properties="slotProperties"

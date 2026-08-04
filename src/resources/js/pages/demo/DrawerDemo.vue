@@ -2,13 +2,11 @@
 import AppLayout from "@/layouts/AppLayout.vue";
 import BaseButton from "@/core/components/buttons/BaseButton.vue";
 import Card from "@/core/components/Card.vue";
-import Collapse from "@/core/components/Collapse.vue";
 import ComponentReference from "@/features/components/ComponentReference.vue";
 import Drawer from "@/core/components/Drawer.vue";
-import ExpandBadge from "@/core/components/badges/ExpandBadge.vue";
+import ExampleComponent from "@/features/components/ExampleComponent.vue";
 import { ref } from "vue";
 
-const showExample = ref(false);
 const exampleDrawer = ref(false);
 
 const referenceProperties = [
@@ -55,54 +53,48 @@ export default { layout: AppLayout };
                 Collapsable pane that pops up over the top of the main page.
             </p>
         </Card>
-        <Card title="Component Example">
-            <template #append-title>
-                <ExpandBadge
-                    :expanded="showExample"
-                    @click="showExample = !showExample"
-                />
-            </template>
-            <Collapse :show="showExample">
-                <div class="flex justify-center">
+        <ExampleComponent>
+            <template #component>
+                <div class="text-center">
                     <BaseButton
                         text="Toggle Drawer"
                         @click="exampleDrawer = !exampleDrawer"
                     />
-                    <Drawer v-model:show="exampleDrawer" title="Example Drawer">
-                        lorem ipsum dolor sit amet consectetur adipiscing elit
-                        omnis et et accusamus pariatur vero qui aliquip dolor
-                        velit et distinctio cumque libero facere ea quas
-                        mollitia non deserunt sint blanditiis est quidem dolores
-                        optio nostrud tempor officia elit atque aliqua corrupti
-                        maxime do ducimus dolore commodo cumque et laborum est
-                    </Drawer>
                 </div>
-                <div class="mt-3 p-3 bg-slate-300 rounded-lg overflow-auto">
-                    &lt;script setup&gt; <br />
-                    &emsp;import Drawer from "@/core/components/Drawer.vue"
-                    <br />
-                    <br />
-                    &emsp;const showDrawer = ref(false);<br />
-                    &lt;/script&gt;<br />
-                    <br />
-                    &lt;template&gt;<br />
-                    &emsp;&lt;Drawer v-model:show="showDrawer" title="Example
-                    Drawer"&gt;<br />
-                    &emsp;&emsp;&lt;div&gt;
-                    <div class="ms-12">
-                        lorem ipsum dolor sit amet consectetur adipiscing elit
-                        omnis et et accusamus pariatur vero qui aliquip dolor
-                        velit et distinctio cumque libero facere ea quas
-                        mollitia non deserunt sint blanditiis est quidem dolores
-                        optio nostrud tempor officia elit atque aliqua corrupti
-                        maxime do ducimus dolore commodo cumque et
-                    </div>
-                    &emsp;&emsp;&lt;/div&gt; <br />
-                    &emsp;&lt;/Drawer&gt;<br />
-                    &lt;/template&gt;<br />
+                <Drawer v-model:show="exampleDrawer" title="Example Drawer">
+                    lorem ipsum dolor sit amet consectetur adipiscing elit omnis
+                    et et accusamus pariatur vero qui aliquip dolor velit et
+                    distinctio cumque libero facere ea quas mollitia non
+                    deserunt sint blanditiis est quidem dolores optio nostrud
+                    tempor officia elit atque aliqua corrupti maxime do ducimus
+                    dolore commodo cumque et laborum est
+                </Drawer>
+            </template>
+            <template #code>
+                &lt;script setup&gt; <br />
+                &emsp;import Drawer from "@/core/components/Drawer.vue"
+                <br />
+                <br />
+                &emsp;const showDrawer = ref(false);<br />
+                &lt;/script&gt;<br />
+                <br />
+                &lt;template&gt;<br />
+                &emsp;&lt;Drawer v-model:show="showDrawer" title="Example
+                Drawer"&gt;<br />
+                &emsp;&emsp;&lt;div&gt;
+                <div class="ms-12">
+                    lorem ipsum dolor sit amet consectetur adipiscing elit omnis
+                    et et accusamus pariatur vero qui aliquip dolor velit et
+                    distinctio cumque libero facere ea quas mollitia non
+                    deserunt sint blanditiis est quidem dolores optio nostrud
+                    tempor officia elit atque aliqua corrupti maxime do ducimus
+                    dolore commodo cumque et
                 </div>
-            </Collapse>
-        </Card>
+                &emsp;&emsp;&lt;/div&gt; <br />
+                &emsp;&lt;/Drawer&gt;<br />
+                &lt;/template&gt;<br />
+            </template>
+        </ExampleComponent>
         <ComponentReference
             :reference-properties="referenceProperties"
             :slot-properties="slotProperties"

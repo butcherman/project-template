@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import AppLayout from "@/layouts/AppLayout.vue";
 import Card from "@/core/components/Card.vue";
-import Collapse from "@/core/components/Collapse.vue";
 import ComponentReference from "@/features/components/ComponentReference.vue";
-import ExpandBadge from "@/core/components/badges/ExpandBadge.vue";
+import ExampleComponent from "@/features/components/ExampleComponent.vue";
 import ResourceList from "@/core/features/dataResources/ResourceList.vue";
 import { useSampleData } from "@/features/composables/sampleData";
-import { ref } from "vue";
 
 const { sampleList } = useSampleData();
 
@@ -127,9 +125,6 @@ const emitProperties = [
 ];
 
 const demoSample = sampleList(2);
-const showData = ref(false);
-const showBasic = ref(false);
-const showAdvanced = ref(false);
 </script>
 
 <script lang="ts">
@@ -145,96 +140,74 @@ export default { layout: AppLayout };
                 based on results of a database search.
             </p>
         </Card>
-        <div class="flex flex-col gap-2">
-            <Card title="Sample Data" class="flex-1">
-                <template #append-title>
-                    <ExpandBadge
-                        :expanded="showData"
-                        @click="showData = !showData"
-                    />
+        <ExampleComponent title="Sample Data">
+            <div class="p-3 bg-slate-300 rounded-lg overflow-auto">
+                const sampleList = [ <br />
+                <template v-for="item in demoSample">
+                    &emsp;{ <br />
+                    &emsp;&emsp;name: "{{ item.name }}", <br />
+                    &emsp;&emsp;username: "{{ item.username }}", <br />
+                    &emsp;&emsp;email: "{{ item.email }}", <br />
+                    &emsp;}, <br />
                 </template>
-                <Collapse :show="showData">
-                    <div class="p-3 bg-slate-300 rounded-lg overflow-auto">
-                        const sampleList = [ <br />
-                        <template v-for="item in demoSample">
-                            &emsp;{ <br />
-                            &emsp;&emsp;name: "{{ item.name }}", <br />
-                            &emsp;&emsp;username: "{{ item.username }}", <br />
-                            &emsp;&emsp;email: "{{ item.email }}", <br />
-                            &emsp;}, <br />
-                        </template>
-                    </div>
-                </Collapse>
-            </Card>
-            <Card title="Basic Component Example">
-                <template #append-title>
-                    <ExpandBadge
-                        :expanded="showBasic"
-                        @click="showBasic = !showBasic"
+            </div>
+        </ExampleComponent>
+        <ExampleComponent title="Basic Component Example">
+            <template #component>
+                <div class="flex justify-center mb-2">
+                    <ResourceList
+                        :list="demoSample"
+                        label-field="name"
+                        center
+                        hover-row
                     />
-                </template>
-                <Collapse :show="showBasic">
-                    <div class="flex justify-center mb-2">
-                        <ResourceList
-                            :list="demoSample"
-                            label-field="name"
-                            center
-                            hover-row
-                        />
-                    </div>
-                    <div class="p-3 bg-slate-300 rounded-lg overflow-auto">
-                        &lt;script setup&gt; <br />
-                        &emsp;import ResourceList from
-                        "@/core/features/dataTable/ResourceList.vue" <br />
-                        &lt;/script&gt;<br />
-                        <br />
-                        &lt;template&gt;<br />
-                        &emsp;&lt;ResourceList :list="sampleList"
-                        label-field="name" center hover-row /&gt;<br />
-                        &lt;/template&gt;<br />
-                    </div>
-                </Collapse>
-            </Card>
-            <Card title="Advanced Component Example">
-                <template #append-title>
-                    <ExpandBadge
-                        :expanded="showAdvanced"
-                        @click="showAdvanced = !showAdvanced"
+                </div>
+            </template>
+            <template #code>
+                &lt;script setup&gt; <br />
+                &emsp;import ResourceList from
+                "@/core/features/dataTable/ResourceList.vue" <br />
+                &lt;/script&gt;<br />
+                <br />
+                &lt;template&gt;<br />
+                &emsp;&lt;ResourceList :list="sampleList" label-field="name"
+                center hover-row /&gt;<br />
+                &lt;/template&gt;<br />
+            </template>
+        </ExampleComponent>
+        <ExampleComponent title="Advanced Component Example">
+            <template #component>
+                <div class="flex justify-center mb-2">
+                    <ResourceList
+                        :list="sampleList(50)"
+                        label-field="name"
+                        center
+                        hover-row
+                        paginate
+                        grid-lines
+                        striped
                     />
-                </template>
-                <Collapse :show="showAdvanced">
-                    <div class="flex justify-center mb-2">
-                        <ResourceList
-                            :list="sampleList(50)"
-                            label-field="name"
-                            center
-                            hover-row
-                            paginate
-                            grid-lines
-                            striped
-                        />
-                    </div>
-                    <div class="p-3 bg-slate-300 rounded-lg overflow-auto">
-                        &lt;script setup&gt; <br />
-                        &emsp;import ResourceList from
-                        "@/core/features/dataTable/ResourceList.vue" <br />
-                        &lt;/script&gt;<br />
-                        <br />
-                        &lt;template&gt;<br />
-                        &emsp;&lt;ResourceList<br />
-                        &emsp;&emsp;&emsp;:list="sampleList" <br />
-                        &emsp;&emsp;&emsp;label-field="name" <br />
-                        &emsp;&emsp;&emsp;center <br />
-                        &emsp;&emsp;&emsp;hover-row <br />
-                        &emsp;&emsp;&emsp;paginate <br />
-                        &emsp;&emsp;&emsp;grid-lines <br />
-                        &emsp;&emsp;&emsp;striped <br />
-                        &emsp;&emsp;/&gt;<br />
-                        &lt;/template&gt;<br />
-                    </div>
-                </Collapse>
-            </Card>
-        </div>
+                </div>
+            </template>
+            <template #code>
+                &lt;script setup&gt; <br />
+                &emsp;import ResourceList from
+                "@/core/features/dataTable/ResourceList.vue" <br />
+                &lt;/script&gt;<br />
+                <br />
+                &lt;template&gt;<br />
+                &emsp;&lt;ResourceList<br />
+                &emsp;&emsp;&emsp;:list="sampleList" <br />
+                &emsp;&emsp;&emsp;label-field="name" <br />
+                &emsp;&emsp;&emsp;center <br />
+                &emsp;&emsp;&emsp;hover-row <br />
+                &emsp;&emsp;&emsp;paginate <br />
+                &emsp;&emsp;&emsp;grid-lines <br />
+                &emsp;&emsp;&emsp;striped <br />
+                &emsp;&emsp;/&gt;<br />
+                &lt;/template&gt;<br />
+            </template>
+        </ExampleComponent>
         <ComponentReference
             :reference-properties="referenceProperties"
             :slot-properties="slotProperties"
