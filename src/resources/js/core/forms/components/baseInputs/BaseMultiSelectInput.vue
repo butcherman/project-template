@@ -38,7 +38,8 @@ const props = defineProps<{
 }>();
 
 const { indexData } = useDataHelper();
-const { getValue, getOptionText } = useSelectHelper(props);
+const { getValue, getOptionText, getOptionTextFromValue } =
+    useSelectHelper(props);
 const { hasFocus, onFocus, onBlur, inputVariantStyle } = useInputHelper(
     props,
     emit,
@@ -103,7 +104,7 @@ const triggerBlur = () => {
                     <div v-for="val in indexData(inputValue)" :key="val.id">
                         <BaseBadge>
                             <span class="px-1">
-                                {{ val.data }}
+                                {{ getOptionTextFromValue(val.data, list) }}
                             </span>
                             <fa-icon
                                 icon="circle-xmark"

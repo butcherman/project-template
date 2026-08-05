@@ -27,6 +27,15 @@ export const useSelectHelper = <
     };
 
     /**
+     * Get the text to be displayed, based on the value
+     */
+    const getOptionTextFromValue = (value: unknown, fullList: TOption[]) => {
+        let item = fullList.find((opt) => getValue(opt) === value);
+
+        return item ? getOptionText(item) : value;
+    };
+
+    /**
      * Get the label for the Option Group
      */
     const getGroupText = (group: TGroup): string => {
@@ -51,6 +60,7 @@ export const useSelectHelper = <
     return {
         getValue,
         getOptionText,
+        getOptionTextFromValue,
         getGroupText,
         getGroupItems,
     };
