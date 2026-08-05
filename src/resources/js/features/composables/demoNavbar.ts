@@ -122,6 +122,11 @@ export const useDemoNavbar: { [key: string]: MenuItem[] } = {
             route: "/form-multi-select-input",
         },
         {
+            label: "OTP Input",
+            icon: "fa-regular fa-square",
+            route: "/form-otp-input",
+        },
+        {
             label: "Switch Input",
             icon: "toggle-on",
             route: "/form-switch-input",
