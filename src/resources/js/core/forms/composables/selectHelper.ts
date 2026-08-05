@@ -1,9 +1,29 @@
+import { computed } from "vue";
+
 export const useSelectHelper = <
-    TOption extends string | Record<string, unknown>,
     TGroup extends Record<string, unknown>,
+    TOption extends string | Record<string, unknown>,
 >(
     props: InputSelectProps<TGroup, TOption>,
 ) => {
+    const optionLookup = computed(() => {
+        const map = new Map<unknown, string>();
+
+        if (props.groupListField) {
+            for (const group of props.list as TGroup[]) {
+                for (const option of getGroupItems(group)) {
+                    map.set(getValue(option), getOptionText(option));
+                }
+            }
+        } else {
+            for (const option of props.list as TOption[]) {
+                map.set(getValue(option), getOptionText(option));
+            }
+        }
+
+        return map;
+    });
+
     /**
      * Get the value of the list item
      */
@@ -29,10 +49,8 @@ export const useSelectHelper = <
     /**
      * Get the text to be displayed, based on the value
      */
-    const getOptionTextFromValue = (value: unknown, fullList: TOption[]) => {
-        let item = fullList.find((opt) => getValue(opt) === value);
-
-        return item ? getOptionText(item) : value;
+    const getOptionTextFromValue = (value: unknown) => {
+        return optionLookup.value.get(value);
     };
 
     /**

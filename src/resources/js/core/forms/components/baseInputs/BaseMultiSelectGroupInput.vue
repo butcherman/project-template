@@ -1,7 +1,10 @@
 <script
     setup
     lang="ts"
-    generic="TOption extends string | Record<string, unknown>"
+    generic="
+        TGroup extends Record<string, unknown>,
+        TOption extends string | Record<string, unknown>
+    "
 >
 import BaseBadge from "@/core/components/badges/BaseBadge.vue";
 import InputWrapper from "../wrappers/InputWrapper.vue";
@@ -22,24 +25,31 @@ const emit = defineEmits<{
 
 const props = defineProps<{
     name: string;
-    list: TOption[];
+    list: TGroup[];
     value: unknown[];
 
     autocomplete?: string;
     disabled?: boolean;
     errorMessage?: string;
+    groupTextField: keyof TGroup;
+    groupListField: ArrayProperty<TGroup, TOption>;
     helpMessage?: string;
     helpVisible?: boolean;
     label?: string;
     placeholder?: string;
-    textField?: keyof TOption;
-    valueField?: keyof TOption;
+    textField?: TOption extends string ? never : keyof TOption;
+    valueField?: TOption extends string ? never : keyof TOption;
     variant?: InputVariant;
 }>();
 
 const { indexData } = useDataHelper();
-const { getValue, getOptionText, getOptionTextFromValue } =
-    useSelectHelper(props);
+const {
+    getValue,
+    getOptionText,
+    getOptionTextFromValue,
+    getGroupItems,
+    getGroupText,
+} = useSelectHelper<TGroup, TOption>(props);
 const { hasFocus, onFocus, onBlur, inputVariantStyle } = useInputHelper(
     props,
     emit,
@@ -126,16 +136,23 @@ const triggerBlur = () => {
                 v-if="showSelect"
                 class="absolute top-10 left-0 right-0 z-50 p-2 bg-white rounded-lg border border-slate-300"
             >
-                <div
-                    v-for="opt in list"
-                    :key="getOptionText(opt)"
-                    class="p-1 hover:bg-blue-400 rounded-lg pointer"
-                    :class="{
-                        'bg-blue-200': inputValue.includes(getValue(opt)),
-                    }"
-                    @click="onValueSelected(opt)"
-                >
-                    {{ getOptionText(opt) }}
+                <div v-for="group in list" :key="getGroupText(group)">
+                    <div class="font-bold">{{ getGroupText(group) }}</div>
+                    <div class="ps-4">
+                        <div
+                            v-for="opt in getGroupItems(group)"
+                            class="p-1 hover:bg-blue-400 rounded-lg pointer"
+                            :class="{
+                                'bg-blue-200': inputValue.includes(
+                                    getValue(opt),
+                                ),
+                            }"
+                            :key="getOptionText(opt)"
+                            @click="onValueSelected(opt)"
+                        >
+                            {{ getOptionText(opt) }}
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="absolute inset-e-1.5 bottom-1.5 text-muted pointer">
