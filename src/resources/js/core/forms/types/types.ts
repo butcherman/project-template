@@ -17,16 +17,16 @@ interface InputBaseProps {
 
 type InputBaseEmit = (event: string) => unknown;
 
-// interface InputSelectProps<
-//     TGroup extends Record<string, unknown>,
-//     TOption extends string | Record<string, unknown>,
-// > extends InputBaseProps {
-//     textField?: TOption extends string ? never : keyof TOption;
-//     valueField?: TOption extends string ? never : keyof TOption;
-//     groupTextField?: keyof TGroup;
-//     groupListField?: ArrayProperty<TGroup, TOption>;
-// }
+interface InputSelectProps<
+    TGroup extends Record<string, unknown>,
+    TOption extends string | Record<string, unknown>,
+> extends InputBaseProps {
+    textField?: keyof TOption;
+    valueField?: keyof TOption;
+    groupTextField?: keyof TGroup;
+    groupListField?: ArrayProperty<TGroup, TOption>;
+}
 
-// type ArrayProperty<T, TElement> = {
-//     [K in keyof T]: T[K] extends readonly TElement[] ? K : never;
-// }[keyof T];
+type ArrayProperty<T, TElement> = {
+    [K in keyof T]: T[K] extends readonly TElement[] ? K : never;
+}[keyof T];
