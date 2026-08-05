@@ -127,6 +127,11 @@ export const useDemoNavbar: { [key: string]: MenuItem[] } = {
             route: "/form-otp-input",
         },
         {
+            label: "Password Input",
+            icon: "key",
+            route: "/form-password-input",
+        },
+        {
             label: "Switch Input",
             icon: "toggle-on",
             route: "/form-switch-input",
