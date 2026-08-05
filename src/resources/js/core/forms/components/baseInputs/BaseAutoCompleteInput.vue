@@ -3,18 +3,16 @@ import TextInputWrapper from "../wrappers/TextInputWrapper.vue";
 import { computed, useId } from "vue";
 import { useInputHelper } from "../../composables/inputHelper.js";
 
-defineSlots<{
-    [key: string]: any;
-}>();
-
 const emit = defineEmits<{
     "update:value": [string];
     focus: [];
     blur: [];
+    change: [string];
 }>();
 
 const props = defineProps<{
     name: string;
+    list: string[];
     value: string;
 
     autocomplete?: string;
@@ -33,6 +31,7 @@ const { hasFocus, onFocus, onBlur, inputVariantStyle } = useInputHelper(
 );
 
 const inputId = useId();
+const datalistId = useId();
 const inputValue = computed({
     get: () => props.value,
     set: (value) => emit("update:value", value),
@@ -49,16 +48,15 @@ const inputValue = computed({
             class="block peer form-input-base"
             type="text"
             :autocomplete="name"
-            :class="[
-                inputVariantStyle,
-                { invalid: errorMessage?.length, 'has-focus': hasFocus },
-            ]"
+            :class="[inputVariantStyle]"
             :disabled="disabled"
             :id="inputId"
+            :list="datalistId"
             :placeholder="placeholder ?? ''"
             :name="name"
             @focus="onFocus"
             @blur="onBlur"
+            @change="$emit('change', value)"
         />
         <label
             :for="inputId"
@@ -67,5 +65,10 @@ const inputValue = computed({
         >
             {{ label }}
         </label>
+        <datalist :id="datalistId">
+            <option v-for="opt in list" :key="opt" :value="opt">
+                {{ opt }}
+            </option>
+        </datalist>
     </TextInputWrapper>
 </template>

@@ -107,6 +107,16 @@ export const useDemoNavbar: { [key: string]: MenuItem[] } = {
             route: "/form-component",
         },
         {
+            label: "AutoComplete Input",
+            icon: "check",
+            route: "/form-auto-complete-input",
+        },
+        {
+            label: "DatePicker Input",
+            icon: "calendar-days",
+            route: "/form-date-picker-input",
+        },
+        {
             label: "Switch Input",
             icon: "toggle-on",
             route: "/form-switch-input",

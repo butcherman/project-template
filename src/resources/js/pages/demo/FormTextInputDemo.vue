@@ -22,11 +22,18 @@ const referenceProperties = [
         description: "Value bound to input using v-bind",
     },
     {
-        property: "label",
+        property: "autocomplete",
         type: "string",
         default: "",
         required: false,
-        description: "Label for the input",
+        description: "Autocomplete attribute for the input",
+    },
+    {
+        property: "disabled",
+        type: "boolean",
+        default: "false",
+        required: false,
+        description: "Disable the input",
     },
     {
         property: "errorMessage",
@@ -43,11 +50,19 @@ const referenceProperties = [
         description: "Help message to show under input",
     },
     {
-        property: "variant",
-        type: "filled | outlined | standard",
-        default: "outlined",
+        property: "helpVisible",
+        type: "boolean",
+        default: "false",
         required: false,
-        description: "Style of the input",
+        description:
+            "When true, help will always be visible, not just when has focus.",
+    },
+    {
+        property: "label",
+        type: "string",
+        default: "",
+        required: false,
+        description: "Label for the input",
     },
     {
         property: "placeholder",
@@ -57,19 +72,11 @@ const referenceProperties = [
         description: "Placeholder Text",
     },
     {
-        property: "helpVisible",
-        type: "boolean",
-        default: "false",
+        property: "variant",
+        type: "filled | outlined | standard",
+        default: "outlined",
         required: false,
-        description:
-            "When true, help will always be visible, not just when has focus.",
-    },
-    {
-        property: "autocomplete",
-        type: "string",
-        default: "",
-        required: false,
-        description: "Autocomplete attribute for the input",
+        description: "Style of the input",
     },
 ];
 
