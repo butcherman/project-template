@@ -21,7 +21,7 @@ const showExample = ref(props.show ?? false);
                 @click="showExample = !showExample"
             />
         </template>
-        <Collapse :show="showExample">
+        <Collapse :show="showExample || show">
             <slot>
                 <div class="flex flex-col justify-center gap-2">
                     <slot name="component" />
