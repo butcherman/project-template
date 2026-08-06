@@ -132,6 +132,11 @@ export const useDemoNavbar: { [key: string]: MenuItem[] } = {
             route: "/form-password-input",
         },
         {
+            label: "Phone Number Input",
+            icon: "phone",
+            route: "/form-phone-number-input",
+        },
+        {
             label: "Range Slider Input",
             icon: "sliders",
             route: "/form-range-slider-input",
