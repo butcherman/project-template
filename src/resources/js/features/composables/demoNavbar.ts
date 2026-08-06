@@ -137,6 +137,11 @@ export const useDemoNavbar: { [key: string]: MenuItem[] } = {
             route: "/form-range-slider-input",
         },
         {
+            label: "Select Input",
+            icon: "square-check",
+            route: "/form-select-input",
+        },
+        {
             label: "Switch Input",
             icon: "toggle-on",
             route: "/form-switch-input",

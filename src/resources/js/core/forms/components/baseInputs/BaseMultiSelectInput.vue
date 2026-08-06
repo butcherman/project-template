@@ -32,8 +32,8 @@ const props = defineProps<{
     helpVisible?: boolean;
     label?: string;
     placeholder?: string;
-    textField?: keyof TOption;
-    valueField?: keyof TOption;
+    textField?: TOption extends string ? never : keyof TOption;
+    valueField?: TOption extends string ? never : keyof TOption;
     variant?: InputVariant;
 }>();
 

@@ -5,7 +5,7 @@ import Card from "@/core/components/Card.vue";
 import ExampleComponent from "@/features/components/ExampleComponent.vue";
 import { ref } from "vue";
 
-const rangeValue = ref();
+const rangeValue = ref("");
 </script>
 
 <script lang="ts">

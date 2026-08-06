@@ -51,6 +51,7 @@ Route::inertia('/form-multi-select-input', 'demo/FormMultiSelectInputDemo');
 Route::inertia('/form-otp-input', 'demo/FormOtpInputDemo');
 Route::inertia('/form-password-input', 'demo/FormPasswordInputDemo');
 Route::inertia('/form-range-slider-input', 'demo/FormRangeSliderInputDemo');
+Route::inertia('/form-select-input', 'demo/FormSelectInputDemo');
 Route::inertia('/form-switch-input', 'demo/FormSwitchInputDemo');
 Route::inertia('/form-text-input', 'demo/FormTextInputDemo');
 

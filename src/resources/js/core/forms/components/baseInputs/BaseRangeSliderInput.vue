@@ -8,19 +8,18 @@ defineSlots<{
     [key: string]: any;
 }>();
 
-// TODO - Put min and max on numberline along with value
 const emit = defineEmits<{
-    "update:value": [number];
+    "update:value": [string];
     focus: [];
     blur: [];
-    change: [number];
+    change: [string];
 }>();
 
 const props = defineProps<{
     name: string;
     min: number;
     max: number;
-    value: number;
+    value: string;
 
     autocomplete?: string;
     disabled?: boolean;
@@ -51,6 +50,7 @@ const inputValue = computed({
         </label>
         <input
             v-model="inputValue"
+            v-tooltip.bottom="inputValue"
             class="w-full"
             type="range"
             :autocomplete="name"

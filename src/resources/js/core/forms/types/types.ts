@@ -22,8 +22,8 @@ interface InputSelectProps<
     TOption extends string | Record<string, unknown>,
 > extends InputBaseProps {
     list: TGroup[] | TOption[];
-    textField?: keyof TOption;
-    valueField?: keyof TOption;
+    textField?: TOption extends string ? never : keyof TOption;
+    valueField?: TOption extends string ? never : keyof TOption;
     groupTextField?: keyof TGroup;
     groupListField?: ArrayProperty<TGroup, TOption>;
 }
