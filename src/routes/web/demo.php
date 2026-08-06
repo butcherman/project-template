@@ -54,6 +54,7 @@ Route::inertia('/form-range-slider-input', 'demo/FormRangeSliderInputDemo');
 Route::inertia('/form-select-input', 'demo/FormSelectInputDemo');
 Route::inertia('/form-switch-input', 'demo/FormSwitchInputDemo');
 Route::inertia('/form-text-input', 'demo/FormTextInputDemo');
+Route::inertia('/form-text-area-input', 'demo/FormTextAreaInputDemo');
 
 Route::post('/submit-form', function () {
     return back()->with('success', 'success');

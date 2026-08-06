@@ -151,5 +151,10 @@ export const useDemoNavbar: { [key: string]: MenuItem[] } = {
             icon: "font",
             route: "/form-text-input",
         },
+        {
+            label: "Text Area Input",
+            icon: "p",
+            route: "/form-text-area-input",
+        },
     ],
 };
