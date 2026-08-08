@@ -137,6 +137,11 @@ export const useDemoNavbar: { [key: string]: MenuItem[] } = {
             route: "/form-phone-number-input",
         },
         {
+            label: "Pick List Input",
+            icon: "swatchbook",
+            route: "/form-pick-list-input",
+        },
+        {
             label: "Radio Button Group",
             icon: "circle-dot",
             route: "/form-radio-group-input",

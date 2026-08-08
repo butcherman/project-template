@@ -44,7 +44,7 @@ const inputValue = computed({
 
 <template>
     <InputWrapper v-bind="props" :has-focus="hasFocus">
-        <div class="text-muted">{{ label }}</div>
+        <div v-if="label" class="text-muted">{{ label }}</div>
         <div v-for="item in list" class="flex gap-2">
             <input
                 v-model="inputValue"

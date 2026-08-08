@@ -27,12 +27,16 @@ export const useSelectHelper = <
     /**
      * Get the value of the list item
      */
-    const getValue = (opt: TOption) => {
+    const getValue = (opt: TOption): string => {
         if (typeof opt === "string") {
             return opt;
         }
 
-        return props.valueField ? opt[props.valueField] : opt;
+        if (props.valueField) {
+            return String(opt[props.valueField]);
+        }
+
+        return String(opt);
     };
 
     /**
@@ -43,13 +47,17 @@ export const useSelectHelper = <
             return item;
         }
 
-        return props.textField ? String(item[props.textField]) : String(item);
+        if (props.textField) {
+            return String(item[props.textField]);
+        }
+
+        return String(item);
     };
 
     /**
      * Get the text to be displayed, based on the value
      */
-    const getOptionTextFromValue = (value: unknown) => {
+    const getOptionTextFromValue = (value: unknown): string | undefined => {
         return optionLookup.value.get(value);
     };
 
