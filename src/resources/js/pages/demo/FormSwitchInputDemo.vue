@@ -93,6 +93,7 @@ export default { layout: AppLayout };
 <template>
     <div class="flex flex-col gap-2">
         <Card title="Description">
+            <h3 class="text-center mb-3">Switch Input</h3>
             <p class="text-center">Toggle switch as a Checkbox Input</p>
         </Card>
         <ExampleComponent>

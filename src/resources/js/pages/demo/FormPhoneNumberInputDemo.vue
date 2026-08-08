@@ -108,6 +108,7 @@ export default { layout: AppLayout };
 <template>
     <div class="flex flex-col gap-2">
         <Card title="Description">
+            <h3 class="text-center mb-3">Phone Number Input</h3>
             <p class="text-center">
                 An input for showing a formatted phone number, but the value
                 will just be the 10 digits

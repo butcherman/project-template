@@ -118,6 +118,7 @@ export default { layout: AppLayout };
 <template>
     <div class="flex flex-col gap-2">
         <Card title="Description">
+            <h3 class="text-center mb-3">Text Input</h3>
             <p class="text-center">Basic Text Input</p>
         </Card>
         <ExampleComponent title="Basic Example">

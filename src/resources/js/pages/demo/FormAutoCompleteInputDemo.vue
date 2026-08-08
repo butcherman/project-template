@@ -7,7 +7,7 @@ import ExampleComponent from "@/features/components/ExampleComponent.vue";
 import { ref } from "vue";
 
 const list = ["bread", "eggs", "milk", "cheese"];
-const inputValue = ref();
+const inputValue = ref("");
 
 const referenceProperties = [
     {
@@ -123,6 +123,7 @@ export default { layout: AppLayout };
 <template>
     <div class="flex flex-col gap-2">
         <Card title="Description">
+            <h3 class="text-center mb-3">Auto Complete Input</h3>
             <p class="text-center">
                 Auto Complete gives the user a list of possible entries, but
                 still allows the user to type in their own entry that does not
