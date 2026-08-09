@@ -16,7 +16,7 @@ import {
 import type {
     RichTextToolbarItem,
     RichTextToolbarItemId,
-} from "@/core/types/richText";
+} from "@/core/features/editors/types/richText";
 
 export const richTextToolbarItems = {
     undo: {

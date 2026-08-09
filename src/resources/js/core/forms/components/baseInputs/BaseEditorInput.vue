@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BaseRichTextEditor from "@/core/components/editors/BaseRichTextEditor.vue";
+import BaseRichTextEditor from "@/core/features/editors/components/BaseRichTextEditor.vue";
 import InputWrapper from "../wrappers/InputWrapper.vue";
 import { computed } from "vue";
 import { useInputHelper } from "../../composables/inputHelper.js";

@@ -1,6 +1,6 @@
 import StarterKit from "@tiptap/starter-kit";
 import { useEditor } from "@tiptap/vue-3";
-import type { UseRichTextEditorOptions } from "@/core/types/richText";
+import type { UseRichTextEditorOptions } from "@/core/features/editors/types/richText";
 
 export const useRichTextEditor = (options: UseRichTextEditorOptions = {}) => {
     const editor = useEditor({

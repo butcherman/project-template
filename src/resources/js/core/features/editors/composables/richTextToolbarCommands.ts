@@ -1,7 +1,7 @@
 import type {
     RichTextToolbarItemId,
     RichTextCommandDefinition,
-} from "@/core/types/richText";
+} from "@/core/features/editors/types/richText";
 
 export const richTextToolbarCommands = {
     bold: {

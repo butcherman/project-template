@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import BaseButton from "../buttons/BaseButton.vue";
-import { richTextToolbarCommands } from "@/core/composables/richText/richTextToolbarCommands.js";
+import BaseButton from "@/core/components/buttons/BaseButton.vue";
+import { richTextToolbarCommands } from "@/core/features/editors/composables/richTextToolbarCommands.js";
 import { computed } from "vue";
 import type { Editor } from "@tiptap/vue-3";
 import type {
     RichTextToolbarItem,
     RichTextCommandDefinition,
-} from "@/core/types/richText";
+} from "@/core/features/editors/types/richText";
 
 const props = defineProps<{
     editor: Editor;

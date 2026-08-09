@@ -1,7 +1,7 @@
 import type {
     RichTextToolbarDefinition,
     RichTextToolbarPreset,
-} from "@/core/types/richText";
+} from "@/core/features/editors/types/richText";
 
 export const richTextToolbarPresets = {
     minimal: ["bold", "italic", "underline"],

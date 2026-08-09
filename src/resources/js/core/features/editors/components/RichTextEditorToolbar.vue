@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import RichTextEditorToolbarItem from "./RichTextEditorToolbarItem.vue";
 import type { Editor } from "@tiptap/vue-3";
-import type { RichTextToolbarItem } from "@/core/types/richText";
+import type { RichTextToolbarItem } from "@/core/features/editors/types/richText.js";
 
 const props = defineProps<{
     editor: Editor;

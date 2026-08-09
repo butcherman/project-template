@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import RichTextEditorToolbar from "./RichTextEditorToolbar.vue";
 import { EditorContent } from "@tiptap/vue-3";
-import { useRichTextEditor } from "@/core/composables/richText/richTextEditor";
+import { useRichTextEditor } from "@/core/features/editors/composables/richTextEditor.js";
 import { computed, watch } from "vue";
-import { richTextToolbarPresets } from "@/core/composables/richText/richTextToolbarPresets.js";
-import { useRichTextToolbarHelper } from "@/core/composables/richText/richTextToolbarHelper.js";
+import { richTextToolbarPresets } from "@/core/features/editors/composables/richTextToolbarPresets.js";
+import { useRichTextToolbarHelper } from "@/core/features/editors/composables/richTextToolbarHelper.js";
 import type { JSONContent } from "@tiptap/core";
 import type {
     RichTextToolbarItemId,
     RichTextToolbarPreset,
-} from "@/core/types/richText.js";
+} from "@/core/features/editors/types/richText.js";
 
 const emit = defineEmits<{
     "update:modelValue": [JSONContent];

@@ -3,7 +3,7 @@ import type {
     RichTextToolbarDefinition,
     RichTextToolbarGroup,
     RichTextToolbarItem,
-} from "@/core/types/richText";
+} from "@/core/features/editors/types/richText";
 
 export const useRichTextToolbarHelper = () => {
     const resolveRichTextToolbar = (
