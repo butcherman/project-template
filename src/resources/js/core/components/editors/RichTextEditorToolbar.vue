@@ -11,7 +11,7 @@ const props = defineProps<{
 
 <template>
     <div
-        class="flex flex-row gap-3 border border-slate-300 rounded-lg p-1 divide-x divide-slate-400"
+        class="flex flex-row flex-wrap gap-3 border border-slate-300 rounded-lg p-1 divide-x divide-slate-400"
     >
         <div
             v-for="(group, index) in items"

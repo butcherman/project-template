@@ -84,7 +84,7 @@ watch(
 </script>
 
 <template>
-    <div class="flex flex-col gap-2 min-h-72">
+    <div class="editor flex flex-col gap-2">
         <RichTextEditorToolbar
             v-if="editor"
             :editor="editor"
@@ -92,7 +92,28 @@ watch(
         />
         <EditorContent
             :editor="editor"
-            class="grow border border-slate-300 rounded-lg"
+            class="editor-content border border-slate-300 rounded-lg p-2"
         />
     </div>
 </template>
+
+<style scoped>
+.editor {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.editor-content {
+    flex: 1;
+    min-height: 0;
+}
+
+.editor-content :deep(.tiptap) {
+    height: 100%;
+    min-height: 0;
+    overflow-y: auto;
+    outline: none;
+    border: none;
+}
+</style>
