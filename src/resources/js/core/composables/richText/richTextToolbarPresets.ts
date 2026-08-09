@@ -1,5 +1,5 @@
 import type {
-    RichTextToolbarItemId,
+    RichTextToolbarDefinition,
     RichTextToolbarPreset,
 } from "@/core/types/richText";
 
@@ -7,21 +7,10 @@ export const richTextToolbarPresets = {
     minimal: ["bold", "italic", "underline"],
 
     standard: [
-        "undo",
-        "redo",
-
-        "bold",
-        "italic",
-        "underline",
-        "strike",
-
-        "heading1",
-        "heading2",
-        "heading3",
-
-        "bulletList",
-        "orderedList",
-
-        "blockquote",
+        ["undo", "redo"],
+        ["bold", "italic", "underline", "strike"],
+        ["heading1", "heading2", "heading3"],
+        ["bulletList", "orderedList"],
+        ["blockquote"],
     ],
-} satisfies Record<RichTextToolbarPreset, readonly RichTextToolbarItemId[]>;
+} satisfies Record<RichTextToolbarPreset, RichTextToolbarDefinition>;

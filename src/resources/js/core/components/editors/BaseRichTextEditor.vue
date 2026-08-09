@@ -23,7 +23,7 @@ const props = defineProps<{
     toolbar?: RichTextToolbarPreset | RichTextToolbarItemId[];
 }>();
 
-const { resolveRichTextToolbar } = useRichTextToolbarHelper();
+const { resolveRichTextToolbar, normalizeToolbar } = useRichTextToolbarHelper();
 
 const { editor } = useRichTextEditor({
     content: props.modelValue,
@@ -46,19 +46,13 @@ const { editor } = useRichTextEditor({
  * Build the toolbar
  */
 const toolbarItems = computed(() => {
-    let itemList;
+    const toolbar = props.toolbar
+        ? typeof props.toolbar === "string"
+            ? richTextToolbarPresets[props.toolbar]
+            : props.toolbar
+        : richTextToolbarPresets.standard;
 
-    if (props.toolbar) {
-        if (typeof props.toolbar === "string") {
-            itemList = richTextToolbarPresets[props.toolbar];
-        } else {
-            itemList = props.toolbar;
-        }
-    } else {
-        itemList = richTextToolbarPresets["standard"];
-    }
-
-    return resolveRichTextToolbar(itemList);
+    return resolveRichTextToolbar(normalizeToolbar(toolbar));
 });
 
 /**

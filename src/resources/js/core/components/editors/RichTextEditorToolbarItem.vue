@@ -29,9 +29,11 @@ const canExecute = computed<boolean>(
         size="sm"
         variant="none"
         flat
-        :icon="item.icon"
+        class="font-semibold"
+        :icon="item.text ? '' : item.icon"
         :active="isActive"
         :disabled="!canExecute"
+        :text="item.text"
         v-tooltip="item.label"
         @click="command.execute(editor)"
     />

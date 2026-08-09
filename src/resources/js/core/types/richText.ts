@@ -1,5 +1,6 @@
 import type { JSONContent } from "@tiptap/core";
 import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import type { Editor } from "@tiptap/vue-3";
 
 export type RichTextValue = JSONContent | null;
 
@@ -36,10 +37,15 @@ export interface RichTextToolbarItem {
     icon: IconDefinition;
 
     shortcut?: string;
+    text?: string;
     visible?: boolean;
 }
 
-import type { Editor } from "@tiptap/vue-3";
+export type RichTextToolbarGroup = readonly RichTextToolbarItemId[];
+
+export type RichTextToolbarDefinition =
+    | readonly RichTextToolbarItemId[]
+    | readonly RichTextToolbarGroup[];
 
 export interface RichTextCommandDefinition {
     execute: (editor: Editor) => boolean;

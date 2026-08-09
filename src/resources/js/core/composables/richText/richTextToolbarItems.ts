@@ -59,18 +59,21 @@ export const richTextToolbarItems = {
         command: "heading1",
         label: "Heading 1",
         icon: faHeading,
+        text: "H1",
     },
 
     heading2: {
         command: "heading2",
         label: "Heading 2",
         icon: faHeading,
+        text: "H2",
     },
 
     heading3: {
         command: "heading3",
         label: "Heading 3",
         icon: faHeading,
+        text: "H3",
     },
 
     bulletList: {
