@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import RichTextEditorToolbar from "./RichTextEditorToolbar.vue";
+import { defaultRichTextToolbar } from "@/core/config/defaultRichTextToolbar";
 import { EditorContent } from "@tiptap/vue-3";
 import { useRichTextEditor } from "@/core/composables/richText/richTextEditor";
 import { watch } from "vue";
@@ -62,6 +64,11 @@ watch(
 
 <template>
     <div class="rich-text-editor">
+        <RichTextEditorToolbar
+            v-if="editor"
+            :editor="editor"
+            :items="defaultRichTextToolbar"
+        />
         <EditorContent :editor="editor" />
     </div>
 </template>
