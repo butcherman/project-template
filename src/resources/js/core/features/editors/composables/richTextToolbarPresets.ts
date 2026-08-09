@@ -11,6 +11,6 @@ export const richTextToolbarPresets = {
         ["bold", "italic", "underline", "strike"],
         ["heading1", "heading2", "heading3"],
         ["bulletList", "orderedList"],
-        ["blockquote"],
+        ["blockquote", "link"],
     ],
 } satisfies Record<RichTextToolbarPreset, RichTextToolbarDefinition>;

@@ -7,6 +7,9 @@ export const useRichTextEditor = (options: UseRichTextEditorOptions = {}) => {
         extensions: [
             StarterKit.configure({
                 link: {
+                    autolink: true,
+                    linkOnPaste: true,
+                    openOnClick: false,
                     HTMLAttributes: {
                         class: "text-blue-500 underline",
                     },

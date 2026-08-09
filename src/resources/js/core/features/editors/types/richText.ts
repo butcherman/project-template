@@ -27,7 +27,8 @@ export type RichTextToolbarItemId =
     | "code"
     | "horizontalRule"
     | "undo"
-    | "redo";
+    | "redo"
+    | "link";
 
 export type RichTextToolbarPreset = "minimal" | "standard";
 
@@ -51,4 +52,9 @@ export interface RichTextCommandDefinition {
     execute: (editor: Editor) => boolean;
     isActive?: (editor: Editor) => boolean;
     canExecute?: (editor: Editor) => boolean;
+}
+
+export interface LinkEditorData {
+    text: string;
+    url: string;
 }

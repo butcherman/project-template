@@ -11,6 +11,7 @@ import {
     faMinus,
     faUndo,
     faRedo,
+    faLink,
 } from "@fortawesome/free-solid-svg-icons";
 
 import type {
@@ -104,5 +105,11 @@ export const richTextToolbarItems = {
         command: "horizontalRule",
         label: "Horizontal Rule",
         icon: faMinus,
+    },
+
+    link: {
+        command: "link",
+        label: "Link",
+        icon: faLink,
     },
 } satisfies Record<RichTextToolbarItemId, RichTextToolbarItem>;

@@ -1,3 +1,4 @@
+import { linkEditorModal } from "./linkEditorModal";
 import type {
     RichTextToolbarItemId,
     RichTextCommandDefinition,
@@ -76,5 +77,10 @@ export const richTextToolbarCommands = {
     redo: {
         execute: (editor) => editor.chain().focus().redo().run(),
         canExecute: (editor) => editor.can().chain().focus().redo().run(),
+    },
+
+    link: {
+        execute: (editor) => linkEditorModal(editor),
+        isActive: (editor) => editor.isActive("link"),
     },
 } satisfies Record<RichTextToolbarItemId, RichTextCommandDefinition>;

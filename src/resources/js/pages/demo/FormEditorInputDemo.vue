@@ -1,10 +1,21 @@
 <script setup lang="ts">
 import AppLayout from "@/layouts/AppLayout.vue";
+import BaseEditorInput from "@/core/forms/components/baseInputs/BaseEditorInput.vue";
 import Card from "@/core/components/Card.vue";
 import ExampleComponent from "@/features/components/ExampleComponent.vue";
-import BaseEditorInput from "@/core/forms/components/baseInputs/BaseEditorInput.vue";
+import { ref } from "vue";
 
-const props = defineProps<{}>();
+const inputValue = ref({
+    type: "doc",
+    content: [
+        {
+            type: "heading",
+            attrs: { level: 3 },
+            content: [{ type: "text", text: "This is a test" }],
+        },
+        { type: "paragraph" },
+    ],
+});
 </script>
 
 <script lang="ts">
@@ -20,7 +31,11 @@ export default { layout: AppLayout };
             </p>
         </Card>
         <ExampleComponent show>
-            <BaseEditorInput name="editor" label="Document Editor" />
+            <BaseEditorInput
+                name="editor"
+                label="Document Editor"
+                v-model:value="inputValue"
+            />
         </ExampleComponent>
     </div>
 </template>
