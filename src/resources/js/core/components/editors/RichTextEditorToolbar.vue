@@ -10,7 +10,7 @@ const props = defineProps<{
 </script>
 
 <template>
-    <div class="flex flex-row gap-1">
+    <div class="flex flex-row gap-1 border border-slate-300 rounded-lg p-1">
         <template v-for="item in items" :key="item.command">
             <RichTextEditorToolbarItem :editor="editor" :item="item" />
         </template>

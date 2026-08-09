@@ -63,12 +63,15 @@ watch(
 </script>
 
 <template>
-    <div class="rich-text-editor">
+    <div class="flex flex-col gap-2 min-h-72">
         <RichTextEditorToolbar
             v-if="editor"
             :editor="editor"
             :items="defaultRichTextToolbar"
         />
-        <EditorContent :editor="editor" />
+        <EditorContent
+            :editor="editor"
+            class="grow border border-slate-300 rounded-lg"
+        />
     </div>
 </template>

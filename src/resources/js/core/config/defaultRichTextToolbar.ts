@@ -17,6 +17,18 @@ import type { RichTextToolbarItem } from "@/core/types/richText";
 
 export const defaultRichTextToolbar: RichTextToolbarItem[] = [
     {
+        command: "undo",
+        label: "Undo",
+        icon: faUndo,
+    },
+
+    {
+        command: "redo",
+        label: "Redo",
+        icon: faRedo,
+    },
+
+    {
         command: "bold",
         label: "Bold",
         icon: faBold,
@@ -28,75 +40,63 @@ export const defaultRichTextToolbar: RichTextToolbarItem[] = [
         icon: faItalic,
     },
 
-    // {
-    //     command: "underline",
-    //     label: "Underline",
-    //     icon: faUnderline,
-    // },
-
-    // {
-    //     command: "strike",
-    //     label: "Strikethrough",
-    //     icon: faStrikethrough,
-    // },
-
-    // {
-    //     command: "heading1",
-    //     label: "Heading 1",
-    //     icon: faHeading,
-    // },
-
-    // {
-    //     command: "heading2",
-    //     label: "Heading 2",
-    //     icon: faHeading,
-    // },
-
-    // {
-    //     command: "heading3",
-    //     label: "Heading 3",
-    //     icon: faHeading,
-    // },
-
-    // {
-    //     command: "bulletList",
-    //     label: "Bullet List",
-    //     icon: faList,
-    // },
-
-    // {
-    //     command: "orderedList",
-    //     label: "Numbered List",
-    //     icon: faListOl,
-    // },
-
-    // {
-    //     command: "blockquote",
-    //     label: "Blockquote",
-    //     icon: faQuoteLeft,
-    // },
-
-    // {
-    //     command: "code",
-    //     label: "Code",
-    //     icon: faCode,
-    // },
-
-    // {
-    //     command: "horizontalRule",
-    //     label: "Horizontal Rule",
-    //     icon: faMinus,
-    // },
-
     {
-        command: "undo",
-        label: "Undo",
-        icon: faUndo,
+        command: "underline",
+        label: "Underline",
+        icon: faUnderline,
     },
 
     {
-        command: "redo",
-        label: "Redo",
-        icon: faRedo,
+        command: "strike",
+        label: "Strikethrough",
+        icon: faStrikethrough,
+    },
+
+    {
+        command: "heading1",
+        label: "Heading 1",
+        icon: faHeading,
+    },
+
+    {
+        command: "heading2",
+        label: "Heading 2",
+        icon: faHeading,
+    },
+
+    {
+        command: "heading3",
+        label: "Heading 3",
+        icon: faHeading,
+    },
+
+    {
+        command: "bulletList",
+        label: "Bullet List",
+        icon: faList,
+    },
+
+    {
+        command: "orderedList",
+        label: "Numbered List",
+        icon: faListOl,
+    },
+
+    {
+        command: "blockquote",
+        label: "Blockquote",
+        icon: faQuoteLeft,
+    },
+
+    {
+        command: "code",
+        label: "Code",
+        icon: faCode,
+    },
+
+    {
+        command: "horizontalRule",
+        label: "Horizontal Rule",
+        icon: faMinus,
     },
 ];
