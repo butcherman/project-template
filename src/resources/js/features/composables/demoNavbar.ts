@@ -117,6 +117,11 @@ export const useDemoNavbar: { [key: string]: MenuItem[] } = {
             route: "/form-date-picker-input",
         },
         {
+            label: "Editor Input",
+            icon: "spell-check",
+            route: "/form-editor-input",
+        },
+        {
             label: "Multi-Select Input",
             icon: "square-check",
             route: "/form-multi-select-input",
