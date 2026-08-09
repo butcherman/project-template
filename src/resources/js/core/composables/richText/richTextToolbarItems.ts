@@ -13,90 +13,93 @@ import {
     faRedo,
 } from "@fortawesome/free-solid-svg-icons";
 
-import type { RichTextToolbarItem } from "@/core/types/richText";
+import type {
+    RichTextToolbarItem,
+    RichTextToolbarItemId,
+} from "@/core/types/richText";
 
-export const defaultRichTextToolbar: RichTextToolbarItem[] = [
-    {
+export const richTextToolbarItems = {
+    undo: {
         command: "undo",
         label: "Undo",
         icon: faUndo,
     },
 
-    {
+    redo: {
         command: "redo",
         label: "Redo",
         icon: faRedo,
     },
 
-    {
+    bold: {
         command: "bold",
         label: "Bold",
         icon: faBold,
     },
 
-    {
+    italic: {
         command: "italic",
         label: "Italic",
         icon: faItalic,
     },
 
-    {
+    underline: {
         command: "underline",
         label: "Underline",
         icon: faUnderline,
     },
 
-    {
+    strike: {
         command: "strike",
         label: "Strikethrough",
         icon: faStrikethrough,
     },
 
-    {
+    heading1: {
         command: "heading1",
         label: "Heading 1",
         icon: faHeading,
     },
 
-    {
+    heading2: {
         command: "heading2",
         label: "Heading 2",
         icon: faHeading,
     },
 
-    {
+    heading3: {
         command: "heading3",
         label: "Heading 3",
         icon: faHeading,
     },
 
-    {
+    bulletList: {
         command: "bulletList",
         label: "Bullet List",
         icon: faList,
     },
 
-    {
+    orderedList: {
         command: "orderedList",
         label: "Numbered List",
         icon: faListOl,
     },
 
-    {
+    blockquote: {
         command: "blockquote",
         label: "Blockquote",
         icon: faQuoteLeft,
     },
 
-    {
+    code: {
         command: "code",
         label: "Code",
         icon: faCode,
     },
 
-    {
+    horizontalRule: {
         command: "horizontalRule",
         label: "Horizontal Rule",
         icon: faMinus,
     },
-];
+} satisfies Record<RichTextToolbarItemId, RichTextToolbarItem>;

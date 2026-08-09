@@ -12,7 +12,7 @@ export interface UseRichTextEditorOptions {
     onBlur?: () => void;
 }
 
-export type RichTextCommand =
+export type RichTextToolbarItemId =
     | "bold"
     | "italic"
     | "underline"
@@ -28,8 +28,10 @@ export type RichTextCommand =
     | "undo"
     | "redo";
 
+export type RichTextToolbarPreset = "minimal" | "standard";
+
 export interface RichTextToolbarItem {
-    command: RichTextCommand;
+    command: RichTextToolbarItemId;
     label: string;
     icon: IconDefinition;
 

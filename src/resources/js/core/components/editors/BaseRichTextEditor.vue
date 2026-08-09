@@ -1,10 +1,15 @@
 <script setup lang="ts">
 import RichTextEditorToolbar from "./RichTextEditorToolbar.vue";
-import { defaultRichTextToolbar } from "@/core/config/defaultRichTextToolbar";
 import { EditorContent } from "@tiptap/vue-3";
 import { useRichTextEditor } from "@/core/composables/richText/richTextEditor";
-import { watch } from "vue";
+import { computed, watch } from "vue";
+import { richTextToolbarPresets } from "@/core/composables/richText/richTextToolbarPresets.js";
+import { useRichTextToolbarHelper } from "@/core/composables/richText/richTextToolbarHelper.js";
 import type { JSONContent } from "@tiptap/core";
+import type {
+    RichTextToolbarItemId,
+    RichTextToolbarPreset,
+} from "@/core/types/richText.js";
 
 const emit = defineEmits<{
     "update:modelValue": [JSONContent];
@@ -15,7 +20,10 @@ const emit = defineEmits<{
 const props = defineProps<{
     modelValue: JSONContent | null;
     disabled?: boolean;
+    toolbar?: RichTextToolbarPreset | RichTextToolbarItemId[];
 }>();
+
+const { resolveRichTextToolbar } = useRichTextToolbarHelper();
 
 const { editor } = useRichTextEditor({
     content: props.modelValue,
@@ -32,6 +40,25 @@ const { editor } = useRichTextEditor({
     onBlur: () => {
         emit("blur");
     },
+});
+
+/**
+ * Build the toolbar
+ */
+const toolbarItems = computed(() => {
+    let itemList;
+
+    if (props.toolbar) {
+        if (typeof props.toolbar === "string") {
+            itemList = richTextToolbarPresets[props.toolbar];
+        } else {
+            itemList = props.toolbar;
+        }
+    } else {
+        itemList = richTextToolbarPresets["standard"];
+    }
+
+    return resolveRichTextToolbar(itemList);
 });
 
 /**
@@ -67,7 +94,7 @@ watch(
         <RichTextEditorToolbar
             v-if="editor"
             :editor="editor"
-            :items="defaultRichTextToolbar"
+            :items="toolbarItems"
         />
         <EditorContent
             :editor="editor"

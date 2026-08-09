@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import BaseButton from "../buttons/BaseButton.vue";
-import { richTextCommands } from "@/core/composables/richText/richTextCommands";
+import { richTextToolbarCommands } from "@/core/composables/richText/richTextToolbarCommands.js";
 import { computed } from "vue";
 import type { Editor } from "@tiptap/vue-3";
 import type {
@@ -13,7 +13,8 @@ const props = defineProps<{
     item: RichTextToolbarItem;
 }>();
 
-const command: RichTextCommandDefinition = richTextCommands[props.item.command];
+const command: RichTextCommandDefinition =
+    richTextToolbarCommands[props.item.command];
 
 const isActive = computed<boolean>(
     () => command.isActive?.(props.editor) ?? false,

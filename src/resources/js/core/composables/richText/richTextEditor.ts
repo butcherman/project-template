@@ -7,6 +7,7 @@ export const useRichTextEditor = (options: UseRichTextEditorOptions = {}) => {
         extensions: [StarterKit],
         content: options.content ?? null,
         editable: options.editable ?? true,
+
         onUpdate: ({ editor }) => {
             options.onUpdate?.(editor.getJSON());
         },

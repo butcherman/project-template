@@ -1,9 +1,9 @@
 import type {
-    RichTextCommand,
+    RichTextToolbarItemId,
     RichTextCommandDefinition,
 } from "@/core/types/richText";
 
-export const richTextCommands = {
+export const richTextToolbarCommands = {
     bold: {
         execute: (editor) => editor.chain().focus().toggleBold().run(),
         isActive: (editor) => editor.isActive("bold"),
@@ -69,11 +69,12 @@ export const richTextCommands = {
 
     horizontalRule: {
         execute: (editor) => editor.chain().focus().setHorizontalRule().run(),
-        // isActive: (editor) => editor.isActive('strike'),
+        canExecute: (editor) =>
+            editor.can().chain().focus().setHorizontalRule().run(),
     },
 
     redo: {
         execute: (editor) => editor.chain().focus().redo().run(),
         canExecute: (editor) => editor.can().chain().focus().redo().run(),
     },
-} satisfies Record<RichTextCommand, RichTextCommandDefinition>;
+} satisfies Record<RichTextToolbarItemId, RichTextCommandDefinition>;
