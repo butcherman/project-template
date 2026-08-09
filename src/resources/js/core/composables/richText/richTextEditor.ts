@@ -4,7 +4,15 @@ import type { UseRichTextEditorOptions } from "@/core/types/richText";
 
 export const useRichTextEditor = (options: UseRichTextEditorOptions = {}) => {
     const editor = useEditor({
-        extensions: [StarterKit],
+        extensions: [
+            StarterKit.configure({
+                link: {
+                    HTMLAttributes: {
+                        class: "text-blue-500 underline",
+                    },
+                },
+            }),
+        ],
         content: options.content ?? null,
         editable: options.editable ?? true,
 
