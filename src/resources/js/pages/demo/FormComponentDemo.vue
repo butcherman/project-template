@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import AppLayout from "@/layouts/AppLayout.vue";
-import BaseTextInput from "@/core/forms/components/baseInputs/BaseTextInput.vue";
 import Card from "@/core/components/Card.vue";
+import TextInput from "@/core/forms/components/validatedInputs/TextInput.vue";
 import VueForm from "@/core/forms/components/VueForm.vue";
-import { ref } from "vue";
+import { object, string } from "yup";
 
-const formValues = ref({
-    textInput: undefined,
+const initialValues = {
+    text_input: "",
+};
+
+const validationSchema = object({
+    text_input: string().required().label("Text Input"),
 });
 </script>
 
@@ -33,14 +37,10 @@ export default { layout: AppLayout };
                     name="basic-demo-form"
                     submit-method="post"
                     submit-route="/submit-form"
-                    :initial-values="{}"
-                    :validation-schema="{}"
+                    :initial-values="initialValues"
+                    :validation-schema="validationSchema"
                 >
-                    <BaseTextInput
-                        v-model:value="formValues.textInput"
-                        name="text_input"
-                        label="Text Input"
-                    />
+                    <TextInput name="text_input" label="Required Text Input" />
                 </VueForm>
             </div>
         </Card>

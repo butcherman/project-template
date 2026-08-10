@@ -1,0 +1,33 @@
+<script setup lang="ts">
+import BaseTextInput from "../baseInputs/BaseTextInput.vue";
+import { useValidationHelper } from "../../composables/validationHelper.js";
+import { toRef } from "vue";
+
+const emit = defineEmits<{
+    "update:value": [string];
+    focus: [];
+    blur: [];
+}>();
+
+const props = defineProps<{
+    name: string;
+
+    autocomplete?: string;
+    disabled?: boolean;
+    helpMessage?: string;
+    helpVisible?: boolean;
+    label?: string;
+    placeholder?: string;
+    variant?: InputVariant;
+}>();
+
+const { errorMessage, value } = useValidationHelper(toRef(props, "name"));
+</script>
+
+<template>
+    <BaseTextInput
+        v-bind="props"
+        v-model:value="value"
+        :error-message="errorMessage"
+    />
+</template>
