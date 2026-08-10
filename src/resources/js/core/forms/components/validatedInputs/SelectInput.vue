@@ -1,5 +1,9 @@
-<script setup lang="ts">
-import BaseTextInput from "../baseInputs/BaseTextInput.vue";
+<script
+    setup
+    lang="ts"
+    generic="TOption extends string | Record<string, unknown>"
+>
+import BaseSelectInput from "../baseInputs/BaseSelectInput.vue";
 import { useValidationHelper } from "../../composables/validationHelper.js";
 import { toRef } from "vue";
 
@@ -10,6 +14,7 @@ const emit = defineEmits<{
 
 const props = defineProps<{
     name: string;
+    list: TOption[];
 
     autocomplete?: string;
     disabled?: boolean;
@@ -17,16 +22,16 @@ const props = defineProps<{
     helpVisible?: boolean;
     label?: string;
     placeholder?: string;
+    textField?: TOption extends string ? never : keyof TOption;
+    valueField?: TOption extends string ? never : keyof TOption;
     variant?: InputVariant;
 }>();
 
-const { errorMessage, value } = useValidationHelper<string>(
-    toRef(props, "name"),
-);
+const { errorMessage, value } = useValidationHelper<string>(toRef(props.name));
 </script>
 
 <template>
-    <BaseTextInput
+    <BaseSelectInput
         v-bind="props"
         v-model:value="value"
         :error-message="errorMessage"

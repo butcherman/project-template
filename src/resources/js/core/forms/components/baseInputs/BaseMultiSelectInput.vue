@@ -15,7 +15,7 @@ defineSlots<{
 }>();
 
 const emit = defineEmits<{
-    "update:value": [unknown[]];
+    "update:value": [string[]];
     focus: [];
     blur: [];
 }>();
@@ -23,7 +23,7 @@ const emit = defineEmits<{
 const props = defineProps<{
     name: string;
     list: TOption[];
-    value: unknown[];
+    value: string[];
 
     autocomplete?: string;
     disabled?: boolean;

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BaseTextInput from "../baseInputs/BaseTextInput.vue";
+import BaseSwitchInput from "../baseInputs/BaseSwitchInput.vue";
 import { useValidationHelper } from "../../composables/validationHelper.js";
 import { toRef } from "vue";
 
@@ -11,22 +11,20 @@ const emit = defineEmits<{
 const props = defineProps<{
     name: string;
 
-    autocomplete?: string;
     disabled?: boolean;
     helpMessage?: string;
     helpVisible?: boolean;
     label?: string;
-    placeholder?: string;
-    variant?: InputVariant;
+    switchVariant?: VariantType;
 }>();
 
-const { errorMessage, value } = useValidationHelper<string>(
+const { errorMessage, value } = useValidationHelper<boolean>(
     toRef(props, "name"),
 );
 </script>
 
 <template>
-    <BaseTextInput
+    <BaseSwitchInput
         v-bind="props"
         v-model:value="value"
         :error-message="errorMessage"

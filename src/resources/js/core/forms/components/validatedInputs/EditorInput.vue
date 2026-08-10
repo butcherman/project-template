@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import BaseTextInput from "../baseInputs/BaseTextInput.vue";
+import BaseEditorInput from "../baseInputs/BaseEditorInput.vue";
 import { useValidationHelper } from "../../composables/validationHelper.js";
 import { toRef } from "vue";
+import type { JSONContent } from "@tiptap/core";
 
 const emit = defineEmits<{
     focus: [];
@@ -13,20 +14,19 @@ const props = defineProps<{
 
     autocomplete?: string;
     disabled?: boolean;
+    errorMessage?: string;
     helpMessage?: string;
     helpVisible?: boolean;
     label?: string;
-    placeholder?: string;
-    variant?: InputVariant;
 }>();
 
-const { errorMessage, value } = useValidationHelper<string>(
-    toRef(props, "name"),
+const { errorMessage, value } = useValidationHelper<JSONContent>(
+    toRef(props.name),
 );
 </script>
 
 <template>
-    <BaseTextInput
+    <BaseEditorInput
         v-bind="props"
         v-model:value="value"
         :error-message="errorMessage"

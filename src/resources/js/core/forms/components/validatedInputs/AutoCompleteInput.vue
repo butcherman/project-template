@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BaseTextInput from "../baseInputs/BaseTextInput.vue";
+import BaseAutoCompleteInput from "../baseInputs/BaseAutoCompleteInput.vue";
 import { useValidationHelper } from "../../composables/validationHelper.js";
 import { toRef } from "vue";
 
@@ -10,6 +10,7 @@ const emit = defineEmits<{
 
 const props = defineProps<{
     name: string;
+    list: string[];
 
     autocomplete?: string;
     disabled?: boolean;
@@ -20,13 +21,11 @@ const props = defineProps<{
     variant?: InputVariant;
 }>();
 
-const { errorMessage, value } = useValidationHelper<string>(
-    toRef(props, "name"),
-);
+const { errorMessage, value } = useValidationHelper<string>(toRef(props.name));
 </script>
 
 <template>
-    <BaseTextInput
+    <BaseAutoCompleteInput
         v-bind="props"
         v-model:value="value"
         :error-message="errorMessage"

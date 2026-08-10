@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BaseTextInput from "../baseInputs/BaseTextInput.vue";
+import BaseRangeSliderInput from "../baseInputs/BaseRangeSliderInput.vue";
 import { useValidationHelper } from "../../composables/validationHelper.js";
 import { toRef } from "vue";
 
@@ -10,14 +10,18 @@ const emit = defineEmits<{
 
 const props = defineProps<{
     name: string;
+    min: number;
+    max: number;
 
     autocomplete?: string;
     disabled?: boolean;
     helpMessage?: string;
     helpVisible?: boolean;
+    hideValue?: boolean;
     label?: string;
     placeholder?: string;
-    variant?: InputVariant;
+    rangeVariant?: VariantType;
+    valueText?: string;
 }>();
 
 const { errorMessage, value } = useValidationHelper<string>(
@@ -26,7 +30,7 @@ const { errorMessage, value } = useValidationHelper<string>(
 </script>
 
 <template>
-    <BaseTextInput
+    <BaseRangeSliderInput
         v-bind="props"
         v-model:value="value"
         :error-message="errorMessage"

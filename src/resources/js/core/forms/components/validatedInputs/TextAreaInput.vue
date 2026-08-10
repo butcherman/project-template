@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BaseTextInput from "../baseInputs/BaseTextInput.vue";
+import BaseTextAreaInput from "../baseInputs/BaseTextAreaInput.vue";
 import { useValidationHelper } from "../../composables/validationHelper.js";
 import { toRef } from "vue";
 
@@ -17,6 +17,7 @@ const props = defineProps<{
     helpVisible?: boolean;
     label?: string;
     placeholder?: string;
+    rows?: number;
     variant?: InputVariant;
 }>();
 
@@ -26,7 +27,7 @@ const { errorMessage, value } = useValidationHelper<string>(
 </script>
 
 <template>
-    <BaseTextInput
+    <BaseTextAreaInput
         v-bind="props"
         v-model:value="value"
         :error-message="errorMessage"

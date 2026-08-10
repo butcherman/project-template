@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BaseTextInput from "../baseInputs/BaseTextInput.vue";
+import BaseDatePickerInput from "../baseInputs/BaseDatePickerInput.vue";
 import { useValidationHelper } from "../../composables/validationHelper.js";
 import { toRef } from "vue";
 
@@ -13,20 +13,21 @@ const props = defineProps<{
 
     autocomplete?: string;
     disabled?: boolean;
+    errorMessage?: string;
     helpMessage?: string;
     helpVisible?: boolean;
     label?: string;
+    // max?: string;
+    // min?: string;
     placeholder?: string;
     variant?: InputVariant;
 }>();
 
-const { errorMessage, value } = useValidationHelper<string>(
-    toRef(props, "name"),
-);
+const { errorMessage, value } = useValidationHelper<string>(toRef(props.name));
 </script>
 
 <template>
-    <BaseTextInput
+    <BaseDatePickerInput
         v-bind="props"
         v-model:value="value"
         :error-message="errorMessage"
