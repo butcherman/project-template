@@ -1,7 +1,7 @@
 <script setup lang="ts" generic="TFormData extends FormDataType<TFormData>">
-import BaseVueForm from "./BaseVueForm.vue";
-import { computed, readonly, ref } from "vue";
-import { GenericObject, useForm, Path, PathValue } from "vee-validate";
+import ValidatedVueForm from "./ValidatedVueForm.vue";
+import { ref, useTemplateRef } from "vue";
+import { GenericObject, useForm, Path } from "vee-validate";
 import { router } from "@inertiajs/vue3";
 import type { FormDataType, Errors } from "@inertiajs/core";
 
@@ -31,14 +31,17 @@ const props = defineProps<{
     submitText?: string;
 }>();
 
+const validatedForm = useTemplateRef("validated-form");
 const isSubmitting = ref<boolean>(false);
-const isDirty = computed<boolean>(() => meta.value.dirty);
 const uncaughtErrors = ref<string[]>([]);
 
 const handleErrors = (formErrors: FormDataErrors) => {
     for (const [field, message] of Object.entries(formErrors)) {
         if (typeof message === "string") {
-            setFieldError(field as Path<TFormData>, message);
+            validatedForm.value?.setFieldError(
+                field as Path<TFormData>,
+                message,
+            );
         } else {
             uncaughtErrors.value.push(String(message));
         }
@@ -47,38 +50,10 @@ const handleErrors = (formErrors: FormDataErrors) => {
 
 /*
 |-------------------------------------------------------------------------------
-| Vee Validate Setup
-|-------------------------------------------------------------------------------
-*/
-const { resetForm, setFieldError, setFieldValue, handleSubmit, meta, values } =
-    useForm<TFormData>({
-        validationSchema: props.validationSchema,
-        initialValues: props.initialValues,
-        name: props.name,
-    });
-
-/**
- * Return a specific field value
- */
-const getFieldValue = <K extends keyof TFormData>(field: K): TFormData[K] =>
-    values[field];
-
-/**
- * Assign a specific field value
- */
-const setValue = (
-    field: Path<TFormData>,
-    value: PathValue<TFormData, Path<TFormData>>,
-) => {
-    setFieldValue(field, value);
-};
-
-/*
-|-------------------------------------------------------------------------------
 | Handle the Submission of the Form
 |-------------------------------------------------------------------------------
 */
-const onSubmit = handleSubmit((form): void => {
+const onSubmit = (form: TFormData): void => {
     uncaughtErrors.value = [];
     isSubmitting.value = true;
     emit("submitting", form);
@@ -92,7 +67,7 @@ const onSubmit = handleSubmit((form): void => {
             isSubmitting.value = false;
         },
     });
-});
+};
 
 /*
 |-------------------------------------------------------------------------------
@@ -101,7 +76,7 @@ const onSubmit = handleSubmit((form): void => {
 */
 const onSuccess = () => {
     if (!props.doNotReset) {
-        resetForm();
+        validatedForm.value?.resetForm();
     }
     emit("success");
 };
@@ -112,20 +87,25 @@ const onSuccess = () => {
 |-------------------------------------------------------------------------------
 */
 defineExpose({
-    getFieldValue,
-    setFieldError,
-    setValue,
-    resetForm,
-    isDirty,
+    getFieldValue: validatedForm.value?.getFieldValue,
+    setFieldError: validatedForm.value?.setFieldError,
+    setValue: validatedForm.value?.setValue,
+    resetForm: validatedForm.value?.resetForm,
+    isDirty: validatedForm.value?.isDirty,
+    values: validatedForm.value?.values,
     isSubmitting,
-    values: readonly(values),
 });
 </script>
 
 <template>
-    <BaseVueForm v-bind="props" @submit="onSubmit">
+    <ValidatedVueForm
+        v-bind="props"
+        ref="validated-form"
+        :is-submitting="isSubmitting"
+        @submit="onSubmit"
+    >
         <template v-for="(_, slot) of $slots" #[slot]="scope">
             <slot :name="slot" v-bind="scope" />
         </template>
-    </BaseVueForm>
+    </ValidatedVueForm>
 </template>
