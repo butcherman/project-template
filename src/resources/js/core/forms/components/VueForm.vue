@@ -1,6 +1,5 @@
 <script setup lang="ts" generic="TFormData extends FormDataType<TFormData>">
-import Overlay from "@/core/components/Overlay.vue";
-import SubmitButton from "@/core/components/buttons/SubmitButton.vue";
+import BaseVueForm from "./BaseVueForm.vue";
 import { computed, readonly, ref } from "vue";
 import { GenericObject, useForm, Path, PathValue } from "vee-validate";
 import { router } from "@inertiajs/vue3";
@@ -33,7 +32,6 @@ const props = defineProps<{
 }>();
 
 const isSubmitting = ref<boolean>(false);
-const submitText = computed<string>(() => props.submitText ?? "Submit");
 const isDirty = computed<boolean>(() => meta.value.dirty);
 const uncaughtErrors = ref<string[]>([]);
 
@@ -125,40 +123,9 @@ defineExpose({
 </script>
 
 <template>
-    <Overlay
-        :loading="isSubmitting"
-        :full-page="fullPageOverlay"
-        class="h-full"
-    >
-        <form
-            class="h-full flex flex-col gap-2"
-            :name="name"
-            novalidate
-            @submit.prevent="onSubmit"
-        >
-            <div v-if="uncaughtErrors.length">
-                <div
-                    v-for="err in uncaughtErrors"
-                    :key="err"
-                    class="bg-red-200 rounded-lg p-1 text-center my-2 text-red-800"
-                >
-                    {{ err }}
-                </div>
-            </div>
-            <div class="grow flex flex-col gap-2">
-                <slot />
-            </div>
-            <div>
-                <SubmitButton
-                    class="w-full"
-                    :text="submitText"
-                    :icon="submitIcon"
-                >
-                    <span v-if="isSubmitting">
-                        <fa-icon icon="spinner" class="fa-spin-pulse" />
-                    </span>
-                </SubmitButton>
-            </div>
-        </form>
-    </Overlay>
+    <BaseVueForm v-bind="props" @submit="onSubmit">
+        <template v-for="(_, slot) of $slots" #[slot]="scope">
+            <slot :name="slot" v-bind="scope" />
+        </template>
+    </BaseVueForm>
 </template>
