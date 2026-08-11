@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'enabled' => env('TELESCOPE_ENABLED', true),
+    'enabled' => env('TELESCOPE_ENABLED', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'path' => env('TELESCOPE_PATH', 'telescope'),
+    'path' => 'administration/telescope',
 
     /*
     |--------------------------------------------------------------------------
@@ -55,11 +55,11 @@ return [
     |
     */
 
-    'driver' => env('TELESCOPE_DRIVER', 'database'),
+    'driver' => 'database',
 
     'storage' => [
         'database' => [
-            'connection' => env('DB_CONNECTION', 'mysql'),
+            'connection' => 'mysql',
             'chunk' => 1000,
         ],
     ],
@@ -78,7 +78,6 @@ return [
     'queue' => [
         'connection' => env('TELESCOPE_QUEUE_CONNECTION', null),
         'queue' => env('TELESCOPE_QUEUE', null),
-        'delay' => env('TELESCOPE_QUEUE_DELAY', 10),
     ],
 
     /*
@@ -116,6 +115,8 @@ return [
         'livewire*',
         'nova-api*',
         'pulse*',
+        'administration/horizon',
+        'broadcasting*',
     ],
 
     'ignore_commands' => [

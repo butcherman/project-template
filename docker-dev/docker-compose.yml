@@ -1,145 +1,151 @@
 ################################################################################
 #                                                                              #
 #                                                                              #
-#                         Tech Bench Docker Development                        #
+#                        Application Docker Development                        #
 #           NOTE:  Check .env file for necessary fields to modify to           #
-#                      secure this Tech Bench installation                     #
+#                           secure this installation                           #
 #                                                                              #
 #                                                                              #
 ################################################################################
 name: application_dev
 networks:
-    app-tier:
+    templateNetwork:
         driver: bridge
 volumes:
-    dbDevData:
-    redisDevData:
+    dbTemplateData:
+    redisTemplateData:
 
 services:
-    #  Application Container
-    application:
-        container_name: application
+    # Application Container
+    applicationtemplate:
+        container_name: applicationtemmplate
         restart: unless-stopped
+        stop_signal: SIGTERM
         build:
             context: ./application
             dockerfile: Dockerfile
         volumes:
-            - ../src:/app
-            - ./.env:/app/.env
-        environment:
-            - SERVICE=app
-            - TB_URL=${BASE_URL}
+            - ../src:/var/www/html
+            - ./.env:/var/www/html/.env
         networks:
-            - app-tier
-        depends_on:
-            database:
-                condition: service_healthy
+            - templateNetwork
+        # depends_on:
+        #     database:
+        #         condition: service_healthy
 
-    #  NGINX Web Server
-    nginx:
-        container_name: nginx
+    # NGINX Web Server
+    nginxtemplate:
+        container_name: nginxtemplate
+        restart: unless-stopped
+        stop_signal: SIGTERM
         build:
             context: ../docker/nginx
             dockerfile: Dockerfile
-        restart: unless-stopped
         volumes:
-            - ../src:/app
-            - ./.env:/app/.env
-            - ./nginx/https.conf:/opt/bitnami/nginx/conf/server_blocks/https.conf
+            - ../src:/var/www/html
+            - ./.env:/var/www/html/.env
+            - ./nginx/default_http.conf:/etc/nginx/conf.d/default.conf
         ports:
-            - "80:80"
-            - "443:443"
+            - "8080:80"
+            - "4443:443"
         networks:
-            - app-tier
-        depends_on:
-            - application
-            - reverb
+            - templateNetwork
+        # depends_on:
+        #     database:
+        #         condition: service_started
+        #     reverb:
+        #         condition: service_started
 
-    #  Reverb Container for Websockets
-    reverb:
-        container_name: reverb
+    # Reverb Container for Websockets
+    reverbtemplate:
+        container_name: reverbtemplate
         restart: unless-stopped
+        stop_signal: SIGTERM
         build:
             context: ./application
             dockerfile: Dockerfile
         volumes:
-            - ../src:/app
-            - ./.env:/app/.env
-        environment:
-            - SERVICE=reverb
+            - ../src:/var/www/html
+            - ./.env:/var/www/html/.env
         networks:
-            - app-tier
-        depends_on:
-            - application
-        entrypoint: php artisan reverb:start --debug
+            - templateNetwork
+        command: ['php', '/var/www/html/artisan', 'reverb:start']
+        # depends_on:
+        #     tech_bench:
+        #         condition: service_healthy
 
-    #  Horizon Container to run background jobs
-    horizon:
-        container_name: horizon
+    # Horizon Container to run background jobs
+    horizontemplate:
+        container_name: horizontemplate
         restart: unless-stopped
+        stop_signal: SIGTERM
         build:
             context: ./application
             dockerfile: Dockerfile
         volumes:
-            - ../src:/app
-            - ./.env:/app/.env
-        environment:
-            - SERVICE=horizon
+            - ../src:/var/www/html
+            - ./.env:/var/www/html/.env
         networks:
-            - app-tier
-        depends_on:
-            - application
-            - nginx
+            - templateNetwork
+        command: ["php", "/var/www/html/artisan", "horizon"]
+        # depends_on:
+        #     tech_bench:
+        #         condition: service_healthy
+        #     nginx:
+        #         condition: service_healthy
 
-    #  Scheduler Container
-    scheduler:
-        container_name: scheduler
+    # Scheduler Container
+    schedulertemplate:
+        container_name: schedulertemplate
         restart: unless-stopped
+        stop_signal: SIGTERM
         build:
             context: ./application
             dockerfile: Dockerfile
         volumes:
-            - ../src:/app
-            - ./.env:/app/.env
-        environment:
-            - SERVICE=scheduler
+            - ../src:/var/www/html
+            - ./.env:/var/www/html/.env
         networks:
-            - app-tier
-        depends_on:
-            - application
-            - nginx
+            - templateNetwork
+        command: ["php", "/var/www/html/artisan", "schedule:work"]
+        # depends_on:
+        #     tech_bench:
+        #         condition: service_healthy
+        #     nginx:
+        #         condition: service_healthy
 
     #  MySQL Database Container
-    database:
-        container_name: database
+    databasetemplate:
+        container_name: databasetemplate
+        restart: unless-stopped
+        stop_signal: SIGTERM
         build:
             context: ../docker/database
             dockerfile: Dockerfile
-        restart: unless-stopped
+        environment:
+            - MYSQL_ROOT_PASSWORD=tbRootPasswd
         volumes:
-            - dbDevData:/bitnami/mysql/data
+            - dbTemplateData:/var/lib/mysql
             - ./database/testDatabase.sql:/docker-entrypoint-initdb.d/testDatabase.sql
         networks:
-            - app-tier
-        ports:
-            - "3306:3306"
-        healthcheck:
-            test: ['CMD', '/opt/bitnami/scripts/mysql/healthcheck.sh']
-            interval: 15s
-            timeout: 5s
-            retries: 6
+            - templateNetwork
+        # ports:
+        #     - "3306:3306"
 
     #  Redis Container for Cache, Job and Email Queuing
-    redis:
-        container_name: redis
+    redistemplate:
+        container_name: redistemplate
+        restart: unless-stopped
+        stop_signal: SIGTERM
         build:
             context: ../docker/redis
             dockerfile: Dockerfile
-        restart: unless-stopped
+        environment:
+            - REDIS_PASSWORD=tbRootPassword
         volumes:
-            - redisDevData:/bitnami/redis/data
+            - redisTemplateData:/data
         networks:
-            - app-tier
+            - templateNetwork
         ports:
             - "6379:6379"
 
@@ -148,34 +154,35 @@ services:
     ###########################################################################################
 
     #  Mailpit for Email Traps
-    mailpit:
-        image: axllent/mailpit:latest
-        container_name: mailpit
-        restart: unless-stopped
-        networks:
-            - app-tier
-        ports:
-            - "8025:8025"
-            - "1025:1025"
+    # mailpit:
+    #     image: axllent/mailpit:latest
+    #     container_name: mailpit
+    #     restart: unless-stopped
+    #     stop_signal: SIGTERM
+    #     networks:
+    #         - templateNetwork
+    #     ports:
+    #         - "8025:8025"
+    #         - "1025:1025"
 
     #  NPM Container to run npm run dev
-    npm:
-        container_name: npm
+    npmtemplate:
+        container_name: npmtemplate
         restart: unless-stopped
+        stop_signal: SIGTERM
         build:
             context: ./application
             dockerfile: Dockerfile
-        user: root
         volumes:
-            - ../src:/app
-            - ./.env:/app/.env
-        environment:
-            - SERVICE=app
+            - ../src:/var/www/html
+            - ./.env:/var/www/html/.env
         networks:
-            - app-tier
+            - templateNetwork
         ports:
-            - "5173:5173"
-        depends_on:
-            - application
-            - nginx
-        entrypoint: npm run dev
+            - "6173:6173"
+        command: npm run dev -- --port 6173
+        # depends_on:
+        #     tech_bench:
+        #         condition: service_healthy
+        #     nginx:
+        #         condition: service_healthy

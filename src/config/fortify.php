@@ -1,5 +1,8 @@
 <?php
 
+use App\Actions\Fortify\RedirectIfTwoFactorAuthenticatable;
+use Laravel\Fortify\Actions\AttemptToAuthenticate;
+use Laravel\Fortify\Actions\PrepareAuthenticatedSession;
 use Laravel\Fortify\Features;
 
 return [
@@ -45,7 +48,7 @@ return [
     |
     */
 
-    'username' => 'email',
+    'username' => 'username',
 
     'email' => 'email',
 
@@ -144,16 +147,32 @@ return [
     */
 
     'features' => [
-        // Features::registration(),
         Features::resetPasswords(),
-        // Features::emailVerification(),
         Features::updateProfileInformation(),
         Features::updatePasswords(),
         Features::twoFactorAuthentication([
             'confirm' => true,
-            'confirmPassword' => true,
+            'confirmPassword' => false,
             // 'window' => 0,
         ]),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Pipelines
+    |--------------------------------------------------------------------------
+    |
+    | Custom Logic added to allow both Authenticator App and Email as possible
+    | two Factor options.
+    |
+    */
+
+    'pipelines' => [
+        'login' => [
+            RedirectIfTwoFactorAuthenticatable::class,
+            AttemptToAuthenticate::class,
+            PrepareAuthenticatedSession::class,
+        ],
     ],
 
 ];

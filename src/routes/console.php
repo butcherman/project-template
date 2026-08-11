@@ -1,8 +1,28 @@
 <?php
 
-use Illuminate\Foundation\Inspiring;
-use Illuminate\Support\Facades\Artisan;
+use App\Jobs\Maintenance\CheckAzureCertificateJob;
+use App\Jobs\Maintenance\CheckSslCertificateJob;
+use App\Jobs\Maintenance\CleanImageFoldersJob;
+use App\Jobs\Maintenance\GarbageCollectionJob;
+use App\Jobs\Maintenance\NightlyBackupJob;
+use Illuminate\Support\Facades\Schedule;
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote');
+/*
+|-------------------------------------------------------------------------------
+| Maintenance commands run throughout the day
+|-------------------------------------------------------------------------------
+*/
+
+Schedule::command('telescope:prune')->daily();
+Schedule::command('horizon:snapshot')->everyFifteenMinutes();
+Schedule::command('auth:clear-resets')->everyFifteenMinutes();
+Schedule::command('auth:clear-validation-codes')->everyFifteenMinutes();
+
+/*
+|-------------------------------------------------------------------------------
+| Daily Maintenance Jobs
+|-------------------------------------------------------------------------------
+*/
+// Schedule::job(new GarbageCollectionJob)->daily();
+
+

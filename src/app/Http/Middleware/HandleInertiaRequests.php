@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Actions\User\BuildUserNavbar;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -35,8 +36,16 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-        return array_merge(parent::share($request), [
-            //
-        ]);
+        $user = $request->user() ? $request->user() : null;
+        $navbar = $request->user() ?
+            new BuildUserNavbar($request->user())() :
+            [];
+
+        return [
+            ...parent::share($request),
+            'csrf_token' => fn () => csrf_token(),
+            'current_user' => fn () => $user,
+            'navbar' => fn () => $navbar,
+        ];
     }
 }
