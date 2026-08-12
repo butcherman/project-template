@@ -84,3 +84,74 @@ describe("useDataHelper", () => {
         });
     });
 });
+
+describe("getIndexedChunk", () => {
+    const originalData = [
+        { id: 1, name: "One" },
+        { id: 2, name: "Two" },
+        { id: 3, name: "Three" },
+        { id: 4, name: "Four" },
+        { id: 5, name: "Five" },
+    ];
+
+    test("returns the first page", () => {
+        const { getIndexedChunk } = useDataHelper();
+
+        const result = getIndexedChunk(originalData, 1, 2);
+
+        expect(result).toHaveLength(2);
+        expect(result[0].data).toBe(originalData[0]);
+        expect(result[1].data).toBe(originalData[1]);
+    });
+
+    test("returns a middle page", () => {
+        const { getIndexedChunk } = useDataHelper();
+
+        const result = getIndexedChunk(originalData, 2, 2);
+
+        expect(result).toHaveLength(2);
+        expect(result[0].data).toBe(originalData[2]);
+        expect(result[1].data).toBe(originalData[3]);
+    });
+
+    test("returns the final partial page", () => {
+        const { getIndexedChunk } = useDataHelper();
+
+        const result = getIndexedChunk(originalData, 3, 2);
+
+        expect(result).toHaveLength(1);
+        expect(result[0].data).toBe(originalData[4]);
+        expect(result[0].isFirst).toBe(true);
+        expect(result[0].isLast).toBe(true);
+    });
+
+    test("returns an empty array when the page is beyond the data", () => {
+        const { getIndexedChunk } = useDataHelper();
+
+        const result = getIndexedChunk(originalData, 10, 2);
+
+        expect(result).toEqual([]);
+    });
+
+    test("indexes items relative to the chunk", () => {
+        const { getIndexedChunk } = useDataHelper();
+
+        const result = getIndexedChunk(originalData, 2, 2);
+
+        expect(result[0].isFirst).toBe(true);
+        expect(result[0].isLast).toBe(false);
+
+        expect(result[1].isFirst).toBe(false);
+        expect(result[1].isLast).toBe(true);
+    });
+
+    test("does not modify the original array", () => {
+        const { getIndexedChunk } = useDataHelper();
+
+        const originalCopy = [...originalData];
+
+        getIndexedChunk(originalData, 2, 2);
+
+        expect(originalData).toEqual(originalCopy);
+    });
+});
