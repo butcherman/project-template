@@ -1,5 +1,4 @@
 import { router } from "@inertiajs/vue3";
-import { beforeEach, describe, expect, it, vi } from "vitest";
 import { useLinkHelper } from "@/core/composables/linkHelper";
 
 vi.mock("@inertiajs/vue3", () => ({
