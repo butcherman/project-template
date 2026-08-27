@@ -130,7 +130,7 @@ export default { layout: AppLayout };
         <ExampleComponent>
             <template #component>
                 <BaseRadioGroupInput
-                    v-model:value="inputValue"
+                    v-model="inputValue"
                     name="radio_group"
                     label="Radio Group Input"
                     :list="inputList"
@@ -148,7 +148,7 @@ export default { layout: AppLayout };
                 <br />
                 &lt;template&gt;<br />
                 &emsp;&lt;BaseRadioGroupInput<br />
-                &emsp;&emsp;v-model:value="inputValue"<br />
+                &emsp;&emsp;v-model="inputValue"<br />
                 &emsp;&emsp;name="radio_group"<br />
                 &emsp;&emsp;label="Radio Group Input"<br />
                 &emsp;&emsp;:list="inputList"<br />
@@ -159,7 +159,7 @@ export default { layout: AppLayout };
         <ExampleComponent>
             <template #component>
                 <BaseRadioGroupInput
-                    v-model:value="advancedValue"
+                    v-model="advancedValue"
                     name="radio_group_advanced_list"
                     :list="advancedList"
                     label="Advanced List Demo"
@@ -195,7 +195,7 @@ export default { layout: AppLayout };
                 <br />
                 &lt;template&gt;<br />
                 &emsp;&lt;BaseRadioGroupInput<br />
-                &emsp;&emsp;v-model:value="inputValue"<br />
+                &emsp;&emsp;v-model="inputValue"<br />
                 &emsp;&emsp;name="radio_group"<br />
                 &emsp;&emsp;label="Radio Group Input"<br />
                 &emsp;&emsp;:list="advancedList"<br />

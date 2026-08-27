@@ -187,7 +187,7 @@ export default { layout: AppLayout };
         <ExampleComponent title="Basic Select Input">
             <template #component>
                 <BaseSelectInput
-                    v-model:value="basicInputValue"
+                    v-model="basicInputValue"
                     name="select"
                     label="Select"
                     :list="basicList"
@@ -205,7 +205,7 @@ export default { layout: AppLayout };
                 <br />
                 &lt;template&gt;<br />
                 &emsp;&lt;BaseSelectInput<br />
-                &emsp;&emsp;v-model:value="basicInputValue"<br />
+                &emsp;&emsp;v-model="basicInputValue"<br />
                 &emsp;&emsp;name="select"<br />
                 &emsp;&emsp;label="Select"<br />
                 &emsp;&emsp;:list="simpleList"<br />
@@ -216,7 +216,7 @@ export default { layout: AppLayout };
         <ExampleComponent title="Advanced Dataset Select Input">
             <template #component>
                 <BaseSelectInput
-                    v-model:value="advancedInputValue"
+                    v-model="advancedInputValue"
                     name="select"
                     label="Select"
                     :list="advancedList"
@@ -248,7 +248,7 @@ export default { layout: AppLayout };
                 <br />
                 &lt;template&gt;<br />
                 &emsp;&lt;BaseSelectInput<br />
-                &emsp;&emsp;v-model:value="advancedInputValue"<br />
+                &emsp;&emsp;v-model="advancedInputValue"<br />
                 &emsp;&emsp;name="select"<br />
                 &emsp;&emsp;label="Select"<br />
                 &emsp;&emsp;:list="simpleList"<br />

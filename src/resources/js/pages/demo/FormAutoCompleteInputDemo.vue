@@ -133,7 +133,7 @@ export default { layout: AppLayout };
         <ExampleComponent>
             <template #component>
                 <BaseAutoCompleteInput
-                    v-model:value="inputValue"
+                    v-model="inputValue"
                     :list="list"
                     label="Autocomplete Input"
                     name="autocomplete"
@@ -151,7 +151,7 @@ export default { layout: AppLayout };
                 <br />
                 &lt;template&gt;<br />
                 &emsp;&lt;BaseAutoCompleteInput<br />
-                &emsp;&emsp;v-model:value="textValue"<br />
+                &emsp;&emsp;v-model="textValue"<br />
                 &emsp;&emsp;name="autocomplete"<br />
                 &emsp;&emsp;label="Autocomplete Input"<br />
                 &emsp;&emsp;:list="baseList"<br />

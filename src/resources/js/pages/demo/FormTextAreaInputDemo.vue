@@ -108,7 +108,7 @@ export default { layout: AppLayout };
         <ExampleComponent title="Basic Example" show>
             <template #component>
                 <BaseTextAreaInput
-                    v-model:value="inputValue"
+                    v-model="inputValue"
                     name="text_area"
                     label="Text Area Input"
                     placeholder="Test Input"
@@ -124,7 +124,7 @@ export default { layout: AppLayout };
                 <br />
                 &lt;template&gt;<br />
                 &emsp;&lt;BaseTextAreaInput<br />
-                &emsp;&emsp;v-model:value="textValue"<br />
+                &emsp;&emsp;v-model="textValue"<br />
                 &emsp;&emsp;name="text_area"<br />
                 &emsp;&emsp;label="Text Area Input"<br />
                 &emsp;&emsp;placeholder="Test Input"<br />

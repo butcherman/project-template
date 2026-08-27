@@ -21,6 +21,7 @@ const emit = defineEmits<{
 const props = defineProps<{
     name: string;
     list: TOption[];
+    // TODO - Change this to defineModel
     value: string[];
 
     disabled?: boolean;
