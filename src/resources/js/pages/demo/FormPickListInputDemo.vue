@@ -140,7 +140,7 @@ export default { layout: AppLayout };
         <ExampleComponent title="Basic Example">
             <template #component>
                 <BasePickListInput
-                    v-model:value="inputValue"
+                    v-model="inputValue"
                     label="Pick List Example"
                     name="pick_list"
                     :list="inputList"
@@ -158,7 +158,7 @@ export default { layout: AppLayout };
                 <br />
                 &lt;template&gt;<br />
                 &emsp;&lt;BasePickListInput<br />
-                &emsp;&emsp;v-model:value="inputValue"<br />
+                &emsp;&emsp;v-model="inputValue"<br />
                 &emsp;&emsp;name="pick_list"<br />
                 &emsp;&emsp;label="Pick List Example"<br />
                 &emsp;&emsp;:list="inputList"<br />
@@ -169,7 +169,7 @@ export default { layout: AppLayout };
         <ExampleComponent title="Object List Example">
             <template #component>
                 <BasePickListInput
-                    v-model:value="advancedValue"
+                    v-model="advancedValue"
                     name="pick_list"
                     text-field="text"
                     value-field="value"
@@ -204,7 +204,7 @@ export default { layout: AppLayout };
                 <br />
                 &lt;template&gt;<br />
                 &emsp;&lt;BasePickListInput<br />
-                &emsp;&emsp;v-model:value="inputValue"<br />
+                &emsp;&emsp;v-model="inputValue"<br />
                 &emsp;&emsp;name="pick_list"<br />
                 &emsp;&emsp;label="Pick List Example"<br />
                 &emsp;&emsp;:list="advancedList"<br />

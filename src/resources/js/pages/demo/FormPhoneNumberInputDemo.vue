@@ -117,7 +117,7 @@ export default { layout: AppLayout };
         <ExampleComponent>
             <template #component>
                 <BasePhoneNumberInput
-                    v-model:value="inputValue"
+                    v-model="inputValue"
                     name="phone_input"
                     label="Phone Number"
                 />
@@ -131,7 +131,7 @@ export default { layout: AppLayout };
                 <br />
                 &lt;template&gt;<br />
                 &emsp;&lt;BasePhoneNumberInput<br />
-                &emsp;&emsp;v-model:value="inputValue"<br />
+                &emsp;&emsp;v-model="inputValue"<br />
                 &emsp;&emsp;name="phone_input"<br />
                 &emsp;&emsp;label="Phone Number"<br />
                 &emsp;/&gt;<br />
