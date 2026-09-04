@@ -31,11 +31,7 @@ export default { layout: AppLayout };
                             name="file-upload-form"
                             submit-text="Upload File"
                         > -->
-                        <BaseFileUploadInput
-                            purpose="test"
-                            class="h-50"
-                            auto-upload
-                        />
+                        <BaseFileUploadInput purpose="test" class="min-h-48" />
                         <!-- </BaseVueForm> -->
                     </div>
                 </div>
