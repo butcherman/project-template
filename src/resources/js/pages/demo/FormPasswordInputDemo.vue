@@ -120,7 +120,7 @@ export default { layout: AppLayout };
         <ExampleComponent show>
             <template #component>
                 <BasePasswordInput
-                    v-model:value="password"
+                    v-model="password"
                     name="password"
                     label="Enter Your Password"
                 />
@@ -134,7 +134,7 @@ export default { layout: AppLayout };
                 <br />
                 &lt;template&gt;<br />
                 &emsp;&lt;BasePasswordInput<br />
-                &emsp;&emsp;v-model:value="passwordValue"<br />
+                &emsp;&emsp;v-model="passwordValue"<br />
                 &emsp;&emsp;name="password_input"<br />
                 &emsp;&emsp;label="Enter you Password"<br />
                 &emsp;/&gt;<br />

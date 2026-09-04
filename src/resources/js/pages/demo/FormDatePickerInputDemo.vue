@@ -126,7 +126,7 @@ export default { layout: AppLayout };
         <ExampleComponent>
             <template #component>
                 <BaseDatePickerInput
-                    v-model:value="dateValue"
+                    v-model="dateValue"
                     name="date_picker"
                     label="Select A Date"
                 />
@@ -140,7 +140,7 @@ export default { layout: AppLayout };
                 <br />
                 &lt;template&gt;<br />
                 &emsp;&lt;BaseDatePickerInput<br />
-                &emsp;&emsp;v-model:value="dateValue"<br />
+                &emsp;&emsp;v-model="dateValue"<br />
                 &emsp;&emsp;name="date_picker"<br />
                 &emsp;&emsp;label="Select A Date"<br />
                 &emsp;/BaseDatePickerInput&gt;<br />

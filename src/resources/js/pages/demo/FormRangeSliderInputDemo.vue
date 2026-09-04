@@ -134,7 +134,7 @@ export default { layout: AppLayout };
         <ExampleComponent show>
             <template #component>
                 <BaseRangeSliderInput
-                    v-model:value="rangeValue"
+                    v-model="rangeValue"
                     name="range_input"
                     label="Range Input"
                     value-text="You Selected"
@@ -151,7 +151,7 @@ export default { layout: AppLayout };
                 <br />
                 &lt;template&gt;<br />
                 &emsp;&lt;BaseRangeSliderInput<br />
-                &emsp;&emsp;v-model:value="rangeValue"<br />
+                &emsp;&emsp;v-model="rangeValue"<br />
                 &emsp;&emsp;name="range_input"<br />
                 &emsp;&emsp;label="Range Input"<br />
                 &emsp;&emsp;value-text="You Selected"<br />

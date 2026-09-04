@@ -100,7 +100,7 @@ export default { layout: AppLayout };
         </Card>
         <ExampleComponent show>
             <template #component>
-                <BaseOtpInput v-model:value="otpValue" name="otp_input" />
+                <BaseOtpInput v-model="otpValue" name="otp_input" />
             </template>
             <template #code>
                 &lt;script setup&gt; <br />
@@ -111,7 +111,7 @@ export default { layout: AppLayout };
                 <br />
                 &lt;template&gt;<br />
                 &emsp;&lt;BaseOtpInput<br />
-                &emsp;&emsp;v-model:value="otpValue"<br />
+                &emsp;&emsp;v-model="otpValue"<br />
                 &emsp;&emsp;name="otp_input"<br />
                 &emsp;/&gt;<br />
                 &lt;/template&gt;<br />

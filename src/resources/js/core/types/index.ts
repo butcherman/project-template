@@ -26,6 +26,11 @@ interface MenuItem {
           };
 }
 
+interface LinkList {
+    url: string;
+    text: string;
+}
+
 interface IndexedData<TData> {
     id: string;
     isFirst: boolean;

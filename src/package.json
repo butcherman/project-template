@@ -3,7 +3,9 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite"
+        "dev": "vite",
+        "test": "vitest",
+        "coverage": "vitest run --coverage"
     },
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^7.3.1",
@@ -39,6 +41,10 @@
     },
     "devDependencies": {
         "@faker-js/faker": "^10.5.0",
-        "@types/lodash": "^4.17.24"
+        "@testing-library/vue": "^8.1.0",
+        "@types/lodash": "^4.17.24",
+        "@vitest/coverage-v8": "^4.1.10",
+        "happy-dom": "^20.11.2",
+        "vitest": "^4.1.10"
     }
 }

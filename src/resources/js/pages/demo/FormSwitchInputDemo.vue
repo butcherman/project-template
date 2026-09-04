@@ -99,7 +99,7 @@ export default { layout: AppLayout };
         <ExampleComponent>
             <template #component>
                 <BaseSwitchInput
-                    v-model:value="inputValue"
+                    v-model="inputValue"
                     name="switch_input"
                     label="Primary Variant"
                     switch-variant="primary"
@@ -107,7 +107,7 @@ export default { layout: AppLayout };
                     help-message="This is a help message"
                 />
                 <BaseSwitchInput
-                    v-model:value="inputValue"
+                    v-model="inputValue"
                     name="switch_input"
                     label="Success Variant"
                     switch-variant="success"
@@ -115,7 +115,7 @@ export default { layout: AppLayout };
                     help-message="This is a help message"
                 />
                 <BaseSwitchInput
-                    v-model:value="inputValue"
+                    v-model="inputValue"
                     name="switch_input"
                     label="Danger Variant"
                     switch-variant="danger"
@@ -123,7 +123,7 @@ export default { layout: AppLayout };
                     help-message="This is a help message"
                 />
                 <BaseSwitchInput
-                    v-model:value="inputValue"
+                    v-model="inputValue"
                     name="switch_input"
                     label="Warning Variant"
                     switch-variant="warning"
@@ -140,7 +140,7 @@ export default { layout: AppLayout };
                 <br />
                 &lt;template&gt;<br />
                 &emsp;&lt;BaseSwitchInput<br />
-                &emsp;&emsp;v-model:value="boolValue"<br />
+                &emsp;&emsp;v-model="boolValue"<br />
                 &emsp;&emsp;name="switch_input"<br />
                 &emsp;&emsp;label="Primary Variant"<br />
                 &emsp;&emsp;error-message="This is an error message"<br />

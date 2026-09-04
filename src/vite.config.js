@@ -29,9 +29,9 @@ export default defineConfig(({ mode }) => {
             }),
             tailwindcss(),
             inertia(),
-            wayfinder({
+            ...(mode !== "test" ? [wayfinder({
                 path: 'resources/js/wayfinder'
-            }),
+            })] : [])
         ],
         server: {
             https: {
@@ -54,5 +54,14 @@ export default defineConfig(({ mode }) => {
             //     ],
             // }
         },
+        test: {
+            globals: true,
+            environment: 'happy-dom',
+            coverage: {
+                enabled: true,
+                provider: 'v8',
+                reportsDirectory: './tests/vitest/_Report'
+            }
+        }
     };
 });

@@ -170,7 +170,7 @@ export default { layout: AppLayout };
         <ExampleComponent title="Basic MultiSelect">
             <template #component>
                 <BaseMultiSelectInput
-                    v-model:value="basicInputValue"
+                    v-model="basicInputValue"
                     name="multiselect"
                     label="Multi-Select"
                     :list="basicList"
@@ -188,7 +188,7 @@ export default { layout: AppLayout };
                 <br />
                 &lt;template&gt;<br />
                 &emsp;&lt;BaseMultiSelectInput<br />
-                &emsp;&emsp;v-model:value="basicInputValue"<br />
+                &emsp;&emsp;v-model="basicInputValue"<br />
                 &emsp;&emsp;name="multiselect"<br />
                 &emsp;&emsp;label="Multi-Select"<br />
                 &emsp;&emsp;:list="simpleList"<br />
@@ -199,7 +199,7 @@ export default { layout: AppLayout };
         <ExampleComponent title="Advanced Dataset MultiSelect">
             <template #component>
                 <BaseMultiSelectInput
-                    v-model:value="advancedInputValue"
+                    v-model="advancedInputValue"
                     name="multiselect"
                     label="Multi-Select"
                     :list="sampleList(5)"
@@ -231,7 +231,7 @@ export default { layout: AppLayout };
                 <br />
                 &lt;template&gt;<br />
                 &emsp;&lt;BaseMultiSelectInput<br />
-                &emsp;&emsp;v-model:value="advancedInputValue"<br />
+                &emsp;&emsp;v-model="advancedInputValue"<br />
                 &emsp;&emsp;name="multiselect"<br />
                 &emsp;&emsp;label="Multi-Select"<br />
                 &emsp;&emsp;:list="simpleList"<br />
@@ -244,7 +244,7 @@ export default { layout: AppLayout };
         <ExampleComponent title="Grouped Dataset MultiSelect">
             <template #component>
                 <BaseMultiSelectGroupInput
-                    v-model:value="groupedInputValue"
+                    v-model="groupedInputValue"
                     name="multiselect"
                     label="Multi-Select"
                     :list="groupedList"
@@ -317,7 +317,7 @@ export default { layout: AppLayout };
                 <br />
                 &lt;template&gt;<br />
                 &emsp;&lt;BaseMultiSelectInput<br />
-                &emsp;&emsp;v-model:value="groupedInputValue"<br />
+                &emsp;&emsp;v-model="groupedInputValue"<br />
                 &emsp;&emsp;name="multiselect"<br />
                 &emsp;&emsp;label="Multi-Select"<br />
                 &emsp;&emsp;:list="groupedList"<br />

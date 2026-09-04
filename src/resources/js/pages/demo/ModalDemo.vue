@@ -2,14 +2,11 @@
 import AppLayout from "@/layouts/AppLayout.vue";
 import BaseButton from "@/core/components/buttons/BaseButton.vue";
 import Card from "@/core/components/Card.vue";
-import Collapse from "@/core/components/Collapse.vue";
 import ComponentReference from "@/features/components/ComponentReference.vue";
-import Modal from "@/core/components/Modal.vue";
-import ExpandBadge from "@/core/components/badges/ExpandBadge.vue";
-import { ref } from "vue";
 import ExampleComponent from "@/features/components/ExampleComponent.vue";
+import Modal from "@/core/components/Modal.vue";
+import { ref } from "vue";
 
-const showExample = ref(false);
 const exampleModal = ref(false);
 
 const referenceProperties = [
@@ -134,7 +131,7 @@ export default { layout: AppLayout };
                         text="Show Modal"
                         @click="exampleModal = true"
                     />
-                    <Modal v-model:show="exampleModal" title="Example Modal">
+                    <Modal v-model="exampleModal" title="Example Modal">
                         lorem ipsum dolor sit amet consectetur adipiscing elit
                         omnis et et accusamus pariatur vero qui aliquip dolor
                         velit et distinctio cumque libero facere ea quas
@@ -153,7 +150,7 @@ export default { layout: AppLayout };
                 &lt;/script&gt;<br />
                 <br />
                 &lt;template&gt;<br />
-                &emsp;&lt;Modal v-model:show="showModal" title="Example
+                &emsp;&lt;Modal v-model="showModal" title="Example
                 Modal"&gt;<br />
                 &emsp;&emsp;&lt;div&gt;
                 <div class="ms-12">
