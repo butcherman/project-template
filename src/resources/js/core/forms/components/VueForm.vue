@@ -1,9 +1,9 @@
 <script setup lang="ts" generic="TFormData extends FormDataType<TFormData>">
 import ValidatedVueForm from "./ValidatedVueForm.vue";
-import { ref, useTemplateRef } from "vue";
-import { GenericObject, useForm, Path } from "vee-validate";
 import { router } from "@inertiajs/vue3";
-import type { FormDataType, Errors } from "@inertiajs/core";
+import {  ref, useTemplateRef } from "vue";
+import { GenericObject, useForm, Path } from "vee-validate";
+import type { FormDataType, Errors, Page } from "@inertiajs/core";
 
 type FormDataErrors = Errors;
 type InitialValues<T extends GenericObject> = NonNullable<
@@ -12,7 +12,7 @@ type InitialValues<T extends GenericObject> = NonNullable<
 
 const emit = defineEmits<{
     submitting: [TFormData];
-    success: [];
+    success: [Page];
 }>();
 
 const props = defineProps<{
@@ -35,15 +35,24 @@ const validatedForm = useTemplateRef("validated-form");
 const isSubmitting = ref<boolean>(false);
 const uncaughtErrors = ref<string[]>([]);
 
+/*
+|-------------------------------------------------------------------------------
+| Handle errors if they are given
+|-------------------------------------------------------------------------------
+*/
 const handleErrors = (formErrors: FormDataErrors) => {
     for (const [field, message] of Object.entries(formErrors)) {
         if (typeof message === "string") {
-            validatedForm.value?.setFieldError(
-                field as Path<TFormData>,
-                message,
-            );
+            if (validatedForm.value?.getFieldValue(field as keyof TFormData)) {
+                validatedForm.value?.setFieldError(
+                    field as Path<TFormData>,
+                    message,
+                );
+            } else {
+                uncaughtErrors.value.push(String(message));
+            }
         } else {
-            uncaughtErrors.value.push(String(message));
+            handleErrors(message);
         }
     }
 };
@@ -61,7 +70,7 @@ const onSubmit = (form: TFormData): void => {
     router[props.submitMethod](props.submitRoute, form, {
         preserveScroll: true,
         only: props.only,
-        onSuccess,
+        onSuccess: (res) => onSuccess(res),
         onError: (errors) => handleErrors(errors),
         onFinish: () => {
             isSubmitting.value = false;
@@ -74,11 +83,12 @@ const onSubmit = (form: TFormData): void => {
 | Handle successful completion of the form
 |-------------------------------------------------------------------------------
 */
-const onSuccess = () => {
+const onSuccess = (res: Page) => {
     if (!props.doNotReset) {
         validatedForm.value?.resetForm();
     }
-    emit("success");
+
+    emit("success", res);
 };
 
 /*
@@ -87,13 +97,23 @@ const onSuccess = () => {
 |-------------------------------------------------------------------------------
 */
 defineExpose({
-    getFieldValue: validatedForm.value?.getFieldValue,
-    setFieldError: validatedForm.value?.setFieldError,
-    setValue: validatedForm.value?.setValue,
-    resetForm: validatedForm.value?.resetForm,
-    isDirty: validatedForm.value?.isDirty,
-    values: validatedForm.value?.values,
-    isSubmitting,
+    getFieldValue: (
+        ...args: Parameters<
+            NonNullable<typeof validatedForm.value>["getFieldValue"]
+        >
+    ) => validatedForm.value?.getFieldValue(...args),
+
+    setFieldError: (
+        ...args: Parameters<
+            NonNullable<typeof validatedForm.value>["setFieldError"]
+        >
+    ) => validatedForm.value?.setFieldError(...args),
+
+    setValue: (
+        ...args: Parameters<NonNullable<typeof validatedForm.value>["setValue"]>
+    ) => validatedForm.value?.setValue(...args),
+
+    resetForm: () => validatedForm.value?.resetForm(),
 });
 </script>
 
@@ -101,7 +121,9 @@ defineExpose({
     <ValidatedVueForm
         v-bind="props"
         ref="validated-form"
+        :error-list="uncaughtErrors"
         :is-submitting="isSubmitting"
+        v-tab-trap
         @submit="onSubmit"
     >
         <template v-for="(_, slot) of $slots" #[slot]="scope">

@@ -61,7 +61,7 @@ export default { layout: AppLayout };
                         @click="exampleDrawer = !exampleDrawer"
                     />
                 </div>
-                <Drawer v-model:show="exampleDrawer" title="Example Drawer">
+                <Drawer v-model="exampleDrawer" title="Example Drawer">
                     lorem ipsum dolor sit amet consectetur adipiscing elit omnis
                     et et accusamus pariatur vero qui aliquip dolor velit et
                     distinctio cumque libero facere ea quas mollitia non
@@ -79,7 +79,7 @@ export default { layout: AppLayout };
                 &lt;/script&gt;<br />
                 <br />
                 &lt;template&gt;<br />
-                &emsp;&lt;Drawer v-model:show="showDrawer" title="Example
+                &emsp;&lt;Drawer v-model="showDrawer" title="Example
                 Drawer"&gt;<br />
                 &emsp;&emsp;&lt;div&gt;
                 <div class="ms-12">

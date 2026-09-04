@@ -124,7 +124,7 @@ export default { layout: AppLayout };
         <ExampleComponent title="Basic Example">
             <template #component>
                 <BaseTextInput
-                    v-model:value="formValues.basicText"
+                    v-model="formValues.basicText"
                     name="text_input"
                     label="Outlined Input"
                     placeholder="Test Input"
@@ -133,7 +133,7 @@ export default { layout: AppLayout };
                     variant="outlined"
                 />
                 <BaseTextInput
-                    v-model:value="formValues.basicText"
+                    v-model="formValues.basicText"
                     name="text_input"
                     label="Filled Input"
                     placeholder="Test Input"
@@ -142,7 +142,7 @@ export default { layout: AppLayout };
                     variant="filled"
                 />
                 <BaseTextInput
-                    v-model:value="formValues.basicText"
+                    v-model="formValues.basicText"
                     name="text_input"
                     label="Standard Input"
                     placeholder="Test Input"
@@ -160,7 +160,7 @@ export default { layout: AppLayout };
                 <br />
                 &lt;template&gt;<br />
                 &emsp;&lt;BaseTextInput<br />
-                &emsp;&emsp;v-model:value="textValue"<br />
+                &emsp;&emsp;v-model="textValue"<br />
                 &emsp;&emsp;name="text_input"<br />
                 &emsp;&emsp;label="Text Input"<br />
                 &emsp;&emsp;placeholder="Test Input"<br />
@@ -175,7 +175,7 @@ export default { layout: AppLayout };
         <ExampleComponent title="Slots Example">
             <template #component>
                 <BaseTextInput
-                    v-model:value="formValues.slotsText"
+                    v-model="formValues.slotsText"
                     name="text_input"
                     label="Text Input"
                     placeholder="Test Input"
@@ -195,7 +195,7 @@ export default { layout: AppLayout };
                 <br />
                 &lt;template&gt;<br />
                 &emsp;&lt;BaseTextInput<br />
-                &emsp;&emsp;v-model:value="textValue"<br />
+                &emsp;&emsp;v-model="textValue"<br />
                 &emsp;&emsp;name="text_input"<br />
                 &emsp;&emsp;label="Text Input"<br />
                 &emsp;&emsp;placeholder="Test Input"<br />

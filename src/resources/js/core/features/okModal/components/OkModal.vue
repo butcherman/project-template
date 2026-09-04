@@ -13,6 +13,7 @@ const props = defineProps<{
     message: string;
     title?: string;
     forceOk?: boolean;
+    size?: ComponentSize;
 }>();
 
 const isOpen = ref(true);
@@ -34,8 +35,9 @@ const forceOption = () => {
 
 <template>
     <Modal
-        :show="isOpen"
+        v-model="isOpen"
         :title="title"
+        :size="size"
         position="top"
         hide-close
         hide-backdrop

@@ -34,7 +34,7 @@ export default { layout: AppLayout };
             <BaseEditorInput
                 name="editor"
                 label="Document Editor"
-                v-model:value="inputValue"
+                v-model="inputValue"
             />
         </ExampleComponent>
     </div>
