@@ -122,6 +122,11 @@ export const useDemoNavbar: { [key: string]: MenuItem[] } = {
             route: "/form-editor-input",
         },
         {
+            label: "File Upload Input",
+            icon: "cloud-arrow-up",
+            route: "/form-file-upload-input",
+        },
+        {
             label: "Multi-Select Input",
             icon: "square-check",
             route: "/form-multi-select-input",

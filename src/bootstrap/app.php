@@ -1,11 +1,8 @@
 <?php
 
-use App\Http\Middleware\CheckForInit;
 use App\Http\Middleware\CheckForTwoFactor;
-use App\Http\Middleware\CheckPasswordExpiration;
 use App\Http\Middleware\HandleFlashDataMiddleware;
 use App\Http\Middleware\HandleInertiaRequests;
-use App\Http\Middleware\InitializeApp;
 use App\Http\Middleware\LogDebugVisits;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Foundation\Application;
@@ -48,6 +45,9 @@ return Application::configure(basePath: dirname(__DIR__))
             Authenticate::class,
             // CheckForTwoFactor::class,
             EncryptHistoryMiddleware::class,
+        ])->preventRequestForgery(except: [
+            'tus',
+            'tus/*',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

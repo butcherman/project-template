@@ -48,6 +48,7 @@ Route::inertia('/form-component', 'demo/FormComponentDemo');
 Route::inertia('/form-auto-complete-input', 'demo/FormAutoCompleteInputDemo');
 Route::inertia('/form-date-picker-input', 'demo/FormDatePickerInputDemo');
 Route::inertia('/form-editor-input', 'demo/FormEditorInputDemo');
+Route::inertia('/form-file-upload-input', 'demo/FormFileUploadInputDemo');
 Route::inertia('/form-multi-select-input', 'demo/FormMultiSelectInputDemo');
 Route::inertia('/form-otp-input', 'demo/FormOtpInputDemo');
 Route::inertia('/form-password-input', 'demo/FormPasswordInputDemo');

@@ -43,6 +43,9 @@ RUN install-php-extensions \
     pdo_mysql \
     zip
 
+# Copy the .ini file for additional configuration
+COPY ./php-extended.ini $PHP_INI_DIR/conf.d/php-extended.ini
+
 # Bring NodeJS and NPM up to the latest version
 RUN npm install -g n
 RUN n lts
