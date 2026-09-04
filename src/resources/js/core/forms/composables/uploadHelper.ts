@@ -18,10 +18,6 @@ export const useUploadHelper = (props: InputFileProps, emit: any) => {
                 addFileToQueue(file);
             }
         }
-
-        if (props.autoUpload) {
-            console.log("process queue");
-        }
     };
 
     /**
@@ -45,30 +41,15 @@ export const useUploadHelper = (props: InputFileProps, emit: any) => {
     /**
      * Drag has entered the dropzone
      */
-    const handleDragEnter = (): void => {
+    const onDragEnter = (): void => {
         dragging.value = true;
     };
 
     /**
      * Drag has left the dropzone
      */
-    const handleDragLeave = (): void => {
+    const onDragLeave = (): void => {
         dragging.value = false;
-    };
-
-    /**
-     * File dropped into dropzone
-     */
-    const handleDrop = (event: DragEvent): void => {
-        dragging.value = false;
-
-        const fileList = event.dataTransfer?.files;
-
-        if (!fileList) {
-            return;
-        }
-
-        processFileList(fileList);
     };
 
     /*
@@ -76,24 +57,22 @@ export const useUploadHelper = (props: InputFileProps, emit: any) => {
     | Manual File Selection
     |---------------------------------------------------------------------------
     */
-    const handleFileSelected = (event: Event) => {
-        const input = event.target as HTMLInputElement;
-        const fileList = input.files;
 
-        if (!fileList) {
-            return;
+    const onRemoveFile = (file: File): void => {
+        let fileIndex = fileQueue.value.findIndex((f) => f.file === file);
+
+        if (fileIndex >= 0) {
+            fileQueue.value.splice(fileIndex, 1);
         }
-
-        processFileList(fileList);
     };
 
     return {
         dragging: readonly(dragging),
-        fileQueue: readonly(fileQueue),
+        fileQueue: fileQueue,
 
-        handleDragEnter,
-        handleDragLeave,
-        handleDrop,
-        handleFileSelected,
+        onDragEnter,
+        onDragLeave,
+        onRemoveFile,
+        processFileList,
     };
 };

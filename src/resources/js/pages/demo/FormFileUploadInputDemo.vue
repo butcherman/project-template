@@ -27,12 +27,16 @@ export default { layout: AppLayout };
             <template #component>
                 <div class="flex justify-center">
                     <div class="w-full md:w-1/2">
-                        <BaseVueForm
+                        <!-- <BaseVueForm
                             name="file-upload-form"
                             submit-text="Upload File"
-                        >
-                            <BaseFileUploadInput purpose="test" class="h-50" />
-                        </BaseVueForm>
+                        > -->
+                        <BaseFileUploadInput
+                            purpose="test"
+                            class="h-50"
+                            auto-upload
+                        />
+                        <!-- </BaseVueForm> -->
                     </div>
                 </div>
             </template>

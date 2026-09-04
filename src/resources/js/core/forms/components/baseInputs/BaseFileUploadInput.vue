@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import InputWrapper from "../wrappers/InputWrapper.vue";
+import prettyBytes from "pretty-bytes";
 import { computed, useTemplateRef } from "vue";
+import { useFileIconHelper } from "../../composables/fileIconHelper.js";
+import { useTusUpload } from "../../composables/tusUpload.js";
 import { useUploadHelper } from "../../composables/uploadHelper.js";
+import "file-icon-vectors/dist/file-icon-vectors.min.css";
 
 const emit = defineEmits<{}>();
 
@@ -14,14 +18,18 @@ const props = defineProps<{
     uploadMessage?: string;
 }>();
 
+const { getFileIcon } = useFileIconHelper();
+
+const { startUpload } = useTusUpload();
+
 const {
     dragging,
     fileQueue,
 
-    handleDragEnter,
-    handleDragLeave,
-    handleDrop,
-    handleFileSelected,
+    onDragEnter,
+    onDragLeave,
+    onRemoveFile,
+    processFileList,
 } = useUploadHelper(props, emit);
 
 const fileInput = useTemplateRef("file-input");
@@ -36,6 +44,42 @@ const allowMultiple = computed<boolean>(() =>
 const selectFile = () => {
     fileInput.value?.click();
 };
+
+const onFileSelected = (event: Event): void => {
+    const input = event.target as HTMLInputElement;
+    const fileList = input.files;
+
+    if (!fileList) {
+        return;
+    }
+
+    processFileList(fileList);
+
+    if (props.autoUpload) {
+        console.log("process queue");
+        startUpload(fileQueue);
+    }
+};
+
+/**
+ * File dropped into dropzone
+ */
+const onDrop = (event: DragEvent): void => {
+    onDragLeave();
+
+    const fileList = event.dataTransfer?.files;
+
+    if (!fileList) {
+        return;
+    }
+
+    processFileList(fileList);
+
+    if (props.autoUpload) {
+        console.log("process queue");
+        startUpload(fileQueue);
+    }
+};
 </script>
 
 <template>
@@ -47,18 +91,42 @@ const selectFile = () => {
             }"
             @click="selectFile"
             @dragover.prevent
-            @dragenter.prevent="handleDragEnter"
-            @dragleave.prevent="handleDragLeave"
-            @drop.prevent="handleDrop"
+            @dragenter.prevent="onDragEnter"
+            @dragleave.prevent="onDragLeave"
+            @drop.prevent="onDrop"
         >
             <input
                 ref="file-input"
                 type="file"
                 class="hidden"
                 :multiple="allowMultiple"
-                @change="handleFileSelected"
+                @change="onFileSelected"
             />
-            <div class="dropzone-message pointer-events-none h-full">
+            <div
+                v-if="fileQueue.length"
+                class="dropzone-queue-wrapper flex gap-3 justify-center flex-wrap"
+            >
+                <div v-for="queuedFile in fileQueue">
+                    <div class="flex justify-center">
+                        <div class="relative">
+                            <fa-icon
+                                icon="trash-alt"
+                                class="text-danger absolute top-0 right-0 z-50 bg-slate-300"
+                                v-tooltip="'Remove File'"
+                                @click.stop="onRemoveFile(queuedFile.file)"
+                            />
+                            <span :class="getFileIcon(queuedFile.file)" />
+                        </div>
+                    </div>
+                    <div class="text-xs text-muted">
+                        {{ queuedFile.file.name }}
+                    </div>
+                    <div class="text-xs text-muted">
+                        {{ prettyBytes(queuedFile.file.size) }}
+                    </div>
+                </div>
+            </div>
+            <div v-else class="dropzone-message pointer-events-none h-full">
                 <slot name="upload-message">
                     <div class="h-full flex flex-col justify-center">
                         <div>
@@ -72,6 +140,5 @@ const selectFile = () => {
                 </slot>
             </div>
         </div>
-        {{ fileQueue }}
     </InputWrapper>
 </template>
