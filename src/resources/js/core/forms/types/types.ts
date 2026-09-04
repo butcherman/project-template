@@ -31,3 +31,19 @@ interface InputSelectProps<
 type ArrayProperty<T, TElement> = {
     [K in keyof T]: T[K] extends readonly TElement[] ? K : never;
 }[keyof T];
+
+interface InputFileProps {
+    purpose: string;
+
+    acceptedFiles?: string[];
+    autoUpload?: boolean;
+    maxFiles?: number;
+    uploadMessage?: string;
+}
+
+interface InputQueuedFile {
+    file: File;
+    status: "pending" | "uploading" | "complete" | "error";
+    progress: number;
+    error?: string;
+}

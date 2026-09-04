@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import AppLayout from "@/layouts/AppLayout.vue";
-import BaseOtpInput from "@/core/forms/components/baseInputs/BaseOtpInput.vue";
+import BaseFileUploadInput from "@/core/forms/components/baseInputs/BaseFileUploadInput.vue";
+import BaseVueForm from "@/core/forms/components/BaseVueForm.vue";
 import Card from "@/core/components/Card.vue";
 import ComponentReference from "@/features/components/ComponentReference.vue";
 import ExampleComponent from "@/features/components/ExampleComponent.vue";
 import { ref } from "vue";
-import BaseFileUploadInput from "@/core/forms/components/baseInputs/BaseFileUploadInput.vue";
 
 const referenceProperties = [];
 
@@ -25,7 +25,16 @@ export default { layout: AppLayout };
         </Card>
         <ExampleComponent show>
             <template #component>
-                <BaseFileUploadInput />
+                <div class="flex justify-center">
+                    <div class="w-full md:w-1/2">
+                        <BaseVueForm
+                            name="file-upload-form"
+                            submit-text="Upload File"
+                        >
+                            <BaseFileUploadInput purpose="test" class="h-50" />
+                        </BaseVueForm>
+                    </div>
+                </div>
             </template>
             <template #code> code </template>
         </ExampleComponent>
