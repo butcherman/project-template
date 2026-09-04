@@ -6,6 +6,7 @@
     "license": "LGPL-2.0-or-later",
     "require": {
         "php": "^8.5",
+        "arthurpatriot/laravel-tus": "^1.4",
         "butcherman/version": "^1.4",
         "glhd/gretel": "^1.10",
         "inertiajs/inertia-laravel": "^3.0",
@@ -19,7 +20,6 @@
         "laravel/telescope": "^5.20",
         "laravel/tinker": "^3.0",
         "laravel/wayfinder": "^0.1.20",
-        "pion/laravel-chunk-upload": "^1.6",
         "predis/predis": "^3.5"
     },
     "require-dev": {
