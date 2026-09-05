@@ -2,7 +2,9 @@ import * as tus from "tus-js-client";
 import { onBeforeUnmount, readonly, ref } from "vue";
 import type { Ref } from "vue";
 
-export const useTusUpload = () => {
+export const useTusUpload = (options: TusUploadOptions = {}) => {
+    const { onFileUploaded, onQueueCompleted } = options;
+
     let upload: tus.Upload[] = [];
 
     const totalProgress = ref(0);
@@ -12,43 +14,63 @@ export const useTusUpload = () => {
         fileQueue: Ref<InputQueuedFile[]>,
         purpose: string,
     ): void => {
-        fileQueue.value.forEach((queuedFile) => {
-            queuedFile.status = "uploading";
+        fileQueue.value
+            .filter((queuedFile) => queuedFile.status === "pending")
+            .forEach((queuedFile) => {
+                queuedFile.status = "uploading";
 
-            let newUpload = new tus.Upload(queuedFile.file, {
-                endpoint: "/tus",
-                chunkSize: 5_000_000,
+                let newUpload = new tus.Upload(queuedFile.file, {
+                    endpoint: "/tus",
+                    chunkSize: 5_000_000,
 
-                metadata: {
-                    name: queuedFile.file.name,
-                    type: queuedFile.file.type,
-                    purpose,
-                },
+                    metadata: {
+                        name: queuedFile.file.name,
+                        type: queuedFile.file.type,
+                        purpose,
+                    },
 
-                onError(uploadError) {
-                    queuedFile.error = uploadError.message;
-                    queuedFile.status = "error";
-                    hasError.value = true;
-                },
+                    onError(uploadError) {
+                        queuedFile.error = uploadError.message;
+                        queuedFile.status = "error";
+                        hasError.value = true;
+                    },
 
-                onProgress(bytesUploaded, bytesTotal) {
-                    queuedFile.progress = Math.round(
-                        (bytesUploaded / bytesTotal) * 100,
-                    );
-                },
+                    onProgress(bytesUploaded, bytesTotal) {
+                        queuedFile.progress = Math.round(
+                            (bytesUploaded / bytesTotal) * 100,
+                        );
+                    },
 
-                onSuccess() {
-                    queuedFile.progress = 100;
-                    queuedFile.status = "complete";
+                    onSuccess() {
+                        queuedFile.progress = 100;
+                        queuedFile.status = "complete";
 
-                    console.log("success");
-                },
+                        onFileUploaded?.(queuedFile);
+
+                        checkQueueCompleted(fileQueue);
+                    },
+                });
+
+                upload.push(newUpload);
+
+                newUpload.start();
             });
+    };
 
-            upload.push(newUpload);
+    const checkQueueCompleted = (fileQueue: Ref<InputQueuedFile[]>): void => {
+        const hasActiveUploads = fileQueue.value.some(
+            (queuedFile) =>
+                queuedFile.status === "pending" ||
+                queuedFile.status === "uploading",
+        );
 
-            newUpload.start();
-        });
+        if (!hasActiveUploads) {
+            onQueueCompleted?.(
+                fileQueue.value.filter(
+                    (queuedFile) => queuedFile.status === "complete",
+                ),
+            );
+        }
     };
 
     const cancelUpload = (): void => {
@@ -70,6 +92,7 @@ export const useTusUpload = () => {
     return {
         totalProgress: readonly(totalProgress),
         hasError: readonly(hasError),
+
         cancelUpload,
         startUpload,
         resetStats,

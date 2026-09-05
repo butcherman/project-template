@@ -7,7 +7,10 @@ import { useTusUpload } from "../../composables/tusUpload.js";
 import { useUploadHelper } from "../../composables/uploadHelper.js";
 import "file-icon-vectors/dist/file-icon-vectors.min.css";
 
-const emit = defineEmits<{}>();
+const emit = defineEmits<{
+    fileUploaded: [file: InputQueuedFile];
+    queueCompleted: [files: InputQueuedFile[]];
+}>();
 
 const props = defineProps<{
     purpose: string;
@@ -19,18 +22,27 @@ const props = defineProps<{
 }>();
 
 const { getFileIcon } = useFileIconHelper();
-const { startUpload } = useTusUpload();
+const { startUpload } = useTusUpload({
+    onFileUploaded: (file) => {
+        emit("fileUploaded", file);
+    },
+
+    onQueueCompleted: (files) => {
+        emit("queueCompleted", files);
+    },
+});
 
 const {
     dragging,
     fileQueue,
     rejectedFiles,
+    totalProgress,
 
     onDragEnter,
     onDragLeave,
     onRemoveFile,
     processFileList,
-} = useUploadHelper(props, emit);
+} = useUploadHelper(props);
 
 const fileInput = useTemplateRef("file-input");
 
@@ -84,6 +96,7 @@ const onDrop = (event: DragEvent): void => {
 
 <template>
     <InputWrapper :has-focus="false">
+        <slot :totalProgress />
         <div
             class="h-full border-2 border-blue-300 border-dashed rounded-lg py-8 text-center cursor-pointer bg-blue-400/30"
             :class="{
@@ -170,9 +183,9 @@ const onDrop = (event: DragEvent): void => {
                                 @click.stop="onRemoveFile(rejected.file)"
                             />
                             <span :class="getFileIcon(rejected.file)" />
-                            <div class="absolute top-1/2 w-full">
-                                <div class="text-danger text-2xl">
-                                    <fa-icon icon="circle-exclamation" />
+                            <div class="absolute top-1/3 w-full">
+                                <div class="text-warning text-2xl">
+                                    <fa-icon icon="triangle-exclamation" />
                                 </div>
                             </div>
                         </div>

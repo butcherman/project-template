@@ -41,6 +41,11 @@ interface InputFileProps {
     uploadMessage?: string;
 }
 
+interface TusUploadOptions {
+    onFileUploaded?: (file: InputQueuedFile) => void;
+    onQueueCompleted?: (files: InputQueuedFile[]) => void;
+}
+
 interface InputQueuedFile {
     file: File;
     status: "pending" | "uploading" | "complete" | "error";
@@ -51,4 +56,5 @@ interface InputQueuedFile {
 interface InputRejectedFile {
     file: File;
     error: string;
+    allowRetry: boolean;
 }
