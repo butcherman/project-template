@@ -19,7 +19,6 @@ const props = defineProps<{
 }>();
 
 const { getFileIcon } = useFileIconHelper();
-
 const { startUpload } = useTusUpload();
 
 const {
@@ -57,7 +56,7 @@ const onFileSelected = (event: Event): void => {
 
     if (props.autoUpload) {
         console.log("process queue");
-        startUpload(fileQueue);
+        startUpload(fileQueue, props.purpose);
     }
 };
 
@@ -77,7 +76,7 @@ const onDrop = (event: DragEvent): void => {
 
     if (props.autoUpload) {
         console.log("process queue");
-        startUpload(fileQueue);
+        startUpload(fileQueue, props.purpose);
     }
 };
 </script>
@@ -116,13 +115,47 @@ const onDrop = (event: DragEvent): void => {
                                 @click.stop="onRemoveFile(queuedFile.file)"
                             />
                             <span :class="getFileIcon(queuedFile.file)" />
+                            <div class="absolute top-1/2 w-full">
+                                <div
+                                    v-if="queuedFile.error"
+                                    class="text-danger text-2xl"
+                                >
+                                    <fa-icon icon="circle-exclamation" />
+                                </div>
+                                <div
+                                    v-else-if="
+                                        queuedFile.status === 'uploading'
+                                    "
+                                    class="w-full bg-gray-200 rounded-full h-4 dark:bg-gray-700"
+                                >
+                                    <div
+                                        class="bg-blue-600 h-4 rounded-full text-xs font-medium text-blue-100 text-center p-0.5 leading-none"
+                                        :style="`width: ${queuedFile.progress}%`"
+                                    >
+                                        {{ queuedFile.progress }}%
+                                    </div>
+                                </div>
+                                <div
+                                    v-if="queuedFile.status === 'complete'"
+                                    class="text-success text-2xl"
+                                >
+                                    <fa-icon icon="circle-check" />
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="text-xs text-muted">
-                        {{ queuedFile.file.name }}
+
+                    <div v-if="queuedFile.error" class="text-xs text-danger">
+                        {{ queuedFile.error }}
                     </div>
-                    <div class="text-xs text-muted">
-                        {{ prettyBytes(queuedFile.file.size) }}
+
+                    <div v-else>
+                        <div class="text-xs text-muted">
+                            {{ queuedFile.file.name }}
+                        </div>
+                        <div class="text-xs text-muted">
+                            {{ prettyBytes(queuedFile.file.size) }}
+                        </div>
                     </div>
                 </div>
             </div>

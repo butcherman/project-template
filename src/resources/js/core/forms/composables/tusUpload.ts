@@ -3,72 +3,73 @@ import { onBeforeUnmount, readonly, ref } from "vue";
 import type { Ref } from "vue";
 
 export const useTusUpload = () => {
-    let upload: tus.Upload | null = null;
+    let upload: tus.Upload[] = [];
 
-    const uploading = ref(false);
-    const progress = ref(0);
-    const error = ref<string | null>(null);
+    const totalProgress = ref(0);
+    const hasError = ref<boolean>(false);
 
-    const startUpload = (fileQueue: Ref<InputQueuedFile[]>): void => {
-        upload?.abort();
-
-        uploading.value = true;
-
+    const startUpload = (
+        fileQueue: Ref<InputQueuedFile[]>,
+        purpose: string,
+    ): void => {
         fileQueue.value.forEach((queuedFile) => {
-            upload = new tus.Upload(queuedFile.file, {
+            queuedFile.status = "uploading";
+
+            let newUpload = new tus.Upload(queuedFile.file, {
                 endpoint: "/tus",
                 chunkSize: 5_000_000,
 
                 metadata: {
                     name: queuedFile.file.name,
                     type: queuedFile.file.type,
-                    purpose: "logo",
+                    purpose,
                 },
 
                 onError(uploadError) {
-                    uploading.value = false;
-                    error.value = uploadError.message;
+                    queuedFile.error = uploadError.message;
+                    queuedFile.status = "error";
+                    hasError.value = true;
                 },
 
                 onProgress(bytesUploaded, bytesTotal) {
-                    progress.value = Math.round(
+                    queuedFile.progress = Math.round(
                         (bytesUploaded / bytesTotal) * 100,
                     );
                 },
 
                 onSuccess() {
-                    uploading.value = false;
-                    progress.value = 100;
+                    queuedFile.progress = 100;
+                    queuedFile.status = "complete";
 
                     console.log("success");
                 },
             });
 
-            upload.start();
+            upload.push(newUpload);
+
+            newUpload.start();
         });
     };
 
     const cancelUpload = (): void => {
-        upload?.abort();
+        if (upload) {
+            upload.forEach((up) => up.abort());
+        }
 
-        upload = null;
-        uploading.value = false;
-        progress.value = 0;
+        upload = [];
     };
 
     const resetStats = (): void => {
-        error.value = null;
-        progress.value = 0;
+        hasError.value = false;
     };
 
     onBeforeUnmount(() => {
-        upload?.abort();
+        cancelUpload();
     });
 
     return {
-        uploading: readonly(uploading),
-        progress: readonly(progress),
-        error: readonly(error),
+        totalProgress: readonly(totalProgress),
+        hasError: readonly(hasError),
         cancelUpload,
         startUpload,
         resetStats,
