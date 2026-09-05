@@ -47,3 +47,8 @@ interface InputQueuedFile {
     progress: number;
     error?: string;
 }
+
+interface InputRejectedFile {
+    file: File;
+    error: string;
+}

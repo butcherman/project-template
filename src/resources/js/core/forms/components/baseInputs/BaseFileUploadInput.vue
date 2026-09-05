@@ -24,6 +24,7 @@ const { startUpload } = useTusUpload();
 const {
     dragging,
     fileQueue,
+    rejectedFiles,
 
     onDragEnter,
     onDragLeave,
@@ -102,7 +103,7 @@ const onDrop = (event: DragEvent): void => {
                 @change="onFileSelected"
             />
             <div
-                v-if="fileQueue.length"
+                v-if="fileQueue.length || rejectedFiles.length"
                 class="dropzone-queue-wrapper flex gap-3 justify-center flex-wrap"
             >
                 <div v-for="queuedFile in fileQueue">
@@ -156,6 +157,29 @@ const onDrop = (event: DragEvent): void => {
                         <div class="text-xs text-muted">
                             {{ prettyBytes(queuedFile.file.size) }}
                         </div>
+                    </div>
+                </div>
+
+                <div v-for="rejected in rejectedFiles">
+                    <div class="flex justify-center">
+                        <div class="relative">
+                            <fa-icon
+                                icon="trash-alt"
+                                class="text-danger absolute top-0 right-0 z-50 bg-slate-300"
+                                v-tooltip="'Remove File'"
+                                @click.stop="onRemoveFile(rejected.file)"
+                            />
+                            <span :class="getFileIcon(rejected.file)" />
+                            <div class="absolute top-1/2 w-full">
+                                <div class="text-danger text-2xl">
+                                    <fa-icon icon="circle-exclamation" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-xs text-danger">
+                        {{ rejected.error }}
                     </div>
                 </div>
             </div>

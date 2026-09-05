@@ -34,7 +34,13 @@ export default { layout: AppLayout };
                         <BaseFileUploadInput
                             purpose="test"
                             class="min-h-48"
-                            :auto-upload="true"
+                            :auto-upload="false"
+                            :accepted-files="[
+                                'image/jpeg',
+                                'image/png',
+                                'image/gif',
+                                'image/bmp',
+                            ]"
                         />
                         <!-- </BaseVueForm> -->
                     </div>
