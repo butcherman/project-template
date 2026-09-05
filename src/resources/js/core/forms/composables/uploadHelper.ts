@@ -66,6 +66,11 @@ export const useUploadHelper = (props: InputFileProps, emit: any) => {
             }
         }
 
+        // Verify that the file is not too big
+        if (file.size > 10_000_000_000) {
+            return "File is too large to upload";
+        }
+
         return null;
     };
 
