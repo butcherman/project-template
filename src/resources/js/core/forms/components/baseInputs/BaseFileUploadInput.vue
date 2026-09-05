@@ -8,7 +8,7 @@ import { useUploadHelper } from "../../composables/uploadHelper.js";
 import "file-icon-vectors/dist/file-icon-vectors.min.css";
 
 const emit = defineEmits<{
-    fileUploaded: [file: InputQueuedFile];
+    fileUploaded: [file: string];
     queueCompleted: [files: InputQueuedFile[]];
 }>();
 

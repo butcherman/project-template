@@ -45,13 +45,20 @@ export const useTusUpload = (options: TusUploadOptions = {}) => {
                         queuedFile.progress = 100;
                         queuedFile.status = "complete";
 
-                        onFileUploaded?.(queuedFile);
-
                         checkQueueCompleted(fileQueue);
                     },
                 });
 
                 upload.push(newUpload);
+
+                newUpload.options.onSuccess = () => {
+                    console.log(newUpload.url?.split("/").pop());
+                    let fileId = newUpload.url?.split("/").pop();
+
+                    if (fileId) {
+                        onFileUploaded?.(fileId);
+                    }
+                };
 
                 newUpload.start();
             });
